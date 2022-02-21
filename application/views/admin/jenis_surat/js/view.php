@@ -13,16 +13,16 @@
 <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 
 <script>
-    let tabelAgamaDt = null;
+    let tabelSuratJenisDt = null;
 
     // untuk datatable
-    var untukTabelAgama = function() {
-        tabelAgamaDt = $('#tabel-agama').DataTable({
+    var untukTabelSuratJenis = function() {
+        tabelSuratJenisDt = $('#tabel-jenis-surat').DataTable({
             responsive: true,
             processing: true,
             lengthMenu: [5, 10, 25, 50],
             pageLength: 10,
-            ajax: '<?= admin_url() ?>agama/get_data_agama_dt',
+            ajax: '<?= admin_url() ?>jenis_surat/get_data_jenis_surat_dt',
             columns: [{
                     title: 'No.',
                     data: null,
@@ -45,8 +45,8 @@
                     render: function(data, type, full, meta) {
                         return `
                         <div class="button-icon-btn button-icon-btn-cl">
-                            <button type="button" id="btn-upd" data-id="` + full.id_agama + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-pencil"></i>&nbsp;Ubah</button>&nbsp;
-                            <button type="button" id="btn-del" data-id="` + full.id_agama + `" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
+                            <button type="button" id="btn-upd" data-id="` + full.id_surat_jenis + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-pencil"></i>&nbsp;Ubah</button>&nbsp;
+                            <button type="button" id="btn-del" data-id="` + full.id_surat_jenis + `" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
                         </div>
                     `;
                     },
@@ -59,7 +59,7 @@
     var untukResetForm = function() {
         $(document).on('click', '#btn-add', function() {
             $('#judul-add-upd').html('Tambah');
-            $('#inpidagama').val('');
+            $('#inpidsuratjenis').val('');
             $('#inpnama').val('');
         });
     }();
@@ -91,7 +91,7 @@
                             button: response.button,
                         }).then((value) => {
                             $('#modal-add-upd').modal('hide');
-                            tabelAgamaDt.ajax.reload();
+                            tabelSuratJenisDt.ajax.reload();
                         });
 
                         $('#save').removeAttr('disabled');
@@ -109,7 +109,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "<?= admin_url() ?>agama/get",
+                url: "<?= admin_url() ?>jenis_surat/get",
                 dataType: 'json',
                 data: {
                     id: ini.data('id')
@@ -120,7 +120,7 @@
                     ini.html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
                 },
                 success: function(response) {
-                    $('#inpidagama').val(response.id_agama);
+                    $('#inpidsuratjenis').val(response.id_surat_jenis);
                     $('#inpnama').val(response.nama);
 
                     ini.removeAttr('disabled');
@@ -134,6 +134,7 @@
     var untukHapusData = function() {
         $(document).on('click', '#btn-del', function() {
             var ini = $(this);
+
             swal({
                 title: "Apakah Anda yakin ingin menghapusnya?",
                 text: "Data yang telah dihapus tidak dapat dikembalikan!",
@@ -144,7 +145,7 @@
                 if (del) {
                     $.ajax({
                         type: "post",
-                        url: "<?= admin_url() ?>agama/process_del",
+                        url: "<?= admin_url() ?>jenis_surat/process_del",
                         dataType: 'json',
                         data: {
                             id: ini.data('id')
@@ -160,7 +161,7 @@
                                 icon: data.type,
                                 button: data.button,
                             }).then((value) => {
-                                tabelAgamaDt.ajax.reload();
+                                tabelSuratJenisDt.ajax.reload();
                             });
                         }
                     });

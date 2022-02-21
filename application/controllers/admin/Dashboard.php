@@ -21,9 +21,9 @@ class Dashboard extends MY_Controller
     {
         $data = [
             'halaman' => 'Dashboard Admin',
-            'guru'    => $this->m_guru->getAll(),
-            'aktif'   => $this->m_siswa->getAllSiswaStatus('0'),
-            'alumni'  => $this->m_siswa->getAllSiswaStatus('1'),
+            'guru'    => 0,
+            'aktif'   => 0,
+            'alumni'  => 0,
             'content' => 'admin/dashboard/view',
             'css'     => '',
             'js'      => ''

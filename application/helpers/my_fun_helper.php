@@ -472,3 +472,21 @@ if (!function_exists('create_separator')) {
         return number_format($harga, 0, ',', '.');
     }
 }
+
+if (!function_exists('count_age')) {
+    function count_age($date)
+	{
+		list($tahun, $bulan, $hari) = explode("-", $date);
+		$tahun_diff = date("Y") - $tahun;
+		$bulan_diff = date("m") - $bulan;
+		$hari_diff  = date("d") - $hari;
+
+		if ($bulan_diff < 0) {
+			$tahun_diff--;
+		} else if (($bulan_diff == 0) && ($hari_diff < 0)) {
+			$tahun_diff--;
+		}
+        
+		return $tahun_diff;
+	}
+}

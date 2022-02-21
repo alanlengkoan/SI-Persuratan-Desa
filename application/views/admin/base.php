@@ -153,14 +153,6 @@
                                         <span class="pcoded-mtext">Profil</span>
                                     </a>
                                 </li>
-                                <li class="<?= ($this->uri->segment(2) === 'organisasi' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>organisasi">
-                                        <span class="pcoded-micon">
-                                            <i class="fa fa-circle"></i>
-                                        </span>
-                                        <span class="pcoded-mtext">Organisasi</span>
-                                    </a>
-                                </li>
                                 <li class="<?= ($this->uri->segment(2) === 'agama' ? 'active' : '') ?>">
                                     <a href="<?= admin_url() ?>agama">
                                         <span class="pcoded-micon">
@@ -169,115 +161,47 @@
                                         <span class="pcoded-mtext">Agama</span>
                                     </a>
                                 </li>
-                                <li class="<?= ($this->uri->segment(2) === 'jabatan' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>jabatan">
+                                <li class="<?= ($this->uri->segment(2) === 'pekerjaan' ? 'active' : '') ?>">
+                                    <a href="<?= admin_url() ?>pekerjaan">
                                         <span class="pcoded-micon">
                                             <i class="fa fa-circle"></i>
                                         </span>
-                                        <span class="pcoded-mtext">Jabatan</span>
+                                        <span class="pcoded-mtext">Pekerjaan</span>
                                     </a>
                                 </li>
-                                <li class="<?= ($this->uri->segment(2) === 'kategori' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>kategori">
+                                <li class="<?= ($this->uri->segment(2) === 'jenis_surat' ? 'active' : '') ?>">
+                                    <a href="<?= admin_url() ?>jenis_surat">
                                         <span class="pcoded-micon">
                                             <i class="fa fa-circle"></i>
                                         </span>
-                                        <span class="pcoded-mtext">Kategori</span>
-                                    </a>
-                                </li>
-                                <li class="<?= ($this->uri->segment(2) === 'mapel' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>mapel">
-                                        <span class="pcoded-micon">
-                                            <i class="fa fa-circle"></i>
-                                        </span>
-                                        <span class="pcoded-mtext">Mata Pelajaran</span>
-                                    </a>
-                                </li>
-                                <li class="<?= ($this->uri->segment(2) === 'kelas' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>kelas">
-                                        <span class="pcoded-micon">
-                                            <i class="fa fa-circle"></i>
-                                        </span>
-                                        <span class="pcoded-mtext">Kelas</span>
-                                    </a>
-                                </li>
-                                <li class="<?= ($this->uri->segment(2) === 'dana' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>dana">
-                                        <span class="pcoded-micon">
-                                            <i class="fa fa-circle"></i>
-                                        </span>
-                                        <span class="pcoded-mtext">Dana</span>
-                                    </a>
-                                </li>
-                                <li class="<?= ($this->uri->segment(2) === 'keuangan' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>keuangan">
-                                        <span class="pcoded-micon">
-                                            <i class="fa fa-circle"></i>
-                                        </span>
-                                        <span class="pcoded-mtext">Anggaran</span>
-                                    </a>
-                                </li>
-                                <li class="<?= ($this->uri->segment(2) === 'kuisioner' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>kuisioner">
-                                        <span class="pcoded-micon">
-                                            <i class="fa fa-circle"></i>
-                                        </span>
-                                        <span class="pcoded-mtext">Kuisioner</span>
-                                    </a>
-                                </li>
-                                <li class="<?= ($this->uri->segment(2) === 'fasilitas' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>fasilitas">
-                                        <span class="pcoded-micon">
-                                            <i class="fa fa-circle"></i>
-                                        </span>
-                                        <span class="pcoded-mtext">Fasilitas</span>
+                                        <span class="pcoded-mtext">Jenis Surat</span>
                                     </a>
                                 </li>
                             </ul>
                             <div class="pcoded-navigation-label">Pustaka</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="pcoded-hasmenu <?= ($this->uri->segment(2) === 'pemasukan' || $this->uri->segment(2) === 'pengeluaran' ? 'active pcoded-trigger' : '') ?>">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                <li class="<?= ($this->uri->segment(2) === 'keluarga' ? 'active' : '') ?>">
+                                    <a href="<?= admin_url() ?>keluarga">
                                         <span class="pcoded-micon">
                                             <i class="fa fa-circle"></i>
                                         </span>
-                                        <span class="pcoded-mtext">Keuangan (Kas)</span>
-                                    </a>
-                                    <ul class="pcoded-submenu">
-                                        <li class="<?= ($this->uri->segment(2) === 'pemasukan' ? 'active' : '') ?>">
-                                            <a href="<?= admin_url() ?>pemasukan" class="waves-effect waves-dark">
-                                                <span class="pcoded-mtext">Pemasukan</span>
-                                            </a>
-                                        </li>
-                                        <li class="<?= ($this->uri->segment(2) === 'pengeluaran' ? 'active' : '') ?>">
-                                            <a href="<?= admin_url() ?>pengeluaran" class="waves-effect waves-dark">
-                                                <span class="pcoded-mtext">Pengeluaran</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="<?= ($this->uri->segment(2) === 'guru' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>guru">
-                                        <span class="pcoded-micon">
-                                            <i class="fa fa-circle"></i>
-                                        </span>
-                                        <span class="pcoded-mtext">Guru</span>
+                                        <span class="pcoded-mtext">Keluarga</span>
                                     </a>
                                 </li>
-                                <li class="<?= ($this->uri->segment(2) === 'siswa' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>siswa">
+                                <li class="<?= ($this->uri->segment(2) === 'keluarga_anggota' ? 'active' : '') ?>">
+                                    <a href="<?= admin_url() ?>keluarga_anggota">
                                         <span class="pcoded-micon">
                                             <i class="fa fa-circle"></i>
                                         </span>
-                                        <span class="pcoded-mtext">Siswa</span>
+                                        <span class="pcoded-mtext">Anggota Keluarga</span>
                                     </a>
                                 </li>
-                                <li class="<?= ($this->uri->segment(2) === 'informasi' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>informasi">
+                                <li class="<?= ($this->uri->segment(2) === 'surat' ? 'active' : '') ?>">
+                                    <a href="<?= admin_url() ?>surat">
                                         <span class="pcoded-micon">
                                             <i class="fa fa-circle"></i>
                                         </span>
-                                        <span class="pcoded-mtext">Berita</span>
+                                        <span class="pcoded-mtext">Surat</span>
                                     </a>
                                 </li>
                             </ul>

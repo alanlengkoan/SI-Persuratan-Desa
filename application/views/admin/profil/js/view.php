@@ -39,8 +39,7 @@
                             text: response.text,
                             icon: response.type,
                             button: response.button,
-                        })
-                        .then((value) => {
+                        }).then((value) => {
                             location.reload();
                         });
                     }
@@ -75,8 +74,7 @@
                             text: response.text,
                             icon: response.type,
                             button: response.button,
-                        })
-                        .then((value) => {
+                        }).then((value) => {
                             location.reload();
                         });
                     }
@@ -111,8 +109,7 @@
                             text: response.text,
                             icon: response.type,
                             button: response.button,
-                        })
-                        .then((value) => {
+                        }).then((value) => {
                             location.reload();
                         });
                     }

@@ -1,7 +1,9 @@
-<?php
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
 function redirect_ssl()
 {
     $CI = &get_instance();
+
     $class = $CI->router->fetch_class();
     $exclude =  array('client');
 
