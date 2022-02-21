@@ -1,2 +1,2 @@
 # SI-Desa-Persuratan
-Sistem Informasi Desa Persuratan Pada Desa Bontotannga, Kecamatan Bontotiro, Kabupaten Bulukumba
+Sistem Informasi Desa Persuratan Pada Desa Bontotangnga, Kecamatan Bontotiro, Kabupaten Bulukumba
