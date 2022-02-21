@@ -12,8 +12,6 @@ class Dashboard extends MY_Controller
 
         // untuk load model
         $this->load->model('crud');
-        $this->load->model('m_guru');
-        $this->load->model('m_siswa');
 	}
 
     // untuk default

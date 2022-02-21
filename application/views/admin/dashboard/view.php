@@ -33,7 +33,7 @@
                         <div class="card">
                             <div class="card-block text-center">
                                 <i class="feather icon-users text-c-blue d-block f-40"></i>
-                                <h4 class="m-t-20"><span class="text-c-blue"><?= count($guru) ?></span>&nbsp;Guru</h4>
+                                <h4 class="m-t-20"><span class="text-c-blue"><?= $guru ?></span>&nbsp;Guru</h4>
                                 <p class="m-b-20">Jumlah Guru.</p>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                         <div class="card">
                             <div class="card-block text-center">
                                 <i class="feather icon-users text-c-blue d-block f-40"></i>
-                                <h4 class="m-t-20"><span class="text-c-blue"><?= count($aktif) ?></span>&nbsp;Siswa Aktif</h4>
+                                <h4 class="m-t-20"><span class="text-c-blue"><?= $aktif ?></span>&nbsp;Siswa Aktif</h4>
                                 <p class="m-b-20">Jumlah Siswa Akif.</p>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                         <div class="card">
                             <div class="card-block text-center">
                                 <i class="feather icon-users text-c-blue d-block f-40"></i>
-                                <h4 class="m-t-20"><span class="text-c-blue"><?= count($alumni) ?></span>&nbsp;Siswa Alumni</h4>
+                                <h4 class="m-t-20"><span class="text-c-blue"><?= $alumni ?></span>&nbsp;Siswa Alumni</h4>
                                 <p class="m-b-20">Jumlah Alumni.</p>
                             </div>
                         </div>
