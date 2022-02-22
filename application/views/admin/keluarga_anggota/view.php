@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="card-block table-border-style">
-                        <table class="table table-striped table-bordered nowrap" id="tabel-keluarga">
+                        <table class="table table-striped table-bordered nowrap" id="tabel-keluarga-anggota">
                         </table>
                     </div>
                 </div>
@@ -56,81 +56,125 @@
             <div class="modal-header">
                 <h4 class="modal-title"><span id="judul-add-upd"></span> <?= $title ?></h4>
             </div>
-            <form id="form-add-upd" action="<?= admin_url() ?>keluarga/process_save" method="POST">
+            <form id="form-add-upd" action="<?= admin_url() ?>keluarga_anggota/process_save" method="POST">
                 <!-- begin:: id -->
-                <input type="hidden" name="inpidkeluarga" id="inpidkeluarga" />
+                <input type="hidden" name="inpidkeluargaanggota" id="inpidkeluargaanggota" />
                 <input type="hidden" id="<?= $this->security->get_csrf_token_name() ?>" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>" />
                 <!-- end:: id -->
+
 
                 <div class="modal-body">
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Nomor KK *</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control inputNumber" pattern="\d*" maxlength="16" minlength="16" name="inpnokk" id="inpnokk" placeholder="Masukkan nomor kk" />
+                            <select class="form-control" name="inpnokk" id="inpnokk">
+                                <option value="">- Pilih -</option>
+                                <?php foreach ($keluarga as $key => $row) { ?>
+                                    <option value="<?= $row->no_kk ?>"><?= $row->no_kk ?> - <?= $row->nama_kk ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Nama KK *</label>
+                        <label class="col-sm-3 col-form-label">Nomor KTP *</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inpnmkk" id="inpnmkk" placeholder="Masukkan nama kk" />
+                            <input type="text" class="form-control inputNumber" name="inpnoktp" id="inpnoktp" pattern="\d*" maxlength="16" minlength="16" placeholder="Masukkan nomor ktp" />
                         </div>
                     </div>
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Alamat *</label>
+                        <label class="col-sm-3 col-form-label">Nama *</label>
                         <div class="col-sm-9">
-                            <textarea class="form-control" name="inpalamat" id="inpalamat" placeholder="Masukkan alamat"></textarea>
+                            <input type="text" class="form-control" name="inpnama" id="inpnama" placeholder="Masukkan nama" />
                         </div>
                     </div>
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">RT/RW *</label>
+                        <label class="col-sm-3 col-form-label">Jenis Kelamin *</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inprtrw" id="inprtrw" placeholder="Masukkan rt/rw" />
+                            <select class="form-control" name="inpkelamin" id="inpkelamin">
+                                <option value="">- Pilih -</option>
+                                <option value="L">Laki - laki</option>
+                                <option value="P">Perempuan</option>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Kode Pos *</label>
+                        <label class="col-sm-3 col-form-label">Tempat Lahir *</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inpkdpos" id="inpkdpos" placeholder="Masukkan kode pos" />
+                            <input type="text" class="form-control" name="inptmplahir" id="inptmplahir" placeholder="Masukkan tempat lahir" />
                         </div>
                     </div>
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Desa/Kelurahan *</label>
+                        <label class="col-sm-3 col-form-label">Tanggal Lahir *</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inpdesakel" id="inpdesakel" placeholder="Masukkan desa/kelurahan" />
+                            <input type="date" class="form-control" name="inptgllahir" id="inptgllahir" placeholder="Masukkan tanggal lahir" />
                         </div>
                     </div>
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Kecamatan *</label>
+                        <label class="col-sm-3 col-form-label">Agama *</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inpkec" id="inpkec" placeholder="Masukkan kecamatan" />
+                            <select class="form-control" name="inpidagama" id="inpidagama">
+                                <option value="">- Pilih -</option>
+                                <?php foreach ($agama as $key => $row) { ?>
+                                    <option value="<?= $row->id_agama ?>"><?= $row->nama ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Kabupaten/Kota *</label>
+                        <label class="col-sm-3 col-form-label">Pekerjaan *</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inpkabkot" id="inpkabkot" placeholder="Masukkan kabupaten/kota" />
+                            <select class="form-control" name="inpidpekerjaan" id="inpidpekerjaan">
+                                <option value="">- Pilih -</option>
+                                <?php foreach ($pekerjaan as $key => $row) { ?>
+                                    <option value="<?= $row->id_pekerjaan ?>"><?= $row->nama ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Provinsi *</label>
+                        <label class="col-sm-3 col-form-label">Kewarganegaraan *</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inpprovinsi" id="inpprovinsi" placeholder="Masukkan nama" />
+                            <select class="form-control" name="inpkewarganegaraan" id="inpkewarganegaraan">
+                                <option value="">- Pilih -</option>
+                                <option value="wni">WNI</option>
+                                <option value="wna">WNA</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Pendidikan *</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="inppendidikan" id="inppendidikan" placeholder="Masukkan pendidikan terakhir" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Status Nikah *</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="inpstatusnikah" id="inpstatusnikah">
+                                <option value="">- Pilih -</option>
+                                <option value="y">Iya</option>
+                                <option value="n">Tidak</option>
+                            </select>
                         </div>
                     </div>
                 </div>

@@ -14,16 +14,16 @@
 
 <script>
     let csrf = $('#<?= $this->security->get_csrf_token_name() ?>');
-    let tabelKeluargaDt = null;
+    let tabelKeluargaAnggotaDt = null;
 
     // untuk datatable
-    var untukTabelKeluarga = function() {
-        tabelKeluargaDt = $('#tabel-keluarga').DataTable({
+    var untukTabelKeluargaAnggota = function() {
+        tabelKeluargaAnggotaDt = $('#tabel-keluarga-anggota').DataTable({
             responsive: true,
             processing: true,
             lengthMenu: [5, 10, 25, 50],
             pageLength: 10,
-            ajax: '<?= admin_url() ?>keluarga/get_data_keluarga_dt',
+            ajax: '<?= admin_url() ?>keluarga_anggota/get_data_keluarga_anggota_dt',
             columns: [{
                     title: 'No.',
                     data: null,
@@ -43,39 +43,36 @@
                     className: 'text-center',
                 },
                 {
-                    title: 'Alamat',
-                    data: 'alamat',
+                    title: 'No. KTP',
+                    data: 'no_ktp',
                     className: 'text-center',
                 },
                 {
-                    title: 'RT/RW',
-                    data: 'rt_rw',
+                    title: 'Nama',
+                    data: 'nama',
                     className: 'text-center',
                 },
                 {
-                    title: 'Kode Pos',
-                    data: 'kd_pos',
+                    title: 'Jenis Kelamin',
                     className: 'text-center',
+                    render: function(data, type, full, meta) {
+                        let jenis_kelamin = {
+                            'L': 'Laki - laki',
+                            'P': 'Perempuan',
+                        };
+                        return (full.kelamin === null ? '-' : jenis_kelamin[full.kelamin]);
+                    },
                 },
                 {
-                    title: 'Desa/Kelurahan',
-                    data: 'desa_kelurahan',
+                    title: 'Status Nikah',
                     className: 'text-center',
-                },
-                {
-                    title: 'Kecamatan',
-                    data: 'kecamatan',
-                    className: 'text-center',
-                },
-                {
-                    title: 'Kabupaten/Kota',
-                    data: 'kabupaten_kota',
-                    className: 'text-center',
-                },
-                {
-                    title: 'Provinsi',
-                    data: 'provinsi',
-                    className: 'text-center',
+                    render: function(data, type, full, meta) {
+                        let status_nikah = {
+                            'y': 'Iya',
+                            'n': 'Tidak',
+                        };
+                        return (full.status_nikah === null ? '-' : status_nikah[full.status_nikah]);
+                    },
                 },
                 {
                     title: 'Aksi',
@@ -86,8 +83,8 @@
                     render: function(data, type, full, meta) {
                         return `
                         <div class="button-icon-btn button-icon-btn-cl">
-                            <button type="button" id="btn-upd" data-id="` + full.id_keluarga + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-pencil"></i>&nbsp;Ubah</button>&nbsp;
-                            <button type="button" id="btn-del" data-id="` + full.id_keluarga + `" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
+                            <button type="button" id="btn-upd" data-id="` + full.id_keluarga_anggota + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-pencil"></i>&nbsp;Ubah</button>&nbsp;
+                            <button type="button" id="btn-del" data-id="` + full.id_keluarga_anggota + `" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
                         </div>
                     `;
                     },
@@ -101,14 +98,16 @@
         $(document).on('click', '#btn-add', function() {
             $('#judul-add-upd').html('Tambah');
             $('#inpnokk').val('');
-            $('#inpnmkk').val('');
-            $('#inpalamat').val('');
-            $('#inprtrw').val('');
-            $('#inpkdpos').val('');
-            $('#inpdesakel').val('');
-            $('#inpkec').val('');
-            $('#inpkabkot').val('');
-            $('#inpprovinsi').val('');
+            $('#inpnoktp').val('');
+            $('#inpnama').val('');
+            $('#inpkelamin').val('');
+            $('#inptmplahir').val('');
+            $('#inptgllahir').val('');
+            $('#inpidagama').val('');
+            $('#inpidpekerjaan').val('');
+            $('#inpkewarganegaraan').val('');
+            $('#inppendidikan').val('');
+            $('#inpstatusnikah').val('');
         });
     }();
 
@@ -117,14 +116,16 @@
         $(document).on('submit', '#form-add-upd', function(e) {
             e.preventDefault();
             $('#inpnokk').attr('required', 'required');
-            $('#inpnmkk').attr('required', 'required');
-            $('#inpalamat').attr('required', 'required');
-            $('#inprtrw').attr('required', 'required');
-            $('#inpkdpos').attr('required', 'required');
-            $('#inpdesakel').attr('required', 'required');
-            $('#inpkec').attr('required', 'required');
-            $('#inpkabkot').attr('required', 'required');
-            $('#inpprovinsi').attr('required', 'required');
+            $('#inpnoktp').attr('required', 'required');
+            $('#inpnama').attr('required', 'required');
+            $('#inpkelamin').attr('required', 'required');
+            $('#inptmplahir').attr('required', 'required');
+            $('#inptgllahir').attr('required', 'required');
+            $('#inpidagama').attr('required', 'required');
+            $('#inpidpekerjaan').attr('required', 'required');
+            $('#inpkewarganegaraan').attr('required', 'required');
+            $('#inppendidikan').attr('required', 'required');
+            $('#inpstatusnikah').attr('required', 'required');
 
             if ($('#form-add-upd').parsley().isValid() == true) {
                 $.ajax({
@@ -148,7 +149,7 @@
                         }).then((value) => {
                             $('#modal-add-upd').modal('hide');
                             csrf.val(response.csrf);
-                            tabelKeluargaDt.ajax.reload();
+                            tabelKeluargaAnggotaDt.ajax.reload();
                         });
 
                         $('#save').removeAttr('disabled');
@@ -166,7 +167,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "<?= admin_url() ?>keluarga/get",
+                url: "<?= admin_url() ?>keluarga_anggota/get",
                 dataType: 'json',
                 data: {
                     id: ini.data('id'),
@@ -180,16 +181,18 @@
                 },
                 success: function(response) {
                     csrf.val(response.csrf);
-                    $('#inpidkeluarga').val(response.id_keluarga);
+                    $('#inpidkeluargaanggota').val(response.id_keluarga_anggota);
                     $('#inpnokk').val(response.no_kk);
-                    $('#inpnmkk').val(response.nama_kk);
-                    $('#inpalamat').val(response.alamat);
-                    $('#inprtrw').val(response.rt_rw);
-                    $('#inpkdpos').val(response.kd_pos);
-                    $('#inpdesakel').val(response.desa_kelurahan);
-                    $('#inpkec').val(response.kecamatan);
-                    $('#inpkabkot').val(response.kabupaten_kota);
-                    $('#inpprovinsi').val(response.provinsi);
+                    $('#inpnoktp').val(response.no_ktp);
+                    $('#inpnama').val(response.nama);
+                    $('#inpkelamin').val(response.kelamin);
+                    $('#inptmplahir').val(response.tmp_lahir);
+                    $('#inptgllahir').val(response.tgl_lahir);
+                    $('#inpidagama').val(response.id_agama);
+                    $('#inpidpekerjaan').val(response.id_pekerjaan);
+                    $('#inpkewarganegaraan').val(response.kewarganegaraan);
+                    $('#inppendidikan').val(response.pendidikan);
+                    $('#inpstatusnikah').val(response.status_nikah);
 
                     ini.removeAttr('disabled');
                     ini.html('<i class="fa fa-pencil"></i>&nbsp;Ubah');
@@ -230,7 +233,7 @@
                                 button: response.button,
                             }).then((value) => {
                                 csrf.val(response.csrf);
-                                tabelKeluargaDt.ajax.reload();
+                                tabelKeluargaAnggotaDt.ajax.reload();
                             });
                         }
                     });
