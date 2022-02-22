@@ -4,7 +4,7 @@
         <div class="row align-items-center">
             <div class="col-md-8">
                 <div class="page-header-title">
-                    <h4 class="m-b-10"><?= $halaman ?></h4>
+                    <h4 class="m-b-10"><?= $title ?></h4>
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item">
@@ -31,7 +31,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5 class="w-75 p-2">Daftar <?= $halaman ?></h5>
+                                <h5 class="w-75 p-2">Daftar <?= $title ?></h5>
                             </div>
                             <div class="col-lg-6 text-right">
                                 <button type="button" id="btn-add" class="btn btn-success btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-plus"></i>&nbsp;Tambah</button>
@@ -54,12 +54,12 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><span id="judul-add-upd"></span> <?= $halaman ?></h4>
+                <h4 class="modal-title"><span id="judul-add-upd"></span> <?= $title ?></h4>
             </div>
             <form id="form-add-upd" action="<?= admin_url() ?>pekerjaan/process_save" method="POST">
                 <!-- begin:: id -->
                 <input type="hidden" name="inpidpekerjaan" id="inpidpekerjaan" />
-                <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>" />
+                <input type="hidden" id="<?= $this->security->get_csrf_token_name() ?>" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>" />
                 <!-- end:: id -->
 
                 <div class="modal-body">

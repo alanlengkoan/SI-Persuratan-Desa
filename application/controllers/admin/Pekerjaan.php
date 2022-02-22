@@ -18,11 +18,8 @@ class Pekerjaan extends MY_Controller
     // untuk default
     public function index()
     {
-        $data = [
-            'halaman' => 'Pekerjaan',
-        ];
         // untuk load view
-        $this->template->load('admin', 'pekerjaan', 'view', $data);
+        $this->template->load('admin', 'Pekerjaan', 'pekerjaan', 'view');
     }
 
     // untuk get data
@@ -36,10 +33,10 @@ class Pekerjaan extends MY_Controller
     {
         $post = $this->input->post(NULL, TRUE);
 
-        $response = $this->crud->gda('tb_pekerjaan', ['id_pekerjaan' => $post['id']]);
+        $message = $this->crud->gda('tb_pekerjaan', ['id_pekerjaan' => $post['id']]);
 
-        // untuk response json
-        $this->_response($response);
+        // untuk message json
+        $this->_response_message($message);
     }
 
     // untuk proses tambah data
@@ -59,12 +56,12 @@ class Pekerjaan extends MY_Controller
         }
         $this->db->trans_complete();
         if ($this->db->trans_status() === FALSE) {
-            $response = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
+            $message = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
         } else {
-            $response = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
+            $message = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
         }
-        // untuk response json
-        $this->_response($response);
+        // untuk message json
+        $this->_response_message($message);
     }
 
 
@@ -77,11 +74,11 @@ class Pekerjaan extends MY_Controller
         $this->crud->d('tb_pekerjaan', $post['id'], 'id_pekerjaan');
         $this->db->trans_complete();
         if ($this->db->trans_status() === FALSE) {
-            $response = ['title' => 'Gagal!', 'text' => 'Gagal Hapus!', 'type' => 'error', 'button' => 'Ok!'];
+            $message = ['title' => 'Gagal!', 'text' => 'Gagal Hapus!', 'type' => 'error', 'button' => 'Ok!'];
         } else {
-            $response = ['title' => 'Berhasil!', 'text' => 'Berhasil Hapus!', 'type' => 'success', 'button' => 'Ok!'];
+            $message = ['title' => 'Berhasil!', 'text' => 'Berhasil Hapus!', 'type' => 'success', 'button' => 'Ok!'];
         }
-        // untuk response json
-        $this->_response($response);
+        // untuk message json
+        $this->_response_message($message);
     }
 }

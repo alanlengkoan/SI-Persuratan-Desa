@@ -18,4 +18,11 @@ abstract class MY_Controller extends CI_Controller
             ->_display();
         exit();
     }
+
+    // untuk response message
+    public function _response_message($message)
+    {
+        $message['csrf'] = $this->security->get_csrf_hash();
+        $this->_response($message);
+    }
 }

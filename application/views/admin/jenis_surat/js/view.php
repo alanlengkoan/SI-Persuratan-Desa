@@ -13,6 +13,7 @@
 <script src="<?= assets_url() ?>admin/ckeditor-4.14.0/ckeditor.js"></script>
 
 <script>
+    let csrf = $('#<?= $this->security->get_csrf_token_name() ?>');
     let tabelSuratJenisDt = null;
 
     // untuk datatable
@@ -91,6 +92,7 @@
                             button: response.button,
                         }).then((value) => {
                             $('#modal-add-upd').modal('hide');
+                            csrf.val(response.csrf);
                             tabelSuratJenisDt.ajax.reload();
                         });
 
@@ -112,14 +114,17 @@
                 url: "<?= admin_url() ?>jenis_surat/get",
                 dataType: 'json',
                 data: {
-                    id: ini.data('id')
+                    id: ini.data('id'),
+                    my_csrf_token: csrf.val(),
                 },
                 beforeSend: function() {
                     $('#judul-add-upd').html('Ubah');
+
                     ini.attr('disabled', 'disabled');
                     ini.html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
                 },
                 success: function(response) {
+                    csrf.val(response.csrf);
                     $('#inpidsuratjenis').val(response.id_surat_jenis);
                     $('#inpnama').val(response.nama);
 
@@ -148,19 +153,21 @@
                         url: "<?= admin_url() ?>jenis_surat/process_del",
                         dataType: 'json',
                         data: {
-                            id: ini.data('id')
+                            id: ini.data('id'),
+                            my_csrf_token: csrf.val(),
                         },
                         beforeSend: function() {
                             ini.attr('disabled', 'disabled');
                             ini.html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
                         },
-                        success: function(data) {
+                        success: function(response) {
                             swal({
-                                title: data.title,
-                                text: data.text,
-                                icon: data.type,
-                                button: data.button,
+                                title: response.title,
+                                text: response.text,
+                                icon: response.type,
+                                button: response.button,
                             }).then((value) => {
+                                csrf.val(response.csrf);
                                 tabelSuratJenisDt.ajax.reload();
                             });
                         }

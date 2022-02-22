@@ -13,6 +13,7 @@
 <script src="<?= assets_url() ?>admin/ckeditor-4.14.0/ckeditor.js"></script>
 
 <script>
+    let csrf = $('#<?= $this->security->get_csrf_token_name() ?>');
     let tabelPekerjaanDt = null;
 
     // untuk datatable
@@ -44,11 +45,11 @@
                     searchable: false,
                     render: function(data, type, full, meta) {
                         return `
-                        <div class="button-icon-btn button-icon-btn-cl">
-                            <button type="button" id="btn-upd" data-id="` + full.id_pekerjaan + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-pencil"></i>&nbsp;Ubah</button>&nbsp;
-                            <button type="button" id="btn-del" data-id="` + full.id_pekerjaan + `" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
-                        </div>
-                    `;
+                            <div class="button-icon-btn button-icon-btn-cl">
+                                <button type="button" id="btn-upd" data-id="` + full.id_pekerjaan + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-pencil"></i>&nbsp;Ubah</button>&nbsp;
+                                <button type="button" id="btn-del" data-id="` + full.id_pekerjaan + `" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
+                            </div>
+                        `;
                     },
                 },
             ],
@@ -91,6 +92,7 @@
                             button: response.button,
                         }).then((value) => {
                             $('#modal-add-upd').modal('hide');
+                            csrf.val(response.csrf);
                             tabelPekerjaanDt.ajax.reload();
                         });
 
@@ -112,14 +114,17 @@
                 url: "<?= admin_url() ?>pekerjaan/get",
                 dataType: 'json',
                 data: {
-                    id: ini.data('id')
+                    id: ini.data('id'),
+                    my_csrf_token: csrf.val(),
                 },
                 beforeSend: function() {
                     $('#judul-add-upd').html('Ubah');
+
                     ini.attr('disabled', 'disabled');
                     ini.html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
                 },
                 success: function(response) {
+                    csrf.val(response.csrf);
                     $('#inpidpekerjaan').val(response.id_pekerjaan);
                     $('#inpnama').val(response.nama);
 
@@ -148,19 +153,21 @@
                         url: "<?= admin_url() ?>pekerjaan/process_del",
                         dataType: 'json',
                         data: {
-                            id: ini.data('id')
+                            id: ini.data('id'),
+                            my_csrf_token: csrf.val(),
                         },
                         beforeSend: function() {
                             ini.attr('disabled', 'disabled');
                             ini.html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
                         },
-                        success: function(data) {
+                        success: function(response) {
                             swal({
-                                title: data.title,
-                                text: data.text,
-                                icon: data.type,
-                                button: data.button,
+                                title: response.title,
+                                text: response.text,
+                                icon: response.type,
+                                button: response.button,
                             }).then((value) => {
+                                csrf.val(response.csrf);
                                 tabelPekerjaanDt.ajax.reload();
                             });
                         }

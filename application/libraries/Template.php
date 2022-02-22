@@ -20,18 +20,31 @@ class Template
         $this->ci = &get_instance();
     }
 
-    public function load($role, $module, $view, array $data = [])
+    // untuk load view
+    public function load($role, $title, $module, $view, array $data = [])
     {
+        // untuk judul halaman
+        $data['title'] = $title;
+        // untuk content
         $data['content'] = "{$role}/{$module}/{$view}";
-        // untuk css
-        if (file_exists(APPPATH . "views/{$role}/{$module}/{$view}.php")) {
-            $data['css']     = "{$role}/{$module}/css/{$view}";
-        }
-        // untuk js
-        if (file_exists(APPPATH . "views/{$role}/{$module}/{$view}.php")) {
-            $data['js']      = "{$role}/{$module}/js/{$view}";
-        }
+        // untuk css local
+        $css = "{$role}/{$module}/css/{$view}";
+        $data['css'] = ($this->_check_file_exist($css) ? $css : '');
+        // untuk js local
+        $js = "{$role}/{$module}/js/{$view}";
+        $data['js'] = ($this->_check_file_exist($js) ? $js : '');
         // untuk load view
         $this->ci->load->view("{$role}/base", $data);
+    }
+
+    // untuk check file tersedia
+    private function _check_file_exist($file_path)
+    {
+        $target_file = APPPATH . "views/{$file_path}.php";
+        if (file_exists($target_file)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

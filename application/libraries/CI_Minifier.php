@@ -1,7 +1,4 @@
 <?php
-include APPPATH . 'third_party/Simple_html_dom.php';
-include APPPATH . 'third_party/JSPacker.php';
-
 /**
  * @name        CI_Minifier - Minify Library for CodeIgniter 3
  * @author      Terry Lin
@@ -18,6 +15,9 @@ include APPPATH . 'third_party/JSPacker.php';
  *                    Step 1. put Simple_html_dom.php at /third_party folder
  *                    Step 2. use $this->ci_minifier->set_domparser(2); in Controller.
  */
+
+include APPPATH . 'third_party/Simple_html_dom.php';
+include APPPATH . 'third_party/JSPacker.php';
 
 class CI_Minifier
 {
