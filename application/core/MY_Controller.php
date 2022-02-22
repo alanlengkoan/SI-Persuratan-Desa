@@ -8,6 +8,7 @@ abstract class MY_Controller extends CI_Controller
         parent::__construct();
     }
     
+    // untuk response json
     public function _response($data)
     {
         $this->output

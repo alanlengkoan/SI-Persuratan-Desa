@@ -20,18 +20,15 @@ class Agama extends MY_Controller
     {
         $data = [
             'halaman' => 'Agama',
-            'content' => 'admin/agama/view',
-            'css'     => 'admin/agama/css/view',
-            'js'      => 'admin/agama/js/view'
         ];
         // untuk load view
-        $this->load->view('admin/base', $data);
+        $this->template->load('admin', 'agama', 'view', $data);
     }
 
     // untuk get data agama
     public function get_data_agama_dt()
     {
-        return $this->m_agama->getAllDataDt();
+        $this->m_agama->getAllDataDt();
     }
 
     // untuk get data by id
@@ -40,7 +37,7 @@ class Agama extends MY_Controller
         $post = $this->input->post(NULL, TRUE);
 
         $response = $this->crud->gda('tb_agama', ['id_agama' => $post['id']]);
-        
+
         // untuk response json
         $this->_response($response);
     }
