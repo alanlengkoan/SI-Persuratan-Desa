@@ -16,21 +16,23 @@ use Dompdf\Options;
 
 class Pdf extends Dompdf
 {
+    private $ci;
+
     public function __construct()
     {
         parent::__construct();
+        $this->ci = &get_instance();
     }
 
     // untuk cetak pdf
     public function cetakPdf($file_name, $view, $data = [])
     {
-        $CI = get_instance();
         $options = new Options();
         $options->setChroot(FCPATH);
 
         $this->setOptions($options);
 
-        $html = $CI->load->view($view, $data, TRUE);
+        $html = $this->ci->load->view($view, $data, TRUE);
         $this->loadHtml($html);
         $this->render();
         $this->stream($file_name . '.pdf', ['Attachment' => false]);

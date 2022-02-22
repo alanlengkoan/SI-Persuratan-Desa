@@ -1,5 +1,5 @@
 <script src="<?= assets_url() ?>admin/jquery.filer/js/jquery.filer.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
+<script src="<?= assets_url() ?>admin/parsley-2.9.2/parsley.js"></script>
 
 <script>
     // untuk upload foto

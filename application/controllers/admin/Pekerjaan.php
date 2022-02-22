@@ -20,18 +20,15 @@ class Pekerjaan extends MY_Controller
     {
         $data = [
             'halaman' => 'Pekerjaan',
-            'content' => 'admin/pekerjaan/view',
-            'css'     => 'admin/pekerjaan/css/view',
-            'js'      => 'admin/pekerjaan/js/view'
         ];
         // untuk load view
-        $this->load->view('admin/base', $data);
+        $this->template->load('admin', 'pekerjaan', 'view', $data);
     }
 
     // untuk get data
     public function get_data_pekerjaan_dt()
     {
-        return $this->m_pekerjaan->getAllDataDt();
+        $this->m_pekerjaan->getAllDataDt();
     }
 
     // untuk get data by id

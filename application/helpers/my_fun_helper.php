@@ -413,14 +413,16 @@ if (!function_exists('secToTimes')) {
 }
 
 if (!function_exists('base64url_encode')) {
-    function base64url_encode($data) {
-        return rtrim( strtr( base64_encode($data), '+/', '-_' ), '=' );
+    function base64url_encode($data)
+    {
+        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
     }
 }
 
 if (!function_exists('base64url_decode')) {
-    function base64url_decode($data) {
-        return base64_decode( str_pad( strtr( $data, '-_', '+/' ), strlen($data) % 4, '=', STR_PAD_RIGHT ) );
+    function base64url_decode($data)
+    {
+        return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
     }
 }
 
@@ -475,18 +477,18 @@ if (!function_exists('create_separator')) {
 
 if (!function_exists('count_age')) {
     function count_age($date)
-	{
-		list($tahun, $bulan, $hari) = explode("-", $date);
-		$tahun_diff = date("Y") - $tahun;
-		$bulan_diff = date("m") - $bulan;
-		$hari_diff  = date("d") - $hari;
+    {
+        list($tahun, $bulan, $hari) = explode("-", $date);
+        $tahun_diff = date("Y") - $tahun;
+        $bulan_diff = date("m") - $bulan;
+        $hari_diff  = date("d") - $hari;
 
-		if ($bulan_diff < 0) {
-			$tahun_diff--;
-		} else if (($bulan_diff == 0) && ($hari_diff < 0)) {
-			$tahun_diff--;
-		}
-        
-		return $tahun_diff;
-	}
+        if ($bulan_diff < 0) {
+            $tahun_diff--;
+        } else if (($bulan_diff == 0) && ($hari_diff < 0)) {
+            $tahun_diff--;
+        }
+
+        return $tahun_diff;
+    }
 }

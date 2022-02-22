@@ -9,8 +9,8 @@
 <script src="<?= assets_url() ?>admin/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="<?= assets_url() ?>admin/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?= assets_url() ?>admin/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
-<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<script src="<?= assets_url() ?>admin/parsley-2.9.2/parsley.js"></script>
+<script src="<?= assets_url() ?>admin/ckeditor-4.14.0/ckeditor.js"></script>
 
 <script>
     let tabelAgamaDt = null;
@@ -112,10 +112,11 @@
                 url: "<?= admin_url() ?>agama/get",
                 dataType: 'json',
                 data: {
-                    id: ini.data('id')
+                    id: ini.data('id'),
                 },
                 beforeSend: function() {
                     $('#judul-add-upd').html('Ubah');
+
                     ini.attr('disabled', 'disabled');
                     ini.html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
                 },

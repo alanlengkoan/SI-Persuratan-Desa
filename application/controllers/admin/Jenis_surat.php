@@ -20,12 +20,9 @@ class Jenis_surat extends MY_Controller
     {
         $data = [
             'halaman' => 'Jenis Surat',
-            'content' => 'admin/jenis_surat/view',
-            'css'     => 'admin/jenis_surat/css/view',
-            'js'      => 'admin/jenis_surat/js/view'
         ];
         // untuk load view
-        $this->load->view('admin/base', $data);
+        $this->template->load('admin', 'jenis_surat', 'view', $data);
     }
 
     // untuk get data
