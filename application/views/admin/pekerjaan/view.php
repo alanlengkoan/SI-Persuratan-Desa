@@ -59,6 +59,7 @@
             <form id="form-add-upd" action="<?= admin_url() ?>pekerjaan/process_save" method="POST">
                 <!-- begin:: id -->
                 <input type="hidden" name="inpidpekerjaan" id="inpidpekerjaan" />
+                <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>" />
                 <!-- end:: id -->
 
                 <div class="modal-body">

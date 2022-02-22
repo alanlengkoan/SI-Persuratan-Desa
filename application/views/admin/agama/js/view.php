@@ -112,10 +112,11 @@
                 url: "<?= admin_url() ?>agama/get",
                 dataType: 'json',
                 data: {
-                    id: ini.data('id')
+                    id: ini.data('id'),
                 },
                 beforeSend: function() {
                     $('#judul-add-upd').html('Ubah');
+
                     ini.attr('disabled', 'disabled');
                     ini.html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
                 },
