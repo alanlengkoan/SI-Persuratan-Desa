@@ -96,7 +96,6 @@ class Tentang extends MY_Controller
             }
         } else {
             if (isset($_FILES['inpgambar']['name'])) {
-
                 $result = $this->crud->gda('tb_profil', ['id_profil' => $post['inpidprofil']]);
 
                 $config['upload_path']   = './' . upload_path('gambar');
