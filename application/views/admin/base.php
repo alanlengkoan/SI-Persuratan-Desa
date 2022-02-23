@@ -197,40 +197,40 @@
                                     </a>
                                 </li>
                             </ul>
-                            <div class="pcoded-navigation-label">Laporan</div>
+                            <!-- <div class="pcoded-navigation-label">Laporan</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="<?= ($this->uri->segment(2) === 'l_keuangan' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>laporan/l_keuangan">
+                                <li class="< ?= ($this->uri->segment(2) === 'l_keuangan' ? 'active' : '') ?>">
+                                    <a href="< ?= admin_url() ?>laporan/l_keuangan">
                                         <span class="pcoded-micon">
                                             <i class="fa fa-circle"></i>
                                         </span>
                                         <span class="pcoded-mtext">Laporan Keuangan</span>
                                     </a>
                                 </li>
-                                <li class="<?= ($this->uri->segment(2) === 'l_guru' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>laporan/l_guru">
+                                <li class="< ?= ($this->uri->segment(2) === 'l_guru' ? 'active' : '') ?>">
+                                    <a href="< ?= admin_url() ?>laporan/l_guru">
                                         <span class="pcoded-micon">
                                             <i class="fa fa-circle"></i>
                                         </span>
                                         <span class="pcoded-mtext">Laporan Guru</span>
                                     </a>
                                 </li>
-                                <li class="<?= ($this->uri->segment(2) === 'l_siswa' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>laporan/l_siswa">
+                                <li class="< ?= ($this->uri->segment(2) === 'l_siswa' ? 'active' : '') ?>">
+                                    <a href="< ?= admin_url() ?>laporan/l_siswa">
                                         <span class="pcoded-micon">
                                             <i class="fa fa-circle"></i>
                                         </span>
                                         <span class="pcoded-mtext">Laporan Siswa</span>
                                     </a>
                                 </li>
-                                <li class="<?= ($this->uri->segment(2) === 'l_buku_tamu' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>laporan/l_buku_tamu">
+                                <li class="< ?= ($this->uri->segment(2) === 'l_buku_tamu' ? 'active' : '') ?>">
+                                    <a href="< ?= admin_url() ?>laporan/l_buku_tamu">
                                         <span class="pcoded-micon">
                                             <i class="fa fa-circle"></i>
                                         </span>
                                         <span class="pcoded-mtext">Laporan Buku Tamu</span>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                             <!-- end:: menu sidebar -->
                         </div>
