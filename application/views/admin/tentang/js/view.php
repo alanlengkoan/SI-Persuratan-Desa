@@ -10,15 +10,16 @@
 <script src="<?= assets_url() ?>admin/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?= assets_url() ?>admin/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 <script src="<?= assets_url() ?>admin/parsley-2.9.2/parsley.js"></script>
-<script src="<?= assets_url() ?>admin/ckeditor-4.14.0/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 
 <script>
+    let csrf = $('#<?= $this->security->get_csrf_token_name() ?>');
+    let tabelProfilDt = null;
+
     // untuk textarea editor
     CKEDITOR.replace('inpisi', {
         language: 'en',
     });
-
-    let tabelProfilDt = null;
 
     // untuk datatable
     var untukTabelProfil = function() {
@@ -38,7 +39,7 @@
                 },
                 {
                     title: 'Profil',
-                    data: 'profil',
+                    data: 'nama',
                     className: 'text-center',
                 },
                 {
@@ -61,7 +62,7 @@
                     render: function(data, type, full, meta) {
                         return `
                             <div class="button-icon-btn button-icon-btn-cl">
-                                <button type="button" id="btn-upd" data-id="` + full.id_profil + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-pencil"></i>&nbsp;Ubah</button>
+                                <button type="button" id="btn-upd" data-id="` + full.id_profil + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-pencil"></i>&nbsp;Ubah</button>&nbsp;
                                 <button type="button" id="btn-del" data-id="` + full.id_profil + `" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
                             </div>
                         `;
@@ -85,44 +86,6 @@
             $('#lihat_gambar').removeAttr('style');
             $('#centang_gambar').empty();
             $('#centang_gambar').removeAttr('style');
-        });
-    }();
-
-    // untuk get id
-    var untukGetIdData = function() {
-        $(document).on('click', '#btn-upd', function() {
-            var ini = $(this);
-
-            $.ajax({
-                type: "POST",
-                url: "<?= admin_url() ?>tentang/get",
-                dataType: 'json',
-                data: {
-                    id: ini.data('id')
-                },
-                beforeSend: function() {
-                    $('#judul-add-upd').html('Ubah');
-                    ini.attr('disabled', 'disabled');
-                    ini.html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
-                },
-                success: function(response) {
-                    $('#inpidprofil').val(response.id_profil);
-
-                    $('#lihat_gambar').html(`<img src="<?= upload_url('gambar') ?>` + response.gambar + `" width="100" heigth="100" />`);
-                    $('#lihat_gambar').attr('style', 'padding-bottom: 10px');
-
-                    $('#centang_gambar').html(`<div class="checkbox-fade fade-in-default"><label><input type="checkbox" name="ubah_gambar" id="ubah_gambar" /><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-default"></i></span><span>Ubah Gambar!</span></label></div>`);
-                    $('#centang_gambar').attr('style', 'padding-top: 10px');
-
-                    $('#inpprofil').val(response.profil);
-                    $('#inpgambar').attr('disabled', 'disabled');
-                    $('#inpgambar').removeAttr('id');
-                    CKEDITOR.instances.inpisi.setData(response.isi);
-
-                    ini.removeAttr('disabled');
-                    ini.html('<i class="fa fa-pencil"></i>&nbsp;Ubah');
-                }
-            });
         });
     }();
 
@@ -164,15 +127,15 @@
                     },
                     success: function(response) {
                         swal({
-                                title: response.title,
-                                text: response.text,
-                                icon: response.type,
-                                button: response.button,
-                            })
-                            .then((value) => {
-                                $('#modal-add-upd').modal('hide');
-                                tabelProfilDt.ajax.reload();
-                            });
+                            title: response.title,
+                            text: response.text,
+                            icon: response.type,
+                            button: response.button,
+                        }).then((value) => {
+                            $('#modal-add-upd').modal('hide');
+                            csrf.val(response.csrf);
+                            tabelProfilDt.ajax.reload();
+                        });
                         $('#save').removeAttr('disabled');
                         $('#save').html('<i class="fa fa-save"></i>&nbsp;Simpan');
                     }
@@ -181,46 +144,83 @@
         });
     }();
 
+    // untuk get id
+    var untukGetIdData = function() {
+        $(document).on('click', '#btn-upd', function() {
+            var ini = $(this);
+
+            $.ajax({
+                type: "POST",
+                url: "<?= admin_url() ?>tentang/get",
+                dataType: 'json',
+                data: {
+                    id: ini.data('id'),
+                    my_csrf_token: csrf.val(),
+                },
+                beforeSend: function() {
+                    $('#judul-add-upd').html('Ubah');
+                    ini.attr('disabled', 'disabled');
+                    ini.html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
+                },
+                success: function(response) {
+                    csrf.val(response.csrf);
+                    $('#inpidprofil').val(response.id_profil);
+                    $('#lihat_gambar').html(`<img src="<?= upload_url('gambar') ?>` + response.gambar + `" width="100" heigth="100" />`);
+                    $('#lihat_gambar').attr('style', 'padding-bottom: 10px');
+                    $('#centang_gambar').html(`<div class="checkbox-fade fade-in-default"><label><input type="checkbox" name="ubah_gambar" id="ubah_gambar" /><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-default"></i></span><span>Ubah Gambar!</span></label></div>`);
+                    $('#centang_gambar').attr('style', 'padding-top: 10px');
+                    $('#inpnama').val(response.nama);
+                    $('#inpgambar').attr('disabled', 'disabled');
+                    $('#inpgambar').removeAttr('id');
+                    CKEDITOR.instances.inpisi.setData(response.isi);
+
+                    ini.removeAttr('disabled');
+                    ini.html('<i class="fa fa-pencil"></i>&nbsp;Ubah');
+                }
+            });
+        });
+    }();
+
     // untuk hapus data
     var untukHapusData = function() {
         $(document).on('click', '#btn-del', function() {
             var ini = $(this);
             swal({
-                    title: "Apakah Anda yakin ingin menghapusnya?",
-                    text: "Data yang telah dihapus tidak dapat dikembalikan!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((del) => {
-                    if (del) {
-                        $.ajax({
-                            type: "post",
-                            url: "<?= admin_url() ?>tentang/process_del",
-                            dataType: 'json',
-                            data: {
-                                id: ini.data('id')
-                            },
-                            beforeSend: function() {
-                                ini.attr('disabled', 'disabled');
-                                ini.html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
-                            },
-                            success: function(data) {
-                                swal({
-                                        title: data.title,
-                                        text: data.text,
-                                        icon: data.type,
-                                        button: data.button,
-                                    })
-                                    .then((value) => {
-                                        tabelProfilDt.ajax.reload();
-                                    });
-                            }
-                        });
-                    } else {
-                        return false;
-                    }
-                });
+                title: "Apakah Anda yakin ingin menghapusnya?",
+                text: "Data yang telah dihapus tidak dapat dikembalikan!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((del) => {
+                if (del) {
+                    $.ajax({
+                        type: "post",
+                        url: "<?= admin_url() ?>tentang/process_del",
+                        dataType: 'json',
+                        data: {
+                            id: ini.data('id'),
+                            my_csrf_token: csrf.val(),
+                        },
+                        beforeSend: function() {
+                            ini.attr('disabled', 'disabled');
+                            ini.html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
+                        },
+                        success: function(response) {
+                            swal({
+                                title: response.title,
+                                text: response.text,
+                                icon: response.type,
+                                button: response.button,
+                            }).then((value) => {
+                                csrf.val(response.csrf);
+                                tabelProfilDt.ajax.reload();
+                            });
+                        }
+                    });
+                } else {
+                    return false;
+                }
+            });
         });
     }();
 </script>

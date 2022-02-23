@@ -18,14 +18,8 @@ class Tentang extends MY_Controller
     // untuk default
     public function index()
     {
-        $data = [
-            'halaman' => 'Tentang',
-            'content' => 'admin/tentang/view',
-            'css'     => 'admin/tentang/css/view',
-            'js'      => 'admin/tentang/js/view'
-        ];
         // untuk load view
-        $this->load->view('admin/base', $data);
+        $this->template->load('admin', 'Tentang', 'tentang', 'view');
     }
 
     // untuk get datatable
@@ -39,15 +33,10 @@ class Tentang extends MY_Controller
     {
         $post = $this->input->post(NULL, TRUE);
 
-        $result = $this->crud->gda('tb_profil', ['id_profil' => $post['id']]);
-        $response = [
-            'id_profil' => $result['id_profil'],
-            'profil'    => $result['profil'],
-            'isi'       => $result['isi'],
-            'gambar'    => $result['gambar'],
-        ];
+        $message = $this->crud->gda('tb_profil', ['id_profil' => $post['id']]);
+
         // untuk response json
-        $this->_response($response);
+        $this->_response_message($message);
     }
 
     // untuk proses tambah data
@@ -68,14 +57,14 @@ class Tentang extends MY_Controller
                     // apa bila gagal
                     $error = array('error' => $this->upload->display_errors());
 
-                    $response = ['title' => 'Gagal!', 'text' => strip_tags($error['error']), 'type' => 'error', 'button' => 'Ok!'];
+                    $message = ['title' => 'Gagal!', 'text' => strip_tags($error['error']), 'type' => 'error', 'button' => 'Ok!'];
                 } else {
                     // apa bila berhasil
                     $detailFile = $this->upload->data();
 
                     $data = [
                         'id_profil' => acak_id('tb_profil', 'id_profil'),
-                        'profil'    => $post['inpprofil'],
+                        'nama'      => $post['inpnama'],
                         'isi'       => $post['inpisi'],
                         'gambar'    => $detailFile['file_name'],
                     ];
@@ -84,15 +73,15 @@ class Tentang extends MY_Controller
                     $this->crud->i('tb_profil', $data);
                     $this->db->trans_complete();
                     if ($this->db->trans_status() === FALSE) {
-                        $response = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
+                        $message = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
                     } else {
-                        $response = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
+                        $message = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
                     }
                 }
             } else {
                 $data = [
                     'id_profil' => acak_id('tb_profil', 'id_profil'),
-                    'profil'    => $post['inpprofil'],
+                    'nama'      => $post['inpnama'],
                     'isi'       => $post['inpisi'],
                 ];
                 
@@ -100,9 +89,9 @@ class Tentang extends MY_Controller
                 $this->crud->i('tb_profil', $data);
                 $this->db->trans_complete();
                 if ($this->db->trans_status() === FALSE) {
-                    $response = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
+                    $message = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
                 } else {
-                    $response = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
+                    $message = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
                 }
             }
         } else {
@@ -121,7 +110,7 @@ class Tentang extends MY_Controller
                     // apa bila gagal
                     $error = array('error' => $this->upload->display_errors());
 
-                    $response = ['title' => 'Gagal!', 'text' => strip_tags($error['error']), 'type' => 'error', 'button' => 'Ok!'];
+                    $message = ['title' => 'Gagal!', 'text' => strip_tags($error['error']), 'type' => 'error', 'button' => 'Ok!'];
                 } else {
                     // apa bila berhasil
                     $detailFile = $this->upload->data();
@@ -135,7 +124,7 @@ class Tentang extends MY_Controller
 
                     $data = [
                         'id_profil' => $post['inpidprofil'],
-                        'profil'    => $post['inpprofil'],
+                        'nama'      => $post['inpnama'],
                         'isi'       => $post['inpisi'],
                         'gambar'    => $detailFile['file_name'],
                     ];
@@ -144,15 +133,15 @@ class Tentang extends MY_Controller
                     $this->crud->u('tb_profil', $data, ['id_profil' => $post['inpidprofil']]);
                     $this->db->trans_complete();
                     if ($this->db->trans_status() === FALSE) {
-                        $response = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
+                        $message = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
                     } else {
-                        $response = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
+                        $message = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
                     }
                 }
             } else {
                 $data = [
                     'id_profil' => $post['inpidprofil'],
-                    'profil'    => $post['inpprofil'],
+                    'nama'      => $post['inpnama'],
                     'isi'       => $post['inpisi'],
                 ];
 
@@ -160,14 +149,14 @@ class Tentang extends MY_Controller
                 $this->crud->u('tb_profil', $data, ['id_profil' => $post['inpidprofil']]);
                 $this->db->trans_complete();
                 if ($this->db->trans_status() === FALSE) {
-                    $response = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
+                    $message = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
                 } else {
-                    $response = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
+                    $message = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
                 }
             }
         }
         // untuk response json
-        $this->_response($response);
+        $this->_response_message($message);
     }
 
     // untuk proses hapus data
@@ -186,11 +175,11 @@ class Tentang extends MY_Controller
         $this->crud->d('tb_profil', $post['id'], 'id_profil');
         $this->db->trans_complete();
         if ($this->db->trans_status() === FALSE) {
-            $response = ['title' => 'Gagal!', 'text' => 'Gagal Hapus!', 'type' => 'error', 'button' => 'Ok!'];
+            $message = ['title' => 'Gagal!', 'text' => 'Gagal Hapus!', 'type' => 'error', 'button' => 'Ok!'];
         } else {
-            $response = ['title' => 'Berhasil!', 'text' => 'Berhasil Hapus!', 'type' => 'success', 'button' => 'Ok!'];
+            $message = ['title' => 'Berhasil!', 'text' => 'Berhasil Hapus!', 'type' => 'success', 'button' => 'Ok!'];
         }
         // untuk response json
-        $this->_response($response);
+        $this->_response_message($message);
     }
 }
