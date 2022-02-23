@@ -4,7 +4,7 @@
         <div class="row align-items-center">
             <div class="col-md-8">
                 <div class="page-header-title">
-                    <h4 class="m-b-10"><?= $halaman ?></h4>
+                    <h4 class="m-b-10"><?= $title ?></h4>
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item">

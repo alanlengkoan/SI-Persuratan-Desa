@@ -18,15 +18,11 @@ class Dashboard extends MY_Controller
     public function index()
     {
         $data = [
-            'halaman' => 'Dashboard Admin',
             'guru'    => 0,
             'aktif'   => 0,
             'alumni'  => 0,
-            'content' => 'admin/dashboard/view',
-            'css'     => '',
-            'js'      => ''
         ];
         // untuk load view
-        $this->load->view('admin/base', $data);
+        $this->template->load('admin', 'Dashboard Admin', 'dashboard', 'view', $data);
     }
 }
