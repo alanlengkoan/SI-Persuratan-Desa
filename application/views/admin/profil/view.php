@@ -4,7 +4,7 @@
         <div class="row align-items-center">
             <div class="col-md-8">
                 <div class="page-header-title">
-                    <h4 class="m-b-10"><?= $halaman ?></h4>
+                    <h4 class="m-b-10"><?= $title ?></h4>
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item">
@@ -57,6 +57,8 @@
                                     </div>
                                     <div class="card-block">
                                         <form id="form-foto" action="<?= admin_url() ?>profil/upd_foto" method="POST">
+                                            <input type="hidden" id="<?= $this->security->get_csrf_token_name() ?>_foto" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>" />
+
                                             <div class="row">
                                                 <div class="col-lg-6 align-self-center">
                                                     <input type="file" name="inpfotoprofil" id="inpfotoprofil">
@@ -82,6 +84,8 @@
                                     </div>
                                     <div class="card-block">
                                         <form id="form-akun" action="<?= admin_url() ?>profil/upd_akun" method="POST">
+                                            <input type="hidden" id="<?= $this->security->get_csrf_token_name() ?>_akun" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>" />
+
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">Nama *</label>
                                                 <div class="col-sm-10">
@@ -119,6 +123,8 @@
                                     </div>
                                     <div class="card-block">
                                         <form id="form-keamanan" action="<?= admin_url() ?>profil/upd_keamanan" method="POST">
+                                            <input type="hidden" id="<?= $this->security->get_csrf_token_name() ?>_keamanan" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>" />
+
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">Password Lama *</label>
                                                 <div class="col-sm-10">

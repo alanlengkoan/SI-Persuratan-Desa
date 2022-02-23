@@ -24,14 +24,10 @@ class Profil extends MY_Controller
     public function index()
     {
         $data = [
-            'halaman' => 'Profil',
-            'content' => 'admin/profil/view',
-            'data'    => $this->m_users->getRoleUsers('admin', $this->users->id_users),
-            'css'     => 'admin/profil/css/view',
-            'js'      => 'admin/profil/js/view'
+            'data' => $this->m_users->getRoleUsers('admin', $this->users->id_users),
         ];
         // untuk load view
-        $this->load->view('admin/base', $data);
+        $this->template->load('admin', 'Profil', 'profil', 'view', $data);
     }
 
     // untuk ubah foto
@@ -54,7 +50,7 @@ class Profil extends MY_Controller
             // apa bila gagal
             $error = array('error' => $this->upload->display_errors());
 
-            $response = ['title' => 'Gagal!', 'text' => strip_tags($error['error']), 'type' => 'error', 'button' => 'Ok!'];
+            $message = ['title' => 'Gagal!', 'text' => strip_tags($error['error']), 'type' => 'error', 'button' => 'Ok!'];
         } else {
             // apa bila berhasil
             $detailFile = $this->upload->data();
@@ -66,13 +62,13 @@ class Profil extends MY_Controller
             $this->crud->u('tb_users', $data, ['id_users' => $this->users->id_users]);
             $this->db->trans_complete();
             if ($this->db->trans_status() === FALSE) {
-                $response = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
+                $message = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
             } else {
-                $response = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
+                $message = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
             }
         }
         // untuk response json
-        $this->_response($response);
+        $this->_response_message($message);
     }
 
     // untuk ubah akun

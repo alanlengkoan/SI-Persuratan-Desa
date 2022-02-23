@@ -82,7 +82,7 @@
                 <div class="col-sm-12">
                     <?= form_open('auth/check_validation', array('id' => 'form-login', 'class' => 'md-float-material form-material', 'method' => 'post')) ?>
                     <div class="text-center">
-                        <img src="<?= assets_url() ?>admin/images/logo.png" alt="logo.png">
+                        <img src="<?= assets_url() ?>admin/images/logo.png" alt="logo" width="100" />
                     </div>
                     <div class="auth-box card">
                         <div class="card-block">

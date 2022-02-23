@@ -21,6 +21,7 @@
         $('#form-foto').submit(function(e) {
             e.preventDefault();
             $('#inpfotoprofil').attr('required', 'required');
+
             if ($('#form-foto').parsley().isValid() == true) {
                 $.ajax({
                     method: $(this).attr('method'),
@@ -122,10 +123,10 @@
     function cekLokasiFoto(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
+            reader.readAsDataURL(input.files[0]);
             reader.onload = function(e) {
                 $('#lihat-gambar').attr('src', e.target.result);
             }
-            reader.readAsDataURL(input.files[0]);
         }
     }
 </script>
