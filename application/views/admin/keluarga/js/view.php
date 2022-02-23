@@ -10,7 +10,7 @@
 <script src="<?= assets_url() ?>admin/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?= assets_url() ?>admin/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 <script src="<?= assets_url() ?>admin/parsley-2.9.2/parsley.js"></script>
-<script src="<?= assets_url() ?>admin/ckeditor-4.14.0/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 
 <script>
     let csrf = $('#<?= $this->security->get_csrf_token_name() ?>');
