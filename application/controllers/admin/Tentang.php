@@ -25,7 +25,7 @@ class Tentang extends MY_Controller
     // untuk get datatable
     public function get_data_profil_dt()
     {
-        return $this->m_profil->getAllDataDt();
+        $this->m_profil->getAllDataDt();
     }
 
     // untuk get data by id

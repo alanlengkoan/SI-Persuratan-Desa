@@ -10,6 +10,18 @@ function justAngka(e) {
     }
 };
 
+// untuk tgl indo
+function tglIndo(date) {
+    var namaBulan = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    var tanggal = date.substr(8, 2);
+    var bulan = parseInt(date.substr(5, 2));
+    var tahun = date.substr(0, 4);
+
+    var result = tanggal + ' ' + namaBulan[bulan] + ' ' + tahun;
+
+    return result;
+}
+
 // untuk format harga
 function autoSeparator(Num) {
     Num += '';

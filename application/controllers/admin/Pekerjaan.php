@@ -64,7 +64,6 @@ class Pekerjaan extends MY_Controller
         $this->_response_message($message);
     }
 
-
     // untuk proses hapus data
     public function process_del()
     {

@@ -169,6 +169,22 @@
                                         <span class="pcoded-mtext">Jenis Surat</span>
                                     </a>
                                 </li>
+                                <li class="<?= ($this->uri->segment(2) === 'asal_surat' ? 'active' : '') ?>">
+                                    <a href="<?= admin_url() ?>asal_surat">
+                                        <span class="pcoded-micon">
+                                            <i class="fa fa-circle"></i>
+                                        </span>
+                                        <span class="pcoded-mtext">Asal Surat</span>
+                                    </a>
+                                </li>
+                                <li class="<?= ($this->uri->segment(2) === 'sifat_surat' ? 'active' : '') ?>">
+                                    <a href="<?= admin_url() ?>sifat_surat">
+                                        <span class="pcoded-micon">
+                                            <i class="fa fa-circle"></i>
+                                        </span>
+                                        <span class="pcoded-mtext">Sifat Surat</span>
+                                    </a>
+                                </li>
                             </ul>
                             <div class="pcoded-navigation-label">Pustaka</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -188,12 +204,20 @@
                                         <span class="pcoded-mtext">Anggota Keluarga</span>
                                     </a>
                                 </li>
-                                <li class="<?= ($this->uri->segment(2) === 'surat' ? 'active' : '') ?>">
-                                    <a href="<?= admin_url() ?>surat">
+                                <li class="<?= ($this->uri->segment(2) === 'surat_masuk' ? 'active' : '') ?>">
+                                    <a href="<?= admin_url() ?>surat_masuk">
                                         <span class="pcoded-micon">
                                             <i class="fa fa-circle"></i>
                                         </span>
-                                        <span class="pcoded-mtext">Surat</span>
+                                        <span class="pcoded-mtext">Surat Masuk</span>
+                                    </a>
+                                </li>
+                                <li class="<?= ($this->uri->segment(2) === 'surat_keluar' ? 'active' : '') ?>">
+                                    <a href="<?= admin_url() ?>surat_keluar">
+                                        <span class="pcoded-micon">
+                                            <i class="fa fa-circle"></i>
+                                        </span>
+                                        <span class="pcoded-mtext">Surat Keluar</span>
                                     </a>
                                 </li>
                             </ul>

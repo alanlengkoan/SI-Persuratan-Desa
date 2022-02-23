@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="card-block table-border-style">
-                        <table class="table table-striped table-bordered nowrap" id="tabel-keluarga-anggota">
+                        <table class="table table-striped table-bordered nowrap" id="tabel-surat-masuk">
                         </table>
                     </div>
                 </div>
@@ -56,104 +56,87 @@
             <div class="modal-header">
                 <h4 class="modal-title"><span id="judul-add-upd"></span> <?= $title ?></h4>
             </div>
-            <form id="form-add-upd" action="<?= admin_url() ?>keluarga_anggota/process_save" method="POST">
+            <form id="form-add-upd" action="<?= admin_url() ?>surat_masuk/process_save" method="POST">
                 <!-- begin:: id -->
-                <input type="hidden" name="inpidkeluargaanggota" id="inpidkeluargaanggota" />
+                <input type="hidden" name="inpidsuratmasuk" id="inpidsuratmasuk" />
                 <input type="hidden" id="<?= $this->security->get_csrf_token_name() ?>" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>" />
                 <!-- end:: id -->
-                
+
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Nomor KK *</label>
+                        <label class="col-sm-3 col-form-label">Nomor Surat *</label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="inpnokk" id="inpnokk">
+                            <input type="text" class="form-control" name="inpnosurat" id="inpnosurat" placeholder="Masukkan nomor surat" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tanggal Surat *</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" name="inptglsurat" id="inptglsurat" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tanggal Masuk *</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" name="inptglmasuk" id="inptglmasuk" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Jenis Surat *</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="inpidsuratjenis" id="inpidsuratjenis">
                                 <option value="">- Pilih -</option>
-                                <?php foreach ($keluarga as $key => $row) { ?>
-                                    <option value="<?= $row->no_kk ?>"><?= $row->no_kk ?> - <?= $row->nama_kk ?></option>
+                                <?php foreach ($jenis_surat as $key => $row) { ?>
+                                    <option value="<?= $row->id_surat_jenis ?>"><?= $row->nama ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Nomor KTP *</label>
+                        <label class="col-sm-3 col-form-label">Asal Surat *</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control inputNumber" name="inpnoktp" id="inpnoktp" pattern="\d*" maxlength="16" minlength="16" placeholder="Masukkan nomor ktp" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Nama *</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inpnama" id="inpnama" placeholder="Masukkan nama" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Jenis Kelamin *</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" name="inpkelamin" id="inpkelamin">
+                            <select class="form-control" name="inpidsuratasal" id="inpidsuratasal">
                                 <option value="">- Pilih -</option>
-                                <option value="L">Laki - laki</option>
-                                <option value="P">Perempuan</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tempat Lahir *</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inptmplahir" id="inptmplahir" placeholder="Masukkan tempat lahir" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tanggal Lahir *</label>
-                        <div class="col-sm-9">
-                            <input type="date" class="form-control" name="inptgllahir" id="inptgllahir" placeholder="Masukkan tanggal lahir" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Agama *</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" name="inpidagama" id="inpidagama">
-                                <option value="">- Pilih -</option>
-                                <?php foreach ($agama as $key => $row) { ?>
-                                    <option value="<?= $row->id_agama ?>"><?= $row->nama ?></option>
+                                <?php foreach ($asal_surat as $key => $row) { ?>
+                                    <option value="<?= $row->id_surat_asal ?>"><?= $row->nama ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Pekerjaan *</label>
+                        <label class="col-sm-3 col-form-label">Sifat Surat *</label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="inpidpekerjaan" id="inpidpekerjaan">
+                            <select class="form-control" name="inpidsuratsifat" id="inpidsuratsifat">
                                 <option value="">- Pilih -</option>
-                                <?php foreach ($pekerjaan as $key => $row) { ?>
-                                    <option value="<?= $row->id_pekerjaan ?>"><?= $row->nama ?></option>
+                                <?php foreach ($sifat_surat as $key => $row) { ?>
+                                    <option value="<?= $row->id_surat_sifat ?>"><?= $row->nama ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Kewarganegaraan *</label>
+                        <label class="col-sm-3 col-form-label">Perihal *</label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="inpkewarganegaraan" id="inpkewarganegaraan">
+                            <input type="text" class="form-control" name="inpperihal" id="inpperihal" placeholder="Masukkan perihal" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tipe Arsip *</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="inparsiptipe" id="inparsiptipe">
                                 <option value="">- Pilih -</option>
-                                <option value="wni">WNI</option>
-                                <option value="wna">WNA</option>
+                                <option value="pdf">Pdf</option>
+                                <option value="doc">Doc</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Pendidikan *</label>
+                        <label class="col-sm-3 col-form-label">Arsip *</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inppendidikan" id="inppendidikan" placeholder="Masukkan pendidikan terakhir" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Status Nikah *</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" name="inpstatusnikah" id="inpstatusnikah">
-                                <option value="">- Pilih -</option>
-                                <option value="y">Iya</option>
-                                <option value="n">Tidak</option>
-                            </select>
+                            <div id="lihat_gambar"></div>
+                            <input type="file" class="form-control" name="inparsip" id="inparsip" />
+                            <div id="centang_gambar"></div>
+                            <p>File dengan tipe (*.pdf,*.doc/docx,*.mp4) Max. 20MB</p>
                         </div>
                     </div>
                 </div>

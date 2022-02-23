@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Jenis_surat extends MY_Controller
+class Asal_surat extends MY_Controller
 {
     public function __construct()
     {
@@ -12,20 +12,20 @@ class Jenis_surat extends MY_Controller
 
         // untuk load model
         $this->load->model('crud');
-        $this->load->model('m_surat_jenis');
+        $this->load->model('m_surat_asal');
     }
 
     // untuk default
     public function index()
     {
         // untuk load view
-        $this->template->load('admin', 'Jenis Surat', 'jenis_surat', 'view');
+        $this->template->load('admin', 'Asal Surat', 'asal_surat', 'view');
     }
 
     // untuk get data
-    public function get_data_jenis_surat_dt()
+    public function get_data_asal_surat_dt()
     {
-        $this->m_surat_jenis->getAllDataDt();
+        $this->m_surat_asal->getAllDataDt();
     }
 
     // untuk get data by id
@@ -33,7 +33,7 @@ class Jenis_surat extends MY_Controller
     {
         $post = $this->input->post(NULL, TRUE);
 
-        $message = $this->crud->gda('tb_surat_jenis', ['id_surat_jenis' => $post['id']]);
+        $message = $this->crud->gda('tb_surat_asal', ['id_surat_asal' => $post['id']]);
 
         // untuk message json
         $this->_response_message($message);
@@ -45,14 +45,18 @@ class Jenis_surat extends MY_Controller
         $post = $this->input->post(NULL, TRUE);
         
         $data = [
-            'nama' => $post['inpnama'],
+            'nama'      => $post['inpnama'],
+            'email'     => $post['inpemail'],
+            'telepon'   => $post['inptelepon'],
+            'fax'       => $post['inpfax'],
+            'situs_web' => $post['inpsitusweb'],
         ];
 
         $this->db->trans_start();
-        if (empty($post['inpidsuratjenis'])) {
-            $this->crud->i('tb_surat_jenis', $data);
+        if (empty($post['inpidsuratasal'])) {
+            $this->crud->i('tb_surat_asal', $data);
         } else {
-            $this->crud->u('tb_surat_jenis', $data, ['id_surat_jenis' => $post['inpidsuratjenis']]);
+            $this->crud->u('tb_surat_asal', $data, ['id_surat_asal' => $post['inpidsuratasal']]);
         }
         $this->db->trans_complete();
         if ($this->db->trans_status() === FALSE) {
@@ -70,7 +74,7 @@ class Jenis_surat extends MY_Controller
         $post = $this->input->post(NULL, TRUE);
 
         $this->db->trans_start();
-        $this->crud->d('tb_surat_jenis', $post['id'], 'id_surat_jenis');
+        $this->crud->d('tb_surat_asal', $post['id'], 'id_surat_asal');
         $this->db->trans_complete();
         if ($this->db->trans_status() === FALSE) {
             $message = ['title' => 'Gagal!', 'text' => 'Gagal Hapus!', 'type' => 'error', 'button' => 'Ok!'];

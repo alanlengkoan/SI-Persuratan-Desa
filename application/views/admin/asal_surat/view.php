@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="card-block table-border-style">
-                        <table class="table table-striped table-bordered nowrap" id="tabel-keluarga">
+                        <table class="table table-striped table-bordered nowrap" id="tabel-asal-surat">
                         </table>
                     </div>
                 </div>
@@ -56,65 +56,41 @@
             <div class="modal-header">
                 <h4 class="modal-title"><span id="judul-add-upd"></span> <?= $title ?></h4>
             </div>
-            <form id="form-add-upd" action="<?= admin_url() ?>keluarga/process_save" method="POST">
+            <form id="form-add-upd" action="<?= admin_url() ?>asal_surat/process_save" method="POST">
                 <!-- begin:: id -->
-                <input type="hidden" name="inpidkeluarga" id="inpidkeluarga" />
+                <input type="hidden" name="inpidsuratasal" id="inpidsuratasal" />
                 <input type="hidden" id="<?= $this->security->get_csrf_token_name() ?>" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>" />
                 <!-- end:: id -->
 
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Nomor KK *</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control inputNumber" pattern="\d*" maxlength="16" minlength="16" name="inpnokk" id="inpnokk" placeholder="Masukkan nomor kk" />
+                        <label class="col-sm-2 col-form-label">Nama *</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="inpnama" id="inpnama" placeholder="Masukkan nama" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Nama KK *</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inpnmkk" id="inpnmkk" placeholder="Masukkan nama kk" />
+                        <label class="col-sm-2 col-form-label">Email *</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" name="inpemail" id="inpemail" placeholder="Masukkan email" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Alamat *</label>
-                        <div class="col-sm-9">
-                            <textarea class="form-control" name="inpalamat" id="inpalamat" placeholder="Masukkan alamat"></textarea>
+                        <label class="col-sm-2 col-form-label">Telepon *</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="inptelepon" id="inptelepon" placeholder="Masukkan telepon" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">RT/RW *</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inprtrw" id="inprtrw" placeholder="Masukkan rt/rw" />
+                        <label class="col-sm-2 col-form-label">Fax *</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="inpfax" id="inpfax" placeholder="Masukkan fax" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Kode Pos *</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inpkdpos" id="inpkdpos" placeholder="Masukkan kode pos" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Desa/Kelurahan *</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inpdesakel" id="inpdesakel" placeholder="Masukkan desa/kelurahan" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Kecamatan *</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inpkec" id="inpkec" placeholder="Masukkan kecamatan" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Kabupaten/Kota *</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inpkabkot" id="inpkabkot" placeholder="Masukkan kabupaten/kota" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Provinsi *</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inpprovinsi" id="inpprovinsi" placeholder="Masukkan nama" />
+                        <label class="col-sm-2 col-form-label">Situs Web *</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="inpsitusweb" id="inpsitusweb" placeholder="Masukkan situs web" />
                         </div>
                     </div>
                 </div>
