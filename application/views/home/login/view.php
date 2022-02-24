@@ -130,8 +130,11 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
 
     <script>
+        let csrf = $("input[name='<?= $this->security->get_csrf_token_name() ?>']");
+
         var untukSubmit = function() {
             $('#form-login').parsley();
+
             $('#form-login').submit(function(e) {
                 e.preventDefault();
                 $('#username').attr('required', 'required');
@@ -146,6 +149,8 @@
                             $('#login').val('Wait');
                         },
                         success: function(response) {
+                            csrf.val(response.csrf);
+
                             if (response.status == true) {
                                 window.location = response.link;
                             } else {

@@ -75,17 +75,17 @@ class Keluarga_anggota extends MY_Controller
         $post = $this->input->post(NULL, TRUE);
 
         $data = [
-            'id_agama'        => $post['inpidagama'],
-            'id_pekerjaan'    => $post['inpidpekerjaan'],
-            'no_kk'           => $post['inpnokk'],
-            'no_ktp'          => $post['inpnoktp'],
-            'nama'            => $post['inpnama'],
-            'kelamin'         => $post['inpkelamin'],
-            'tmp_lahir'       => $post['inptmplahir'],
-            'tgl_lahir'       => $post['inptgllahir'],
-            'kewarganegaraan' => $post['inpkewarganegaraan'],
-            'pendidikan'      => $post['inppendidikan'],
-            'status_nikah'    => $post['inpstatusnikah'],
+            'id_agama'        => strip_tags($post['inpidagama']),
+            'id_pekerjaan'    => strip_tags($post['inpidpekerjaan']),
+            'no_kk'           => strip_tags($post['inpnokk']),
+            'no_ktp'          => strip_tags($post['inpnoktp']),
+            'nama'            => strip_tags($post['inpnama']),
+            'kelamin'         => strip_tags($post['inpkelamin']),
+            'tmp_lahir'       => strip_tags($post['inptmplahir']),
+            'tgl_lahir'       => strip_tags($post['inptgllahir']),
+            'kewarganegaraan' => strip_tags($post['inpkewarganegaraan']),
+            'pendidikan'      => strip_tags($post['inppendidikan']),
+            'status_nikah'    => strip_tags($post['inpstatusnikah']),
         ];
 
         $this->db->trans_start();

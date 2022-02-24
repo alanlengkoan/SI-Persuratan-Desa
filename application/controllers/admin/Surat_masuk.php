@@ -96,14 +96,14 @@ class Surat_masuk extends MY_Controller
                 $detailFile = $this->upload->data();
 
                 $data = [
-                    'id_surat_asal'  => $post['inpidsuratasal'],
-                    'id_surat_sifat' => $post['inpidsuratsifat'],
-                    'id_surat_jenis' => $post['inpidsuratjenis'],
-                    'no_surat'       => $post['inpnosurat'],
-                    'tgl_surat'      => $post['inptglsurat'],
-                    'tgl_masuk'      => $post['inptglmasuk'],
-                    'perihal'        => $post['inpperihal'],
-                    'arsip_tipe'     => $post['inparsiptipe'],
+                    'id_surat_asal'  => strip_tags($post['inpidsuratasal']),
+                    'id_surat_sifat' => strip_tags($post['inpidsuratsifat']),
+                    'id_surat_jenis' => strip_tags($post['inpidsuratjenis']),
+                    'no_surat'       => strip_tags($post['inpnosurat']),
+                    'tgl_surat'      => strip_tags($post['inptglsurat']),
+                    'tgl_masuk'      => strip_tags($post['inptglmasuk']),
+                    'perihal'        => strip_tags($post['inpperihal']),
+                    'arsip_tipe'     => strip_tags($post['inparsiptipe']),
                     'arsip'          => $detailFile['file_name'],
                 ];
 
@@ -143,14 +143,14 @@ class Surat_masuk extends MY_Controller
                 }
 
                 $data = [
-                    'id_surat_asal'  => $post['inpidsuratasal'],
-                    'id_surat_sifat' => $post['inpidsuratsifat'],
-                    'id_surat_jenis' => $post['inpidsuratjenis'],
-                    'no_surat'       => $post['inpnosurat'],
-                    'tgl_surat'      => $post['inptglsurat'],
-                    'tgl_masuk'      => $post['inptglmasuk'],
-                    'perihal'        => $post['inpperihal'],
-                    'arsip_tipe'     => $post['inparsiptipe'],
+                    'id_surat_asal'  => strip_tags($post['inpidsuratasal']),
+                    'id_surat_sifat' => strip_tags($post['inpidsuratsifat']),
+                    'id_surat_jenis' => strip_tags($post['inpidsuratjenis']),
+                    'no_surat'       => strip_tags($post['inpnosurat']),
+                    'tgl_surat'      => strip_tags($post['inptglsurat']),
+                    'tgl_masuk'      => strip_tags($post['inptglmasuk']),
+                    'perihal'        => strip_tags($post['inpperihal']),
+                    'arsip_tipe'     => strip_tags($post['inparsiptipe']),
                     'arsip'          => $detailFile['file_name'],
                 ];
 

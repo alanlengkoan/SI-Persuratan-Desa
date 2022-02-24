@@ -45,7 +45,7 @@ class Agama extends MY_Controller
         $post = $this->input->post(NULL, TRUE);
 
         $data = [
-            'nama' => $post['inpnama'],
+            'nama' => strip_tags($post['inpnama']),
         ];
 
         $this->db->trans_start();

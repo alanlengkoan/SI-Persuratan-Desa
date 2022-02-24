@@ -45,11 +45,11 @@ class Asal_surat extends MY_Controller
         $post = $this->input->post(NULL, TRUE);
         
         $data = [
-            'nama'      => $post['inpnama'],
-            'email'     => $post['inpemail'],
-            'telepon'   => $post['inptelepon'],
-            'fax'       => $post['inpfax'],
-            'situs_web' => $post['inpsitusweb'],
+            'nama'      => strip_tags($post['inpnama']),
+            'email'     => strip_tags($post['inpemail']),
+            'telepon'   => strip_tags($post['inptelepon']),
+            'fax'       => strip_tags($post['inpfax']),
+            'situs_web' => strip_tags($post['inpsitusweb']),
         ];
 
         $this->db->trans_start();

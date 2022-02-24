@@ -45,8 +45,8 @@ class Sifat_surat extends MY_Controller
         $post = $this->input->post(NULL, TRUE);
         
         $data = [
-            'nama'       => $post['inpnama'],
-            'keterangan' => $post['inpketerangan'],
+            'nama'       => strip_tags($post['inpnama']),
+            'keterangan' => strip_tags($post['inpketerangan']),
         ];
 
         $this->db->trans_start();

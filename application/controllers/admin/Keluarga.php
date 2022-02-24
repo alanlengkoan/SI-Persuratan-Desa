@@ -68,15 +68,15 @@ class Keluarga extends MY_Controller
         $post = $this->input->post(NULL, TRUE);
         
         $data = [
-            'no_kk'          => $post['inpnokk'],
-            'nama_kk'        => $post['inpnmkk'],
-            'alamat'         => $post['inpalamat'],
-            'rt_rw'          => $post['inprtrw'],
-            'kd_pos'         => $post['inpkdpos'],
-            'desa_kelurahan' => $post['inpdesakel'],
-            'kecamatan'      => $post['inpkec'],
-            'kabupaten_kota' => $post['inpkabkot'],
-            'provinsi'       => $post['inpprovinsi'],
+            'no_kk'          => strip_tags($post['inpnokk']),
+            'nama_kk'        => strip_tags($post['inpnmkk']),
+            'alamat'         => strip_tags($post['inpalamat']),
+            'rt_rw'          => strip_tags($post['inprtrw']),
+            'kd_pos'         => strip_tags($post['inpkdpos']),
+            'desa_kelurahan' => strip_tags($post['inpdesakel']),
+            'kecamatan'      => strip_tags($post['inpkec']),
+            'kabupaten_kota' => strip_tags($post['inpkabkot']),
+            'provinsi'       => strip_tags($post['inpprovinsi']),
         ];
 
         $this->db->trans_start();

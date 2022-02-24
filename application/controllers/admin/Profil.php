@@ -77,9 +77,9 @@ class Profil extends MY_Controller
         $post = $this->input->post(NULL, TRUE);
 
         $data = [
-            'nama'     => $post['inpnama'],
-            'email'    => $post['inpemail'],
-            'username' => $post['inpusername'],
+            'nama'     => strip_tags($post['inpnama']),
+            'email'    => strip_tags($post['inpemail']),
+            'username' => strip_tags($post['inpusername']),
             'roles'    => 'admin'
         ];
         $this->db->trans_start();

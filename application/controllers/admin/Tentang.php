@@ -64,7 +64,7 @@ class Tentang extends MY_Controller
 
                     $data = [
                         'id_profil' => acak_id('tb_profil', 'id_profil'),
-                        'nama'      => $post['inpnama'],
+                        'nama'      => strip_tags($post['inpnama']),
                         'isi'       => $post['inpisi'],
                         'gambar'    => $detailFile['file_name'],
                     ];
@@ -81,7 +81,7 @@ class Tentang extends MY_Controller
             } else {
                 $data = [
                     'id_profil' => acak_id('tb_profil', 'id_profil'),
-                    'nama'      => $post['inpnama'],
+                    'nama'      => strip_tags($post['inpnama']),
                     'isi'       => $post['inpisi'],
                 ];
                 
@@ -122,8 +122,8 @@ class Tentang extends MY_Controller
                     }
 
                     $data = [
-                        'id_profil' => $post['inpidprofil'],
-                        'nama'      => $post['inpnama'],
+                        'id_profil' => strip_tags($post['inpidprofil']),
+                        'nama'      => strip_tags($post['inpnama']),
                         'isi'       => $post['inpisi'],
                         'gambar'    => $detailFile['file_name'],
                     ];
@@ -139,8 +139,8 @@ class Tentang extends MY_Controller
                 }
             } else {
                 $data = [
-                    'id_profil' => $post['inpidprofil'],
-                    'nama'      => $post['inpnama'],
+                    'id_profil' => strip_tags($post['inpidprofil']),
+                    'nama'      => strip_tags($post['inpnama']),
                     'isi'       => $post['inpisi'],
                 ];
 

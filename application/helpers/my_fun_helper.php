@@ -492,3 +492,11 @@ if (!function_exists('count_age')) {
         return $tahun_diff;
     }
 }
+
+// untuk remove titik dan spasi
+if (!function_exists('remove_point_space')) {
+    function remove_point_space($string)
+    {
+        return preg_replace('/\.|\s/', '', $string);
+    }
+}
