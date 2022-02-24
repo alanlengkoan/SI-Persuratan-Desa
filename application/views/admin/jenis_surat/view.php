@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="card-block table-border-style">
-                        <table class="table table-striped table-bordered nowrap" id="tabel-jenis-surat">
+                        <table class="table table-striped table-bordered nowrap" id="tabel-jenis-surat" style="width: 100%;">
                         </table>
                     </div>
                 </div>
