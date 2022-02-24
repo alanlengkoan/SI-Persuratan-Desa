@@ -74,6 +74,7 @@
                     render: function(data, type, full, meta) {
                         return `
                         <div class="button-icon-btn button-icon-btn-cl">
+                            <a href="<?= admin_url() ?>surat_masuk/detail/` + btoa(full.id_surat_masuk) + `" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-info"></i>&nbsp;Detail</a>&nbsp;
                             <button type="button" id="btn-upd" data-id="` + full.id_surat_masuk + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-pencil"></i>&nbsp;Ubah</button>&nbsp;
                             <button type="button" id="btn-del" data-id="` + full.id_surat_masuk + `" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
                         </div>

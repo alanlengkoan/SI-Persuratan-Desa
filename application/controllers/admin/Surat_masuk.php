@@ -30,6 +30,18 @@ class Surat_masuk extends MY_Controller
         $this->template->load('admin', 'Surat Masuk', 'surat_masuk', 'view', $data);
     }
 
+    // untuk halaman detail
+    public function detail()
+    {
+        $id_surat_masuk = base64url_decode($this->uri->segment(4));
+
+        $data = [
+            'data' => $this->m_surat_masuk->getDetail($id_surat_masuk),
+        ];
+        // untuk load view
+        $this->template->load('admin', 'Detail Surat Masuk', 'surat_masuk', 'detail', $data);
+    }
+
     // untuk get data
     public function get_data_surat_masuk_dt()
     {
