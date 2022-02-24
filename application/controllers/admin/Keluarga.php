@@ -39,6 +39,29 @@ class Keluarga extends MY_Controller
         $this->_response_message($message);
     }
 
+    // untuk check nomor kk
+    public function check_no_kk()
+    {
+        $post = $this->input->post(NULL, TRUE);
+
+        $q = $post['q'];
+
+        $message = [];
+
+        if ($q) {
+            $get = $this->db->query("SELECT * FROM tb_keluarga WHERE no_kk LIKE '%$q%'");
+            $sum = $get->num_rows();
+
+            if ($sum > 0) {
+                $message = ['status' => true];
+            } else {
+                $message = ['status' => false];
+            }
+        }
+        // untuk message json
+        $this->_response_message($message);
+    }
+
     // untuk proses tambah data
     public function process_save()
     {

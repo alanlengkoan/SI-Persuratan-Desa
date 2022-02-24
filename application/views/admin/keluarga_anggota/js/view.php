@@ -93,6 +93,38 @@
         });
     }();
 
+    // untuk validasi nomor kk
+    var untukValidasiNomorKK = function() {
+        $('#inpnoktp').on('keyup', function() {
+            let no_kk = $(this).val();
+
+            $.ajax({
+                url: '<?= admin_url() ?>keluarga_anggota/check_no_ktp',
+                type: 'POST',
+                typeData: 'JSON',
+                data: {
+                    q: no_kk,
+                    my_csrf_token: csrf.val()
+                },
+                success: function(response) {
+                    csrf.val(response.csrf);
+                    if (no_kk.length > 0) {
+                        if (response.status === true) {
+                            $('#validasi').css('color', 'red').html('Nomor KK sudah ada!');
+                            $('#save').attr('disabled', true);
+                        } else {
+                            $('#validasi').css('color', 'green').html('Nomor KK belum ada!');
+                            $('#save').attr('disabled', false);
+                        }
+                    } else {
+                        $('#validasi').css('color', 'black').html('Masukkan Nomor KK yang berbeda!');
+                        $('#save').attr('disabled', true);
+                    }
+                }
+            });
+        });
+    }();
+
     // untuk reset form
     var untukResetForm = function() {
         $(document).on('click', '#btn-add', function() {

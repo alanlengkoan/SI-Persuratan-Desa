@@ -67,6 +67,7 @@
                         <label class="col-sm-3 col-form-label">Nomor KK *</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control inputNumber" pattern="\d*" maxlength="16" minlength="16" name="inpnokk" id="inpnokk" placeholder="Masukkan nomor kk" />
+                            <span id="validasi">Masukkan Nomor KK yang berbeda!</span>
                         </div>
                     </div>
                     <div class="form-group row">

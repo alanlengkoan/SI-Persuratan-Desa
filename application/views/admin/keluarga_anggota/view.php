@@ -61,7 +61,7 @@
                 <input type="hidden" name="inpidkeluargaanggota" id="inpidkeluargaanggota" />
                 <input type="hidden" id="<?= $this->security->get_csrf_token_name() ?>" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>" />
                 <!-- end:: id -->
-                
+
                 <div class="modal-body">
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Nomor KK *</label>
@@ -78,6 +78,7 @@
                         <label class="col-sm-3 col-form-label">Nomor KTP *</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control inputNumber" name="inpnoktp" id="inpnoktp" pattern="\d*" maxlength="16" minlength="16" placeholder="Masukkan nomor ktp" />
+                            <span id="validasi">Masukkan Nomor KK yang berbeda!</span>
                         </div>
                     </div>
                     <div class="form-group row">
