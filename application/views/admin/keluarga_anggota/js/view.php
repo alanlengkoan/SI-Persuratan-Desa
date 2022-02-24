@@ -93,8 +93,8 @@
         });
     }();
 
-    // untuk validasi nomor kk
-    var untukValidasiNomorKK = function() {
+    // untuk validasi nomor ktp
+    var untukValidasiNomorKTP = function() {
         $('#inpnoktp').on('keyup', function() {
             let no_kk = $(this).val();
 
