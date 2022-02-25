@@ -6,6 +6,5 @@
     #validasi {
       font-style: italic;
       font-size: 10px;
-      ;
     }
   </style>

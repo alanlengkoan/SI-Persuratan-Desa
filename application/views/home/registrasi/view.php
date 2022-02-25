@@ -18,6 +18,13 @@
     <link rel="stylesheet" type="text/css" href="<?= assets_url() ?>admin/icon/icofont/css/icofont.css">
     <link rel="stylesheet" type="text/css" href="<?= assets_url() ?>admin/css/style.css" />
     <link rel="stylesheet" type="text/css" href="<?= assets_url() ?>admin/css/pages.css" />
+
+    <style>
+        #validasi {
+            font-style: italic;
+            font-size: 10px;
+        }
+    </style>
 </head>
 
 <body themebg-pattern="theme1">
@@ -92,9 +99,10 @@
                                 </div>
                             </div>
                             <div class="form-group form-primary">
-                                <?= form_input(array('name' => 'nama', 'id' => 'nama', 'class' => 'form-control')) ?>
+                                <?= form_input(array('name' => 'nik', 'id' => 'nik', 'class' => 'form-control')) ?>
                                 <span class="form-bar"></span>
-                                <label class="float-label">Nama</label>
+                                <label class="float-label">NIK</label>
+                                <span id="validasi">Masukkan Nomor KTP yang berbeda!</span>
                             </div>
                             <div class="form-group form-primary">
                                 <?= form_input(array('type' => 'email', 'name' => 'email', 'id' => 'email', 'class' => 'form-control')) ?>
@@ -147,14 +155,18 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
 
     <script>
+        let csrf = $("input[name='<?= $this->security->get_csrf_token_name() ?>']");
+
         var untukSubmit = function() {
             $('#form-register').parsley();
+
             $('#form-register').submit(function(e) {
                 e.preventDefault();
-                $('#nama').attr('required', 'required');
+                $('#nik').attr('required', 'required');
                 $('#email').attr('required', 'required');
                 $('#username').attr('required', 'required');
                 $('#password').attr('required', 'required');
+
                 if ($('#form-register').parsley().isValid() == true) {
                     $.ajax({
                         method: $(this).attr('method'),
@@ -168,17 +180,48 @@
                             $('#register').val('Register');
 
                             swal({
-                                    title: response.title,
-                                    text: response.text,
-                                    icon: response.type,
-                                    button: response.button,
-                                })
-                                .then((value) => {
-                                    location.href = "<?= login_url() ?>";
-                                });
+                                title: response.title,
+                                text: response.text,
+                                icon: response.type,
+                                button: response.button,
+                            }).then((value) => {
+                                location.href = "<?= login_url() ?>";
+                            });
                         }
                     })
                 }
+            });
+        }();
+
+        // untuk validasi nomor nik
+        var untukValidasiNomorNIK = function() {
+            $('#nik').on('keyup', function() {
+                let no_kk = $(this).val();
+
+                $.ajax({
+                    url: '<?= base_url() ?>auth/check_no_ktp',
+                    type: 'POST',
+                    typeData: 'JSON',
+                    data: {
+                        q: no_kk,
+                        my_csrf_token: csrf.val()
+                    },
+                    success: function(response) {
+                        csrf.val(response.csrf);
+                        if (no_kk.length > 0) {
+                            if (response.status === true) {
+                                $('#validasi').css('color', 'green').html('Nomor KTP sudah terdaftar!');
+                                $('#register').attr('disabled', false);
+                            } else {
+                                $('#validasi').css('color', 'red').html('Nomor KTP belum terdaftar!');
+                                $('#register').attr('disabled', true);
+                            }
+                        } else {
+                            $('#validasi').css('color', 'black').html('Masukkan Nomor KTP yang berbeda!');
+                            $('#register').attr('disabled', false);
+                        }
+                    }
+                });
             });
         }();
     </script>

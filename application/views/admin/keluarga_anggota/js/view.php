@@ -124,14 +124,14 @@
                     csrf.val(response.csrf);
                     if (no_kk.length > 0) {
                         if (response.status === true) {
-                            $('#validasi').css('color', 'red').html('Nomor KK sudah ada!');
+                            $('#validasi').css('color', 'red').html('Nomor NIK sudah ada!');
                             $('#save').attr('disabled', true);
                         } else {
-                            $('#validasi').css('color', 'green').html('Nomor KK belum ada!');
+                            $('#validasi').css('color', 'green').html('Nomor NIK belum ada!');
                             $('#save').attr('disabled', false);
                         }
                     } else {
-                        $('#validasi').css('color', 'black').html('Masukkan Nomor KK yang berbeda!');
+                        $('#validasi').css('color', 'black').html('Masukkan Nomor NIK yang berbeda!');
                         $('#save').attr('disabled', true);
                     }
                 }
@@ -143,6 +143,7 @@
     var untukResetForm = function() {
         $(document).on('click', '#btn-add', function() {
             $('#judul-add-upd').html('Tambah');
+            $('#validasi').css('color', 'black').html('Masukkan Nomor NIK yang berbeda!');
             $('#inpnokk').val('');
             $('#inpnoktp').val('');
             $('#inpnama').val('');

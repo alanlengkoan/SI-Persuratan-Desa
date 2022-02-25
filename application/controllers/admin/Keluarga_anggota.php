@@ -90,13 +90,7 @@ class Keluarga_anggota extends MY_Controller
 
         $this->db->trans_start();
         if (empty($post['inpidkeluargaanggota'])) {
-            $users = [
-                'id_users' => acak_id('tb_users', 'id_users')
-            ];
-
-            $insert = array_merge($data, $users);
-
-            $this->crud->i('tb_keluarga_anggota', $insert);
+            $this->crud->i('tb_keluarga_anggota', $data);
         } else {
             $this->crud->u('tb_keluarga_anggota', $data, ['id_keluarga_anggota' => $post['inpidkeluargaanggota']]);
         }

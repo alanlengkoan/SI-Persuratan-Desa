@@ -5,6 +5,6 @@
   <style>
     #validasi {
       font-style: italic;
-      font-size: 10px;;
+      font-size: 10px;
     }
   </style>

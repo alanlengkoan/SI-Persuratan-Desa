@@ -87,6 +87,29 @@ class Auth extends MY_Controller
         }
     }
 
+    // untuk mengecek no nik
+    public function check_no_ktp()
+    {
+        $post = $this->input->post(NULL, TRUE);
+
+        $q = $post['q'];
+
+        $message = [];
+
+        if ($q) {
+            $get = $this->db->query("SELECT * FROM tb_keluarga_anggota WHERE no_ktp LIKE '%$q%'");
+            $sum = $get->num_rows();
+
+            if ($sum > 0) {
+                $message = ['status' => true];
+            } else {
+                $message = ['status' => false];
+            }
+        }
+        // untuk message json
+        $this->_response_message($message);
+    }
+
     // untuk halaman register
     public function register()
     {
@@ -99,86 +122,48 @@ class Auth extends MY_Controller
         }
     }
 
-    // // untuk simpan data
-    // public function process_save()
-    // {
-    //     $post = $this->input->post(NULL, TRUE);
+    // untuk simpan data
+    public function process_save()
+    {
+        $post = $this->input->post(NULL, TRUE);
 
-    //     $q     = $post['nik'];
-    //     $query = $this->db->query("SELECT * FROM tb_pelanggan AS p WHERE p.nik LIKE '%$q%';");
-    //     $count = $query->num_rows();
+        $q = $post['nik'];
 
-    //     if ($count > 0) {
-    //         $response = ['title' => 'Gagal!', 'text' => 'NIK yang Anda masukkan telah terdaftar!', 'type' => 'warning', 'button' => 'Ok!'];
-    //     } else {
-    //         // data users
-    //         $users = [
-    //             'id_users'     => acak_id('tb_users', 'id_users'),
-    //             'nama'         => $post['nama'],
-    //             'email'        => $post['email'],
-    //             'username'     => create_character(5),
-    //             'password'     => password_hash('12345678', PASSWORD_DEFAULT),
-    //             'roles'        => 'users',
-    //             'status_akun'  => '0',
-    //         ];
+        $qry = $this->db->query("SELECT * FROM tb_keluarga_anggota WHERE no_ktp LIKE '%$q%'");
+        $num = $qry->num_rows();
+        $row = $qry->row();
 
-    //         $config['upload_path']   = './' . upload_path('gambar');
-    //         $config['allowed_types'] = 'jpg|jpeg|png';
-    //         $config['encrypt_name']  = TRUE;
-    //         $config['overwrite']     = TRUE;
+        if ($num > 0) {
+            // untuk simpan users
+            $users = [
+                'id_users' => acak_id('tb_users', 'id_users'),
+                'nama'     => $row->nama,
+                'email'    => $post['email'],
+                'username' => $post['username'],
+                'password' => password_hash($post['password'], PASSWORD_DEFAULT),
+                'roles'    => 'users',
+            ];
 
-    //         $this->load->library('upload', $config);
+            // untuk ubah keluarga anggota
+            $keluarga_anggota = [
+                'id_users' => $users['id_users'],
+            ];
 
-    //         $this->upload->do_upload('fc_pangkat_terakhir');
-    //         $fc_pangkat_terakhir['fc_pangkat_terakhir'] = $this->upload->data();
-
-    //         $this->upload->do_upload('fc_belum_punya_rumah');
-    //         $fc_belum_punya_rumah['fc_belum_punya_rumah'] = $this->upload->data();
-
-    //         $this->upload->do_upload('fc_ktp');
-    //         $fc_ktp['fc_ktp'] = $this->upload->data();
-
-    //         $this->upload->do_upload('fc_kk');
-    //         $fc_kk['fc_kk'] = $this->upload->data();
-
-    //         $this->upload->do_upload('fc_surat_nikah');
-    //         $fc_surat_nikah['fc_surat_nikah'] = $this->upload->data();
-
-    //         $this->upload->do_upload('pas_foto');
-    //         $pas_foto['pas_foto'] = $this->upload->data();
-
-    //         // data pelanggan
-    //         $pelanggan = [
-    //             'id_pelanggan'         => acak_id('tb_pelanggan', 'id_pelanggan'),
-    //             'id_users'             => $users['id_users'],
-    //             'nik'                  => $post['nik'],
-    //             'nip'                  => $post['nip'],
-    //             'kelamin'              => $post['kelamin'],
-    //             'telepon'              => $post['telepon'],
-    //             'alamat'               => $post['alamat'],
-    //             'fc_pangkat_terakhir'  => $fc_pangkat_terakhir['fc_pangkat_terakhir']['file_name'],
-    //             'fc_belum_punya_rumah' => $fc_belum_punya_rumah['fc_belum_punya_rumah']['file_name'],
-    //             'fc_ktp'               => $fc_ktp['fc_ktp']['file_name'],
-    //             'fc_kk'                => $fc_kk['fc_kk']['file_name'],
-    //             'fc_surat_nikah'       => $fc_surat_nikah['fc_surat_nikah']['file_name'],
-    //             'pas_foto'             => $pas_foto['pas_foto']['file_name'],
-    //             'status_nikah'         => $post['status_nikah'],
-    //             'status_lihat'         => 'belum-lihat',
-    //         ];
-
-    //         $this->db->trans_start();
-    //         $this->crud->i('tb_users', $users);
-    //         $this->crud->i('tb_pelanggan', $pelanggan);
-    //         $this->db->trans_complete();
-    //         if ($this->db->trans_status() === FALSE) {
-    //             $response = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
-    //         } else {
-    //             $response = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
-    //         }
-    //     }
-    //     // untuk response json
-    //     $this->_response($response);
-    // }
+            $this->db->trans_start();
+            $this->crud->i('tb_users', $users);
+            $this->crud->u('tb_keluarga_anggota', $keluarga_anggota, ['id_keluarga_anggota' => $row->id_keluarga_anggota]);
+            $this->db->trans_complete();
+            if ($this->db->trans_status() === FALSE) {
+                $message = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
+            } else {
+                $message = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
+            }
+        } else {
+            $message = ['title' => 'Gagal!', 'text' => 'NIK yang Anda masukkan tidak terdaftar!', 'type' => 'warning', 'button' => 'Ok!'];
+        }
+        // untuk message json
+        $this->_response_message($message);
+    }
 
     // untuk logout
     public function logout()

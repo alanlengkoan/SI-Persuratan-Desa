@@ -78,7 +78,7 @@
                         <label class="col-sm-3 col-form-label">Nomor KTP *</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control inputNumber" name="inpnoktp" id="inpnoktp" pattern="\d*" maxlength="16" minlength="16" placeholder="Masukkan nomor ktp" />
-                            <span id="validasi">Masukkan Nomor KK yang berbeda!</span>
+                            <span id="validasi"></span>
                         </div>
                     </div>
                     <div class="form-group row">

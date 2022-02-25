@@ -132,6 +132,7 @@
     var untukResetForm = function() {
         $(document).on('click', '#btn-add', function() {
             $('#judul-add-upd').html('Tambah');
+            $('#validasi').css('color', 'black').html('Masukkan Nomor KK yang berbeda!');
             $('#inpnokk').val('');
             $('#inpnmkk').val('');
             $('#inpalamat').val('');
