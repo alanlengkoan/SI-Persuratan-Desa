@@ -87,39 +87,98 @@ class Auth extends MY_Controller
         }
     }
 
-    public function access_session()
+    // untuk halaman register
+    public function register()
     {
-        $ip  = $this->input->ip_address();
-        $get = $this->db->query("SELECT * FROM tb_buku_tamu AS bt WHERE bt.ip_address = '$ip'");
-        $num = $get->num_rows();
-        $res = ['check' => $num];
-        // untuk response json
-        $this->_response($res);
+        checking_role_session($this->session->userdata('role'));
+
+        if (empty($this->session->userdata('username'))) {
+            $this->load->view('home/registrasi/view');
+        } else {
+            $this->auth($this->session->userdata('username'), $this->session->userdata('password'));
+        }
     }
 
-    public function access_session_save()
-    {
-        $post = $this->input->post(NULL, TRUE);
-        $data = [
-            'ip_address' => $this->input->ip_address(),
-            'nama'       => $post['nama'],
-            'kelamin'    => $post['kelamin'],
-            'telepon'    => $post['telepon'],
-            'email'      => $post['email'],
-            'alamat'     => $post['alamat'],
-            'keperluan'  => $post['keperluan'],
-        ];
-        $this->db->trans_start();
-        $this->crud->i('tb_buku_tamu', $data);
-        $this->db->trans_complete();
-        if ($this->db->trans_status() === FALSE) {
-            $response = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
-        } else {
-            $response = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
-        }
-        // untuk response json
-        $this->_response($response);
-    }
+    // // untuk simpan data
+    // public function process_save()
+    // {
+    //     $post = $this->input->post(NULL, TRUE);
+
+    //     $q     = $post['nik'];
+    //     $query = $this->db->query("SELECT * FROM tb_pelanggan AS p WHERE p.nik LIKE '%$q%';");
+    //     $count = $query->num_rows();
+
+    //     if ($count > 0) {
+    //         $response = ['title' => 'Gagal!', 'text' => 'NIK yang Anda masukkan telah terdaftar!', 'type' => 'warning', 'button' => 'Ok!'];
+    //     } else {
+    //         // data users
+    //         $users = [
+    //             'id_users'     => acak_id('tb_users', 'id_users'),
+    //             'nama'         => $post['nama'],
+    //             'email'        => $post['email'],
+    //             'username'     => create_character(5),
+    //             'password'     => password_hash('12345678', PASSWORD_DEFAULT),
+    //             'roles'        => 'users',
+    //             'status_akun'  => '0',
+    //         ];
+
+    //         $config['upload_path']   = './' . upload_path('gambar');
+    //         $config['allowed_types'] = 'jpg|jpeg|png';
+    //         $config['encrypt_name']  = TRUE;
+    //         $config['overwrite']     = TRUE;
+
+    //         $this->load->library('upload', $config);
+
+    //         $this->upload->do_upload('fc_pangkat_terakhir');
+    //         $fc_pangkat_terakhir['fc_pangkat_terakhir'] = $this->upload->data();
+
+    //         $this->upload->do_upload('fc_belum_punya_rumah');
+    //         $fc_belum_punya_rumah['fc_belum_punya_rumah'] = $this->upload->data();
+
+    //         $this->upload->do_upload('fc_ktp');
+    //         $fc_ktp['fc_ktp'] = $this->upload->data();
+
+    //         $this->upload->do_upload('fc_kk');
+    //         $fc_kk['fc_kk'] = $this->upload->data();
+
+    //         $this->upload->do_upload('fc_surat_nikah');
+    //         $fc_surat_nikah['fc_surat_nikah'] = $this->upload->data();
+
+    //         $this->upload->do_upload('pas_foto');
+    //         $pas_foto['pas_foto'] = $this->upload->data();
+
+    //         // data pelanggan
+    //         $pelanggan = [
+    //             'id_pelanggan'         => acak_id('tb_pelanggan', 'id_pelanggan'),
+    //             'id_users'             => $users['id_users'],
+    //             'nik'                  => $post['nik'],
+    //             'nip'                  => $post['nip'],
+    //             'kelamin'              => $post['kelamin'],
+    //             'telepon'              => $post['telepon'],
+    //             'alamat'               => $post['alamat'],
+    //             'fc_pangkat_terakhir'  => $fc_pangkat_terakhir['fc_pangkat_terakhir']['file_name'],
+    //             'fc_belum_punya_rumah' => $fc_belum_punya_rumah['fc_belum_punya_rumah']['file_name'],
+    //             'fc_ktp'               => $fc_ktp['fc_ktp']['file_name'],
+    //             'fc_kk'                => $fc_kk['fc_kk']['file_name'],
+    //             'fc_surat_nikah'       => $fc_surat_nikah['fc_surat_nikah']['file_name'],
+    //             'pas_foto'             => $pas_foto['pas_foto']['file_name'],
+    //             'status_nikah'         => $post['status_nikah'],
+    //             'status_lihat'         => 'belum-lihat',
+    //         ];
+
+    //         $this->db->trans_start();
+    //         $this->crud->i('tb_users', $users);
+    //         $this->crud->i('tb_pelanggan', $pelanggan);
+    //         $this->db->trans_complete();
+    //         if ($this->db->trans_status() === FALSE) {
+    //             $response = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
+    //         } else {
+    //             $response = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
+    //         }
+    //     }
+    //     // untuk response json
+    //     $this->_response($response);
+    // }
 
     // untuk logout
     public function logout()

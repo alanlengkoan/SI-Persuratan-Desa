@@ -53,6 +53,20 @@
                     className: 'text-center',
                 },
                 {
+                    title: 'Tanggal Lahir',
+                    className: 'text-center',
+                    render: function(data, type, full, meta) {
+                        return tglIndo(full.tgl_lahir);
+                    },
+                },
+                {
+                    title: 'Umur',
+                    className: 'text-center',
+                    render: function(data, type, full, meta) {
+                        return countAge(full.tgl_lahir);
+                    },
+                },
+                {
                     title: 'Jenis Kelamin',
                     className: 'text-center',
                     render: function(data, type, full, meta) {
