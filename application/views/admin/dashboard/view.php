@@ -84,7 +84,9 @@
                                         <h5 class="card-header-text">Penduduk</h5>
                                     </div>
                                     <div class="card-block">
-                                        <div id="grafik-penduduk"></div>
+                                        <figure class="highcharts-figure">
+                                            <div id="grafik-penduduk"></div>
+                                        </figure>
                                     </div>
                                 </div>
                                 <div class="card">
@@ -92,7 +94,9 @@
                                         <h5 class="card-header-text">Pekerjaan</h5>
                                     </div>
                                     <div class="card-block">
-                                        <div id="grafik-pekerjaan"></div>
+                                        <figure class="highcharts-figure">
+                                            <div id="grafik-pekerjaan"></div>
+                                        </figure>
                                     </div>
                                 </div>
                                 <div class="card">
@@ -100,7 +104,9 @@
                                         <h5 class="card-header-text">Umur</h5>
                                     </div>
                                     <div class="card-block">
-                                        <div id="grafik-umur"></div>
+                                        <figure class="highcharts-figure">
+                                            <div id="grafik-umur"></div>
+                                        </figure>
                                     </div>
                                 </div>
                             </div>
