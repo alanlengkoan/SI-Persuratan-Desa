@@ -50,7 +50,7 @@
                             <div class="tab-pane active show" id="tabel" role="tabpanel">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5 class="card-header-text">Jumlah Penduduk</h5>
+                                        <h5 class="card-header-text">Penduduk</h5>
                                     </div>
                                     <div class="card-block">
                                         <table class="table table-striped table-bordered nowrap" id="tabel-penduduk" style="width: 100%;">
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5 class="card-header-text">Jumlah Pekerjaan</h5>
+                                        <h5 class="card-header-text">Pekerjaan</h5>
                                     </div>
                                     <div class="card-block">
                                         <table class="table table-striped table-bordered nowrap" id="tabel-pekerjaan" style="width: 100%;">
@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5 class="card-header-text">Jumlah Umur</h5>
+                                        <h5 class="card-header-text">Umur</h5>
                                     </div>
                                     <div class="card-block">
                                         <table class="table table-striped table-bordered nowrap" id="tabel-umur" style="width: 100%;">
@@ -81,33 +81,26 @@
                             <div class="tab-pane" id="grafik" role="tabpanel">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5 class="card-header-text">Grafik</h5>
+                                        <h5 class="card-header-text">Penduduk</h5>
                                     </div>
                                     <div class="card-block">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5 class="card-header-text">Jumlah Penduduk</h5>
-                                            </div>
-                                            <div class="card-block">
-                                                <div id="grafik-penduduk"></div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5 class="card-header-text">Jumlah Pekerjaan</h5>
-                                            </div>
-                                            <div class="card-block">
-                                                <div id="grafik-pekerjaan"></div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5 class="card-header-text">Jumlah Umur</h5>
-                                            </div>
-                                            <div class="card-block">
-                                                <div id="grafik-umur"></div>
-                                            </div>
-                                        </div>
+                                        <div id="grafik-penduduk"></div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-header-text">Pekerjaan</h5>
+                                    </div>
+                                    <div class="card-block">
+                                        <div id="grafik-pekerjaan"></div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-header-text">Umur</h5>
+                                    </div>
+                                    <div class="card-block">
+                                        <div id="grafik-umur"></div>
                                     </div>
                                 </div>
                             </div>
