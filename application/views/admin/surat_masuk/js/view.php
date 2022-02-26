@@ -23,6 +23,9 @@
             lengthMenu: [5, 10, 25, 50],
             pageLength: 10,
             ajax: '<?= admin_url() ?>surat_masuk/get_data_surat_masuk_dt',
+            language: {
+                emptyTable: "Tak ada data yang tersedia pada tabel ini"
+            },
             columns: [{
                     title: 'No.',
                     data: null,

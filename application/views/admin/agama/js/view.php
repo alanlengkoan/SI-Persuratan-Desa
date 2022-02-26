@@ -24,6 +24,9 @@
             lengthMenu: [5, 10, 25, 50],
             pageLength: 10,
             ajax: '<?= admin_url() ?>agama/get_data_agama_dt',
+            language: {
+                emptyTable: "Tak ada data yang tersedia pada tabel ini"
+            },
             columns: [{
                     title: 'No.',
                     data: null,

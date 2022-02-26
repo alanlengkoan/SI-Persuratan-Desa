@@ -24,6 +24,9 @@
             lengthMenu: [5, 10, 25, 50],
             pageLength: 10,
             ajax: '<?= admin_url() ?>pekerjaan/get_data_pekerjaan_dt',
+            language: {
+                emptyTable: "Tak ada data yang tersedia pada tabel ini"
+            },
             columns: [{
                     title: 'No.',
                     data: null,
