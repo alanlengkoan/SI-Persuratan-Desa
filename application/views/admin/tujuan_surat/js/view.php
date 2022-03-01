@@ -13,16 +13,16 @@
 
 <script>
     let csrf = $('#<?= $this->security->get_csrf_token_name() ?>');
-    let tabelSuratAsalDt = null;
+    let tabelSuratTujuanDt = null;
 
     // untuk datatable
     var untukTabelSuratJenis = function() {
-        tabelSuratAsalDt = $('#tabel-asal-surat').DataTable({
+        tabelSuratTujuanDt = $('#tabel-tujuan-surat').DataTable({
             responsive: true,
             processing: true,
             lengthMenu: [5, 10, 25, 50],
             pageLength: 10,
-            ajax: '<?= admin_url() ?>asal_surat/get_data_asal_surat_dt',
+            ajax: '<?= admin_url() ?>tujuan_surat/get_data_tujuan_surat_dt',
             language: {
                 emptyTable: "Tak ada data yang tersedia pada tabel ini"
             },
@@ -55,16 +55,6 @@
                     className: 'text-center',
                 },
                 {
-                    title: 'Fax',
-                    data: 'fax',
-                    className: 'text-center',
-                },
-                {
-                    title: 'Situs Web',
-                    data: 'situs_web',
-                    className: 'text-center',
-                },
-                {
                     title: 'Aksi',
                     responsivePriority: -1,
                     className: 'text-center',
@@ -73,8 +63,8 @@
                     render: function(data, type, full, meta) {
                         return `
                         <div class="button-icon-btn button-icon-btn-cl">
-                            <button type="button" id="btn-upd" data-id="` + full.id_surat_asal + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-pencil"></i>&nbsp;Ubah</button>&nbsp;
-                            <button type="button" id="btn-del" data-id="` + full.id_surat_asal + `" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
+                            <button type="button" id="btn-upd" data-id="` + full.id_surat_tujuan + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-pencil"></i>&nbsp;Ubah</button>&nbsp;
+                            <button type="button" id="btn-del" data-id="` + full.id_surat_tujuan + `" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
                         </div>
                     `;
                     },
@@ -87,13 +77,11 @@
     var untukResetForm = function() {
         $(document).on('click', '#btn-add', function() {
             $('#judul-add-upd').html('Tambah');
-            $('#inpidsuratasal').val('');
+            $('#inpidsurattujuan').val('');
             $('#inpnama').val('');
             $('#inpemail').val('');
             $('#inptelepon').val('');
             $('#inpalamat').val('');
-            $('#inpfax').val('');
-            $('#inpsitusweb').val('');
         });
     }();
 
@@ -105,8 +93,6 @@
             $('#inpemail').attr('required', 'required');
             $('#inptelepon').attr('required', 'required');
             $('#inpalamat').attr('required', 'required');
-            $('#inpfax').attr('required', 'required');
-            $('#inpsitusweb').attr('required', 'required');
 
             if ($('#form-add-upd').parsley().isValid() == true) {
                 $.ajax({
@@ -130,7 +116,7 @@
                         }).then((value) => {
                             $('#modal-add-upd').modal('hide');
                             csrf.val(response.csrf);
-                            tabelSuratAsalDt.ajax.reload();
+                            tabelSuratTujuanDt.ajax.reload();
                         });
 
                         $('#save').removeAttr('disabled');
@@ -148,7 +134,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "<?= admin_url() ?>asal_surat/get",
+                url: "<?= admin_url() ?>tujuan_surat/get",
                 dataType: 'json',
                 data: {
                     id: ini.data('id'),
@@ -162,13 +148,11 @@
                 },
                 success: function(response) {
                     csrf.val(response.csrf);
-                    $('#inpidsuratasal').val(response.id_surat_asal);
+                    $('#inpidsurattujuan').val(response.id_surat_tujuan);
                     $('#inpnama').val(response.nama);
                     $('#inpemail').val(response.email);
                     $('#inptelepon').val(response.telepon);
                     $('#inpalamat').val(response.alamat);
-                    $('#inpfax').val(response.fax);
-                    $('#inpsitusweb').val(response.situs_web);
 
                     ini.removeAttr('disabled');
                     ini.html('<i class="fa fa-pencil"></i>&nbsp;Ubah');
@@ -192,7 +176,7 @@
                 if (del) {
                     $.ajax({
                         type: "post",
-                        url: "<?= admin_url() ?>asal_surat/process_del",
+                        url: "<?= admin_url() ?>tujuan_surat/process_del",
                         dataType: 'json',
                         data: {
                             id: ini.data('id'),
@@ -210,7 +194,7 @@
                                 button: response.button,
                             }).then((value) => {
                                 csrf.val(response.csrf);
-                                tabelSuratAsalDt.ajax.reload();
+                                tabelSuratTujuanDt.ajax.reload();
                             });
                         }
                     });

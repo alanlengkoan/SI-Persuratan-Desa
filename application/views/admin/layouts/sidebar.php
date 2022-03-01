@@ -55,6 +55,14 @@
                     <span class="pcoded-mtext">Jenis Surat</span>
                 </a>
             </li>
+            <li class="<?= ($this->uri->segment(2) === 'sifat_surat' ? 'active' : '') ?>">
+                <a href="<?= admin_url() ?>sifat_surat">
+                    <span class="pcoded-micon">
+                        <i class="fa fa-circle"></i>
+                    </span>
+                    <span class="pcoded-mtext">Sifat Surat</span>
+                </a>
+            </li>
             <li class="<?= ($this->uri->segment(2) === 'asal_surat' ? 'active' : '') ?>">
                 <a href="<?= admin_url() ?>asal_surat">
                     <span class="pcoded-micon">
@@ -63,12 +71,12 @@
                     <span class="pcoded-mtext">Asal Surat</span>
                 </a>
             </li>
-            <li class="<?= ($this->uri->segment(2) === 'sifat_surat' ? 'active' : '') ?>">
-                <a href="<?= admin_url() ?>sifat_surat">
+            <li class="<?= ($this->uri->segment(2) === 'tujuan_surat' ? 'active' : '') ?>">
+                <a href="<?= admin_url() ?>tujuan_surat">
                     <span class="pcoded-micon">
                         <i class="fa fa-circle"></i>
                     </span>
-                    <span class="pcoded-mtext">Sifat Surat</span>
+                    <span class="pcoded-mtext">Tujuan Surat</span>
                 </a>
             </li>
         </ul>

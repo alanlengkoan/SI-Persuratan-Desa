@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="card-block table-border-style">
-                        <table class="table table-striped table-bordered nowrap" id="tabel-asal-surat" style="width: 100%;">
+                        <table class="table table-striped table-bordered nowrap" id="tabel-tujuan-surat" style="width: 100%;">
                         </table>
                     </div>
                 </div>
@@ -56,9 +56,9 @@
             <div class="modal-header">
                 <h4 class="modal-title"><span id="judul-add-upd"></span> <?= $title ?></h4>
             </div>
-            <form id="form-add-upd" action="<?= admin_url() ?>asal_surat/process_save" method="POST">
+            <form id="form-add-upd" action="<?= admin_url() ?>tujuan_surat/process_save" method="POST">
                 <!-- begin:: id -->
-                <input type="hidden" name="inpidsuratasal" id="inpidsuratasal" />
+                <input type="hidden" name="inpidsurattujuan" id="inpidsurattujuan" />
                 <input type="hidden" id="<?= $this->security->get_csrf_token_name() ?>" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>" />
                 <!-- end:: id -->
 
@@ -85,18 +85,6 @@
                         <label class="col-sm-2 col-form-label">Alamat *</label>
                         <div class="col-sm-10">
                             <textarea class="form-control" name="inpalamat" id="inpalamat" placeholder="Masukkan alamat"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Fax *</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="inpfax" id="inpfax" placeholder="Masukkan fax" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Situs Web *</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="inpsitusweb" id="inpsitusweb" placeholder="Masukkan situs web" />
                         </div>
                     </div>
                 </div>
