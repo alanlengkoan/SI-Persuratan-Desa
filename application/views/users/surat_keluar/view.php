@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="card-block table-border-style">
-                        <table class="table table-striped table-bordered nowrap" id="tabel-surat-masuk" style="width: 100%;">
+                        <table class="table table-striped table-bordered nowrap" id="tabel-surat-keluar" style="width: 100%;">
                         </table>
                     </div>
                 </div>
@@ -56,9 +56,9 @@
             <div class="modal-header">
                 <h4 class="modal-title"><span id="judul-add-upd"></span> <?= $title ?></h4>
             </div>
-            <form id="form-add-upd" action="<?= admin_url() ?>surat_masuk/process_save" method="POST">
+            <form id="form-add-upd" action="<?= users_url() ?>surat_keluar/process_save" method="POST">
                 <!-- begin:: id -->
-                <input type="hidden" name="inpidsuratmasuk" id="inpidsuratmasuk" />
+                <input type="hidden" name="inpidsuratkeluar" id="inpidsuratkeluar" />
                 <input type="hidden" id="<?= $this->security->get_csrf_token_name() ?>" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>" />
                 <!-- end:: id -->
 
@@ -76,18 +76,18 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tanggal Masuk *</label>
+                        <label class="col-sm-3 col-form-label">Tanggal Keluar *</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" name="inptglmasuk" id="inptglmasuk" />
+                            <input type="date" class="form-control" name="inptglkeluar" id="inptglkeluar" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Asal Surat *</label>
+                        <label class="col-sm-3 col-form-label">Tujuan Surat *</label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="inpidsuratasal" id="inpidsuratasal">
+                            <select class="form-control" name="inpidsurattujuan" id="inpidsurattujuan">
                                 <option value="">- Pilih -</option>
-                                <?php foreach ($asal_surat as $key => $row) { ?>
-                                    <option value="<?= $row->id_surat_asal ?>"><?= $row->nama ?></option>
+                                <?php foreach ($tujuan_surat as $key => $row) { ?>
+                                    <option value="<?= $row->id_surat_tujuan ?>"><?= $row->nama ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -121,22 +121,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tipe Arsip *</label>
+                        <label class="col-sm-3 col-form-label">Isi&nbsp;*</label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="inparsiptipe" id="inparsiptipe">
-                                <option value="">- Pilih -</option>
-                                <option value="pdf">Pdf</option>
-                                <option value="doc">Doc</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Arsip *</label>
-                        <div class="col-sm-9">
-                            <div id="lihat_gambar"></div>
-                            <input type="file" class="form-control" name="inparsip" id="inparsip" />
-                            <div id="centang_gambar"></div>
-                            <p>File dengan tipe (*.pdf,*.doc/docx,*.mp4) Max. 20MB</p>
+                            <textarea name="inpisi" id="inpisi" cols="30" rows="10"></textarea>
                         </div>
                     </div>
                 </div>

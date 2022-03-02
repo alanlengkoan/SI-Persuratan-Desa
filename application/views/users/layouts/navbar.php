@@ -4,7 +4,7 @@
             <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
                 <i class="feather icon-toggle-right"></i>
             </a>
-            <a href="<?= admin_url() ?>">
+            <a href="<?= users_url() ?>">
                 <?= $this->session->userdata('role') ?>
             </a>
             <a class="mobile-options waves-effect waves-light">
@@ -47,13 +47,8 @@
                         </div>
                         <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                             <li>
-                                <a href="<?= admin_url() ?>profil">
+                                <a href="<?= users_url() ?>profil">
                                     <i class="feather icon-user"></i> Profile
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?= admin_url() ?>pengaturan">
-                                    <i class="feather icon-settings"></i> Pengaturan
                                 </a>
                             </li>
                             <li>

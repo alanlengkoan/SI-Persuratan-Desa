@@ -77,7 +77,7 @@ class Auth extends MY_Controller
                         'role'     => $row['roles'],
                     ];
                     $this->session->set_userdata($data);
-                    exit($this->_response_message(array('status' => true, 'link' => base_url())));
+                    exit($this->_response_message(array('status' => true, 'link' => users_url())));
                 }
             } else {
                 exit($this->_response_message(['title' => 'Gagal!', 'text' => 'Username atau Password Anda salah!', 'type' => 'error', 'button' => 'Ok!']));

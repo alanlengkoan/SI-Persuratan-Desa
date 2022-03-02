@@ -35,12 +35,12 @@ if (!function_exists('admin_url')) {
     }
 }
 
-// untuk home url
-if (!function_exists('home_url')) {
-    function home_url($url = NULL)
+// untuk users url
+if (!function_exists('users_url')) {
+    function users_url($url = NULL)
     {
         $link = ($url) ? '/' . $url : '';
-        return site_url('home/') . $link;
+        return site_url('users/') . $link;
     }
 }
 

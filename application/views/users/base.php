@@ -36,13 +36,13 @@
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
             <!-- begin:: navbar -->
-            <?php $this->load->view('admin/layouts/navbar'); ?>
+            <?php $this->load->view('users/layouts/navbar'); ?>
             <!-- end:: navbar -->
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                     <!-- begin:: sidebar -->
-                    <?php $this->load->view('admin/layouts/sidebar'); ?>
+                    <?php $this->load->view('users/layouts/sidebar'); ?>
                     <!-- end:: sidebar -->
 
                     <!-- begin:: content -->
