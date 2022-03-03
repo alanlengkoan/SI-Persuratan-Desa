@@ -50,7 +50,7 @@
             <h5>PEMERINTAH KABUPATEN BULUKUMBA</h5>
             <h4>KECAMATAN BONTOTIRO</h4>
             <h3>DESA BONTO TANGNGA</h3>
-            <p><i>Kondodewata, Kec. Mappak, Kab. Tana Toraja, Sulawesi Selatan, Indonesia.</i></p>
+            <p><i><?= (empty($data->alamat) ? null : $data->alamat) ?></i></p>
         </td>
         <td>
             <img src="<?= assets_path() ?>admin/images/logo.png" alt="logo" title="logo" width="70px" />
@@ -75,13 +75,12 @@
     <tr>
         <td align="center">
             <p>Bulukumba, <?= tgl_indo($detail->tgl_surat) ?></p>
-            <p>Kepala Sekolah</p>
+            <p>Kepala Desa</p>
             <br />
             <br />
             <br />
             <br />
-            <p class="nama">Drs. Sinai</p>
-            <p>NIP : 196401081989031019</p>
+            <p class="nama"><?= (empty($data->nama) ? null : $data->nama) ?></p>
         </td>
     </tr>
 </table>

@@ -3,7 +3,7 @@
         <!-- begin:: profil sidebar -->
         <div class="">
             <div class="main-menu-header">
-                <img class="img-menu-user img-radius" src="<?= (get_users_detail($this->session->userdata('id'))->foto !== null ? upload_url('gambar') . '' . get_users_detail($this->session->userdata('id'))->foto : "//placehold.it/150") ?>" alt="User-Profile-Image">
+                <img class="img-menu-user img-radius" src="<?= (get_users_detail($this->session->userdata('id'))->foto !== null ? upload_url('gambar') . '' . get_users_detail($this->session->userdata('id'))->foto : "//placehold.co/150") ?>" alt="User-Profile-Image">
                 <div class="user-details">
                     <p id="more-details"><?= get_users_detail($this->session->userdata('id'))->nama ?></p>
                 </div>

@@ -12,10 +12,11 @@ class Surat_keluar extends MY_Controller
 
         // untuk load model
         $this->load->model('crud');
-        $this->load->model('m_surat_tujuan');
+        $this->load->model('m_pengaturan');
         $this->load->model('m_surat_sifat');
         $this->load->model('m_surat_jenis');
         $this->load->model('m_surat_keluar');
+        $this->load->model('m_surat_tujuan');
     }
 
     // untuk default
@@ -49,6 +50,7 @@ class Surat_keluar extends MY_Controller
         $data = [
             'title'  => 'Surat Keluar',
             'detail' => $this->m_surat_keluar->getDetail($id_surat_keluar),
+            'data'   => $this->m_pengaturan->getFirstRecord(),
         ];
         // untuk load view
         $this->pdf->setPaper('legal', 'potrait');

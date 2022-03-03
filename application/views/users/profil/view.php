@@ -64,7 +64,7 @@
                                                     <input type="file" name="inpfotoprofil" id="inpfotoprofil">
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <img src="<?= ($data->foto !== null) ? upload_url('gambar') . '' . $data->foto : "//placehold.it/150" ?>" class="img-fluid mx-auto d-block" id="lihat-gambar" alt="Profil" width="200" />
+                                                    <img src="<?= ($data->foto !== null) ? upload_url('gambar') . '' . $data->foto : "//placehold.co/150" ?>" class="img-fluid mx-auto d-block" id="lihat-gambar" alt="Profil" width="200" />
                                                     <br>
                                                     <div class="text-center">
                                                         <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light" id="save-foto"><i class="fa fa-save"></i>&nbsp;Simpan</button>

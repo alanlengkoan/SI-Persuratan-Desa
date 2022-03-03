@@ -41,7 +41,7 @@
                     <li class="user-profile header-notification">
                         <div class="dropdown-primary dropdown">
                             <div class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="<?= (get_users_detail($this->session->userdata('id'))->foto !== null ? upload_url('gambar') . '' . get_users_detail($this->session->userdata('id'))->foto : "//placehold.it/150") ?>" class="img-radius" alt="User-Profile-Image">
+                                <img src="<?= (get_users_detail($this->session->userdata('id'))->foto !== null ? upload_url('gambar') . '' . get_users_detail($this->session->userdata('id'))->foto : "//placehold.co/150") ?>" class="img-radius" alt="User-Profile-Image">
                                 <span><?= get_users_detail($this->session->userdata('id'))->nama ?></span>
                                 <i class="feather icon-chevron-down"></i>
                             </div>
