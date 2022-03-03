@@ -36,6 +36,8 @@
                         </div>
                     </div>
                     <div class="card-block table-border-style">
+                        <input type="hidden" id="<?= $this->security->get_csrf_token_name() ?>" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>" />
+                        
                         <table class="table table-striped table-bordered nowrap" id="tabel-surat-keluar" style="width: 100%;">
                         </table>
                     </div>

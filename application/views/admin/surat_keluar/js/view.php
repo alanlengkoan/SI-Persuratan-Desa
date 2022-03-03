@@ -13,6 +13,7 @@
 <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 
 <script>
+    let csrf = $('#<?= $this->security->get_csrf_token_name() ?>');
     let tabelSuratKeluarDt = null;
 
     // untuk datatable
@@ -69,6 +70,23 @@
                     className: 'text-center',
                 },
                 {
+                    title: 'Approve',
+                    className: 'text-center',
+                    render: function(data, type, full, meta) {
+                        var status = [
+                            [
+                                'Belum disetujui',
+                                'warning',
+                            ],
+                            [
+                                'Telah disetujui',
+                                'primary',
+                            ],
+                        ];
+                        return `<button type="button" id="btn-approve" data-id="` + full.id_surat_keluar + `" data-value="` + full.approve + `" class="btn btn-` + status[full.approve][1] + ` btn-sm waves-effect"><i class="fa fa-toggle-on"></i>&nbsp;` + status[full.approve][0] + `</button>`;
+                    },
+                },
+                {
                     title: 'Aksi',
                     responsivePriority: -1,
                     className: 'text-center',
@@ -77,15 +95,102 @@
                     render: function(data, type, full, meta) {
                         return `
                         <div class="button-icon-btn button-icon-btn-cl">
-                            <a href="<?= admin_url() ?>surat_keluar/detail/` + btoa(full.id_surat_keluar) + `" class="btn btn-success btn-sm waves-effect"><i class="fa fa-info"></i>&nbsp;Detail</a>&nbsp;
+                            <a href="<?= admin_url() ?>surat_keluar/detail/` + btoa(full.id_surat_keluar) + `" target="_blank" class="btn btn-success btn-sm waves-effect"><i class="fa fa-info"></i>&nbsp;Detail</a>&nbsp;
                             <a href="<?= admin_url() ?>surat_keluar/print/` + btoa(full.id_surat_keluar) + `" target="_blank" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-print"></i>&nbsp;Cetak</a>&nbsp;
-                            <button type="button" id="btn-upd" data-id="` + full.id_surat_keluar + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-pencil"></i>&nbsp;Ubah</button>&nbsp;
                             <button type="button" id="btn-del" data-id="` + full.id_surat_keluar + `" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
                         </div>
                     `;
                     },
                 },
             ],
+        });
+    }();
+
+    // untuk ubah approve
+    var untukUbahApprove = function() {
+        $(document).on('click', '#btn-approve', function() {
+            var ini = $(this);
+            swal({
+                title: "Apakah Anda yakin ingin mengubah status?",
+                text: "Berita tersebut akan berubah!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((del) => {
+                if (del) {
+                    $.ajax({
+                        type: "post",
+                        url: "<?= admin_url() ?>surat_keluar/upd_approve",
+                        dataType: 'json',
+                        data: {
+                            id: ini.data('id'),
+                            value: ini.data('value'),
+                            my_csrf_token: csrf.val(),
+                        },
+                        beforeSend: function() {
+                            ini.attr('disabled', 'disabled');
+                            ini.html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
+                        },
+                        success: function(response) {
+                            swal({
+                                title: response.title,
+                                text: response.text,
+                                icon: response.type,
+                                button: response.button,
+                            }).then((value) => {
+                                csrf.val(response.csrf);
+                                tabelSuratKeluarDt.ajax.reload();
+                            });
+                        }
+                    });
+                } else {
+                    return false;
+                }
+            });
+        });
+    }();
+
+    // untuk hapus data
+    var untukHapusData = function() {
+        $(document).on('click', '#btn-del', function() {
+            var ini = $(this);
+
+            swal({
+                title: "Apakah Anda yakin ingin menghapusnya?",
+                text: "Data yang telah dihapus tidak dapat dikembalikan!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((del) => {
+                if (del) {
+                    $.ajax({
+                        type: "post",
+                        url: "<?= admin_url() ?>surat_keluar/process_del",
+                        dataType: 'json',
+                        data: {
+                            id: ini.data('id'),
+                            my_csrf_token: csrf.val(),
+                        },
+                        beforeSend: function() {
+                            ini.attr('disabled', 'disabled');
+                            ini.html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
+                        },
+                        success: function(response) {
+                            swal({
+                                title: response.title,
+                                text: response.text,
+                                icon: response.type,
+                                button: response.button,
+                            }).then((value) => {
+                                csrf.val(response.csrf);
+                                tabelSuratKeluarDt.ajax.reload();
+                            });
+                        }
+                    });
+                } else {
+                    return false;
+                }
+            });
         });
     }();
 </script>

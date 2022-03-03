@@ -8,7 +8,7 @@ class Dashboard extends MY_Controller
         parent::__construct();
 
         // untuk mengecek status login
-        checking_session($this->session->userdata('username'), $this->session->userdata('role'), ['users']);
+        checking_session($this->username, $this->role, ['users']);
 
         // untuk load model
         $this->load->model('crud');

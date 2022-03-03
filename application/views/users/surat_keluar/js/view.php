@@ -75,20 +75,44 @@
                     className: 'text-center',
                 },
                 {
+                    title: 'Approve',
+                    className: 'text-center',
+                    render: function(data, type, full, meta) {
+                        var status = [
+                            [
+                                'Belum disetujui',
+                                'warning',
+                            ],
+                            [
+                                'Telah disetujui',
+                                'primary',
+                            ],
+                        ];
+                        return `<span class="badge badge-` + status[full.approve][1] + `">` + status[full.approve][0] + `</span>`;
+                    },
+                },
+                {
                     title: 'Aksi',
                     responsivePriority: -1,
                     className: 'text-center',
                     orderable: false,
                     searchable: false,
                     render: function(data, type, full, meta) {
-                        return `
-                        <div class="button-icon-btn button-icon-btn-cl">
-                            <a href="<?= users_url() ?>surat_keluar/detail/` + btoa(full.id_surat_keluar) + `" class="btn btn-success btn-sm waves-effect"><i class="fa fa-info"></i>&nbsp;Detail</a>&nbsp;
-                            <a href="<?= users_url() ?>surat_keluar/print/` + btoa(full.id_surat_keluar) + `" target="_blank" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-print"></i>&nbsp;Cetak</a>&nbsp;
-                            <button type="button" id="btn-upd" data-id="` + full.id_surat_keluar + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-pencil"></i>&nbsp;Ubah</button>&nbsp;
-                            <button type="button" id="btn-del" data-id="` + full.id_surat_keluar + `" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
-                        </div>
-                    `;
+                        if (full.approve === '0') {
+                            return `
+                                <div class="button-icon-btn button-icon-btn-cl">
+                                    <button type="button" id="btn-upd" data-id="` + full.id_surat_keluar + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-pencil"></i>&nbsp;Ubah</button>&nbsp;
+                                </div>
+                            `;
+                        } else {
+                            return `
+                                <div class="button-icon-btn button-icon-btn-cl">
+                                    <a href="<?= users_url() ?>surat_keluar/detail/` + btoa(full.id_surat_keluar) + `" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-info"></i>&nbsp;Detail</a>&nbsp;
+                                    <a href="<?= users_url() ?>surat_keluar/print/` + btoa(full.id_surat_keluar) + `" target="_blank" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-print"></i>&nbsp;Cetak</a>&nbsp;
+                                    <button type="button" id="btn-upd" data-id="` + full.id_surat_keluar + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-pencil"></i>&nbsp;Ubah</button>&nbsp;
+                                </div>
+                            `;
+                        }
                     },
                 },
             ],
@@ -191,50 +215,6 @@
 
                     ini.removeAttr('disabled');
                     ini.html('<i class="fa fa-pencil"></i>&nbsp;Ubah');
-                }
-            });
-        });
-    }();
-
-    // untuk hapus data
-    var untukHapusData = function() {
-        $(document).on('click', '#btn-del', function() {
-            var ini = $(this);
-
-            swal({
-                title: "Apakah Anda yakin ingin menghapusnya?",
-                text: "Data yang telah dihapus tidak dapat dikembalikan!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            }).then((del) => {
-                if (del) {
-                    $.ajax({
-                        type: "post",
-                        url: "<?= users_url() ?>surat_keluar/process_del",
-                        dataType: 'json',
-                        data: {
-                            id: ini.data('id'),
-                            my_csrf_token: csrf.val(),
-                        },
-                        beforeSend: function() {
-                            ini.attr('disabled', 'disabled');
-                            ini.html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
-                        },
-                        success: function(response) {
-                            swal({
-                                title: response.title,
-                                text: response.text,
-                                icon: response.type,
-                                button: response.button,
-                            }).then((value) => {
-                                csrf.val(response.csrf);
-                                tabelSuratKeluarDt.ajax.reload();
-                            });
-                        }
-                    });
-                } else {
-                    return false;
                 }
             });
         });
