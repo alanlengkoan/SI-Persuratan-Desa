@@ -117,14 +117,30 @@
         </ul>
         <div class="pcoded-navigation-label">Laporan</div>
         <ul class="pcoded-item pcoded-left-item">
-            <!-- <li class="< ?= ($this->uri->segment(2) === 'l_keuangan' ? 'active' : '') ?>">
-                <a href="< ?= admin_url() ?>laporan/l_keuangan">
+            <li class="<?= ($this->uri->segment(2) === '' ? 'active' : '') ?>">
+                <a href="<?= admin_url() ?>">
                     <span class="pcoded-micon">
                         <i class="fa fa-circle"></i>
                     </span>
-                    <span class="pcoded-mtext">Laporan Keuangan</span>
+                    <span class="pcoded-mtext">Laporan Surat Masuk</span>
                 </a>
-            </li> -->
+            </li>
+            <li class="<?= ($this->uri->segment(2) === '' ? 'active' : '') ?>">
+                <a href="<?= admin_url() ?>">
+                    <span class="pcoded-micon">
+                        <i class="fa fa-circle"></i>
+                    </span>
+                    <span class="pcoded-mtext">Laporan Surat Keluar</span>
+                </a>
+            </li>
+            <li class="<?= ($this->uri->segment(2) === '' ? 'active' : '') ?>">
+                <a href="<?= admin_url() ?>">
+                    <span class="pcoded-micon">
+                        <i class="fa fa-circle"></i>
+                    </span>
+                    <span class="pcoded-mtext">Laporan Penduduk</span>
+                </a>
+            </li>
         </ul>
         <!-- end:: menu sidebar -->
     </div>
