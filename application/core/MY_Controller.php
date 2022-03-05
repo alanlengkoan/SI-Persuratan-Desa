@@ -12,6 +12,8 @@ abstract class MY_Controller extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+
+        // untuk variabel global
         $this->id       = $this->session->userdata('id');
         $this->id_users = $this->session->userdata('id_users');
         $this->username = $this->session->userdata('username');
