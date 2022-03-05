@@ -15,7 +15,7 @@
             <li class="<?= ($this->uri->segment(2) === null ? 'active' : '') ?>">
                 <a href="<?= admin_url() ?>">
                     <span class="pcoded-micon">
-                        <i class="fa fa-dashboard"></i>
+                        <i class="fa fa-circle"></i>
                     </span>
                     <span class="pcoded-mtext">Dashboard</span>
                 </a>
