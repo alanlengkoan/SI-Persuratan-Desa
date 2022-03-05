@@ -33,7 +33,7 @@ class Keluarga_anggota extends MY_Controller
     // untuk get data
     public function get_data_keluarga_anggota_dt()
     {
-        return $this->m_keluarga_anggota->getAllDataDt();
+        $this->m_keluarga_anggota->getAllDataDt();
     }
 
     // untuk get data by id

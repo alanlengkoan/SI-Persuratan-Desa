@@ -117,24 +117,24 @@
         </ul>
         <div class="pcoded-navigation-label">Laporan</div>
         <ul class="pcoded-item pcoded-left-item">
-            <li class="<?= ($this->uri->segment(2) === '' ? 'active' : '') ?>">
-                <a href="<?= admin_url() ?>">
+            <li class="<?= ($this->uri->segment(3) === 'surat_masuk' ? 'active' : '') ?>">
+                <a href="<?= admin_url() ?>laporan/surat_masuk">
                     <span class="pcoded-micon">
                         <i class="fa fa-circle"></i>
                     </span>
                     <span class="pcoded-mtext">Laporan Surat Masuk</span>
                 </a>
             </li>
-            <li class="<?= ($this->uri->segment(2) === '' ? 'active' : '') ?>">
-                <a href="<?= admin_url() ?>">
+            <li class="<?= ($this->uri->segment(3) === 'surat_keluar' ? 'active' : '') ?>">
+                <a href="<?= admin_url() ?>laporan/surat_keluar">
                     <span class="pcoded-micon">
                         <i class="fa fa-circle"></i>
                     </span>
                     <span class="pcoded-mtext">Laporan Surat Keluar</span>
                 </a>
             </li>
-            <li class="<?= ($this->uri->segment(2) === '' ? 'active' : '') ?>">
-                <a href="<?= admin_url() ?>">
+            <li class="<?= ($this->uri->segment(3) === 'penduduk' ? 'active' : '') ?>">
+                <a href="<?= admin_url() ?>laporan/penduduk">
                     <span class="pcoded-micon">
                         <i class="fa fa-circle"></i>
                     </span>
