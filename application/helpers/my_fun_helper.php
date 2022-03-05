@@ -502,11 +502,11 @@ if (!function_exists('remove_point_space')) {
 }
 
 if (!function_exists('checking_data')) {
-    function checking_data($database_name, $table_name, $column_primary, $id)
+    function checking_data($table_name, $column_primary, $id)
     {
         $CI = get_instance();
 
-        $get = $CI->db->query("SELECT table_name FROM information_schema.COLUMNS WHERE column_name = '{$column_primary}' AND table_name NOT IN( '{$table_name}') AND table_schema = '{$database_name}'");
+        $get = $CI->db->query("SELECT table_name FROM information_schema.COLUMNS WHERE column_name = '{$column_primary}' AND table_name NOT IN( '{$table_name}') AND table_schema = '{$CI->db->database}'");
         $res = [];
         foreach ($get->result() as $value) {
             $qry = $CI->db->query("SELECT * FROM {$value->table_name} WHERE {$column_primary} = '$id'");

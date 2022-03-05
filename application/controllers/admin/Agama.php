@@ -69,7 +69,7 @@ class Agama extends MY_Controller
     {
         $post = $this->input->post(NULL, TRUE);
 
-        $check = checking_data('si_persuratan_desa', 'tb_agama', 'id_agama', $post['id']);
+        $check = checking_data('tb_agama', 'id_agama', $post['id']);
 
         if ($check > 0) {
             $message = ['title' => 'Gagal!', 'text' => 'Maaf data yang Anda hapus masih digunakan!', 'type' => 'error', 'button' => 'Ok!'];

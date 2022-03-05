@@ -69,13 +69,19 @@ class Jenis_surat extends MY_Controller
     {
         $post = $this->input->post(NULL, TRUE);
 
-        $this->db->trans_start();
-        $this->crud->d('tb_surat_jenis', $post['id'], 'id_surat_jenis');
-        $this->db->trans_complete();
-        if ($this->db->trans_status() === FALSE) {
-            $message = ['title' => 'Gagal!', 'text' => 'Gagal Hapus!', 'type' => 'error', 'button' => 'Ok!'];
+        $check = checking_data('tb_surat_jenis', 'id_surat_jenis', $post['id']);
+
+        if ($check > 0) {
+            $message = ['title' => 'Gagal!', 'text' => 'Maaf data yang Anda hapus masih digunakan!', 'type' => 'error', 'button' => 'Ok!'];
         } else {
-            $message = ['title' => 'Berhasil!', 'text' => 'Berhasil Hapus!', 'type' => 'success', 'button' => 'Ok!'];
+            $this->db->trans_start();
+            $this->crud->d('tb_surat_jenis', $post['id'], 'id_surat_jenis');
+            $this->db->trans_complete();
+            if ($this->db->trans_status() === FALSE) {
+                $message = ['title' => 'Gagal!', 'text' => 'Gagal Hapus!', 'type' => 'error', 'button' => 'Ok!'];
+            } else {
+                $message = ['title' => 'Berhasil!', 'text' => 'Berhasil Hapus!', 'type' => 'success', 'button' => 'Ok!'];
+            }
         }
         // untuk message json
         $this->_response_message($message);

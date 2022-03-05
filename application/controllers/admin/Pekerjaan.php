@@ -69,7 +69,7 @@ class Pekerjaan extends MY_Controller
     {
         $post = $this->input->post(NULL, TRUE);
 
-        $check = checking_data('si_persuratan_desa', 'tb_pekerjaan', 'id_pekerjaan', $post['id']);
+        $check = checking_data('tb_pekerjaan', 'id_pekerjaan', $post['id']);
 
         if ($check > 0) {
             $message = ['title' => 'Gagal!', 'text' => 'Maaf data yang Anda hapus masih digunakan!', 'type' => 'error', 'button' => 'Ok!'];
