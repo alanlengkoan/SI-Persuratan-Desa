@@ -500,3 +500,21 @@ if (!function_exists('remove_point_space')) {
         return preg_replace('/\.|\s/', '', $string);
     }
 }
+
+if (!function_exists('checking_data')) {
+    function checking_data($database_name, $table_name, $column_primary, $id)
+    {
+        $CI = get_instance();
+
+        $get = $CI->db->query("SELECT table_name FROM information_schema.COLUMNS WHERE column_name = '{$column_primary}' AND table_name NOT IN( '{$table_name}') AND table_schema = '{$database_name}'");
+        $res = [];
+        foreach ($get->result() as $value) {
+            $qry = $CI->db->query("SELECT * FROM {$value->table_name} WHERE {$column_primary} = '$id'");
+            $num = $qry->num_rows();
+            if ($num > 0) {
+                $res[] = $value->table_name;
+            }
+        }
+        return count($res);
+    }
+}
