@@ -47,8 +47,8 @@
             <img src="<?= assets_path() ?>admin/images/sulsel.png" alt="logo" title="logo" width="70px" />
         </td>
         <td align="center">
-            <h5>PEMERINTAH KABUPATEN BULUKUMBA</h5>
-            <h4>KECAMATAN BONTOTIRO</h4>
+            <h3>PEMERINTAH KABUPATEN BULUKUMBA</h3>
+            <h3>KECAMATAN BONTOTIRO</h3>
             <h3>DESA BONTO TANGNGA</h3>
             <p><i><?= (empty($data->alamat) ? null : $data->alamat) ?></i></p>
         </td>
