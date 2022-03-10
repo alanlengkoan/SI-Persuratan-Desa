@@ -9,17 +9,15 @@ class Home extends MY_Controller
 
         // untuk load model
         $this->load->model('crud');
+        $this->load->model('m_profil');
     }
 
     public function index()
     {
         $data = [
-            'title'   => 'Home',
-            'content' => 'home/home/view',
-            'css'     => '',
-            'js'      => ''
+            'profil' => $this->m_profil->getAll(),
         ];
         // untuk load view
-        $this->load->view('home/base', $data);
+        $this->template->load('home', 'Beranda', 'beranda', 'view', $data);
     }
 }

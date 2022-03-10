@@ -1,3 +1,4 @@
+
 <script src="<?= assets_url() ?>admin/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?= assets_url() ?>admin/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
 <script src="<?= assets_url() ?>admin/pages/data-table/js/jszip.min.js"></script>
@@ -80,7 +81,7 @@
         $(document).on('click', '#btn-add', function() {
             $('#judul-add-upd').html('Tambah');
             $('#inpidprofil').val('');
-            $('#inpprofil').val('');
+            $('#inpnama').val('');
             $("input[name*='inpgambar']").removeAttr('disabled');
             $("input[name*='inpgambar']").attr('id', 'inpgambar');
             $('#inpgambar').val('');
@@ -112,7 +113,7 @@
     var untukTambahDanUbahData = function() {
         $(document).on('submit', '#form-add-upd', function(e) {
             e.preventDefault();
-            $('#inpprofil').attr('required', 'required');
+            $('#inpnama').attr('required', 'required');
             $('#inpisi').attr('required', 'required');
 
             if ($('#form-add-upd').parsley().isValid() == true) {
