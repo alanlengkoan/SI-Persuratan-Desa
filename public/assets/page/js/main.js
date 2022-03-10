@@ -1,413 +1,264 @@
-$(document).ready(function() {
-    "use strict";
+/**
+* Template Name: MyResume - v4.7.0
+* Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
+(function() {
+  "use strict";
 
-    var window_width = $(window).width(),
-        window_height = window.innerHeight,
-        header_height = $(".default-header").height(),
-        header_height_static = $(".site-header.static").outerHeight(),
-        fitscreen = window_height - header_height;
+  /**
+   * Easy selector helper function
+   */
+  const select = (el, all = false) => {
+    el = el.trim()
+    if (all) {
+      return [...document.querySelectorAll(el)]
+    } else {
+      return document.querySelector(el)
+    }
+  }
 
-    $(".fullscreen").css("height", window_height)
-    $(".fitscreen").css("height", fitscreen);
+  /**
+   * Easy event listener function
+   */
+  const on = (type, el, listener, all = false) => {
+    let selectEl = select(el, all)
+    if (selectEl) {
+      if (all) {
+        selectEl.forEach(e => e.addEventListener(type, listener))
+      } else {
+        selectEl.addEventListener(type, listener)
+      }
+    }
+  }
 
-    //------- Niceselect  js --------//  
+  /**
+   * Easy on scroll event listener 
+   */
+  const onscroll = (el, listener) => {
+    el.addEventListener('scroll', listener)
+  }
 
-    if (document.getElementById("default-select")) {
-        $('select').niceSelect();
-    };
-    if (document.getElementById("default-select2")) {
-        $('select').niceSelect();
-    };
-    if (document.getElementById("service-select")) {
-        $('select').niceSelect();
-    };    
+  /**
+   * Navbar links active state on scroll
+   */
+  let navbarlinks = select('#navbar .scrollto', true)
+  const navbarlinksActive = () => {
+    let position = window.scrollY + 200
+    navbarlinks.forEach(navbarlink => {
+      if (!navbarlink.hash) return
+      let section = select(navbarlink.hash)
+      if (!section) return
+      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
+        navbarlink.classList.add('active')
+      } else {
+        navbarlink.classList.remove('active')
+      }
+    })
+  }
+  window.addEventListener('load', navbarlinksActive)
+  onscroll(document, navbarlinksActive)
 
-    //------- Lightbox  js --------//  
+  /**
+   * Scrolls to an element with header offset
+   */
+  const scrollto = (el) => {
+    let elementPos = select(el).offsetTop
+    window.scrollTo({
+      top: elementPos,
+      behavior: 'smooth'
+    })
+  }
 
-    $('.img-gal').magnificPopup({
-        type: 'image',
-        gallery: {
-            enabled: true
-        }
+  /**
+   * Back to top button
+   */
+  let backtotop = select('.back-to-top')
+  if (backtotop) {
+    const toggleBacktotop = () => {
+      if (window.scrollY > 100) {
+        backtotop.classList.add('active')
+      } else {
+        backtotop.classList.remove('active')
+      }
+    }
+    window.addEventListener('load', toggleBacktotop)
+    onscroll(document, toggleBacktotop)
+  }
+
+  /**
+   * Mobile nav toggle
+   */
+  on('click', '.mobile-nav-toggle', function(e) {
+    select('body').classList.toggle('mobile-nav-active')
+    this.classList.toggle('bi-list')
+    this.classList.toggle('bi-x')
+  })
+
+  /**
+   * Scrool with ofset on links with a class name .scrollto
+   */
+  on('click', '.scrollto', function(e) {
+    if (select(this.hash)) {
+      e.preventDefault()
+
+      let body = select('body')
+      if (body.classList.contains('mobile-nav-active')) {
+        body.classList.remove('mobile-nav-active')
+        let navbarToggle = select('.mobile-nav-toggle')
+        navbarToggle.classList.toggle('bi-list')
+        navbarToggle.classList.toggle('bi-x')
+      }
+      scrollto(this.hash)
+    }
+  }, true)
+
+  /**
+   * Scroll with ofset on page load with hash links in the url
+   */
+  window.addEventListener('load', () => {
+    if (window.location.hash) {
+      if (select(window.location.hash)) {
+        scrollto(window.location.hash)
+      }
+    }
+  });
+
+  /**
+   * Preloader
+   */
+  let preloader = select('#preloader');
+  if (preloader) {
+    window.addEventListener('load', () => {
+      preloader.remove()
     });
+  }
 
-    $('.play-btn').magnificPopup({
-        type: 'iframe',
-        mainClass: 'mfp-fade',
-        removalDelay: 160,
-        preloader: false,
-        fixedContentPos: false
+  /**
+   * Hero type effect
+   */
+  const typed = select('.typed')
+  if (typed) {
+    let typed_strings = typed.getAttribute('data-typed-items')
+    typed_strings = typed_strings.split(',')
+    new Typed('.typed', {
+      strings: typed_strings,
+      loop: true,
+      typeSpeed: 100,
+      backSpeed: 50,
+      backDelay: 2000
     });
+  }
 
-    //------- Superfist nav menu  js --------//  
-
-    $('.nav-menu').superfish({
-        animation: {
-            opacity: 'show'
-        },
-        speed: 400
-    });
-
-    /* ---------------------------------------------
-     accordion
-     --------------------------------------------- */
-
-    var allPanels = $(".accordion > dd").hide();
-    allPanels.first().slideDown("easeOutExpo");
-    $(".accordion").each(function() {
-        $(this).find("dt > a").first().addClass("active").parent().next().css({
-            display: "block"
+  /**
+   * Skills animation
+   */
+  let skilsContent = select('.skills-content');
+  if (skilsContent) {
+    new Waypoint({
+      element: skilsContent,
+      offset: '80%',
+      handler: function(direction) {
+        let progress = select('.progress .progress-bar', true);
+        progress.forEach((el) => {
+          el.style.width = el.getAttribute('aria-valuenow') + '%'
         });
-    });
+      }
+    })
+  }
 
+  /**
+   * Porfolio isotope and filter
+   */
+  window.addEventListener('load', () => {
+    let portfolioContainer = select('.portfolio-container');
+    if (portfolioContainer) {
+      let portfolioIsotope = new Isotope(portfolioContainer, {
+        itemSelector: '.portfolio-item'
+      });
 
-     $(document).on('click', '.accordion > dt > a', function(e) {
+      let portfolioFilters = select('#portfolio-flters li', true);
 
-        var current = $(this).parent().next("dd");
-        $(this).parents(".accordion").find("dt > a").removeClass("active");
-        $(this).addClass("active");
-        $(this).parents(".accordion").find("dd").slideUp("easeInExpo");
-        $(this).parent().next().slideDown("easeOutExpo");
-
-        return false;
-
-    });
-
-    //------- Tabs Js --------//  
-    if (document.getElementById("horizontalTab")) {
-
-    $('#horizontalTab').jqTabs({
-        direction: 'horizontal',
-        duration: 200
-    });
-    
-    };  
-
-
-    //------- Owl Carusel  js --------//  
-
-
-    $('.active-popular-carusel').owlCarousel({
-        items:4,
-        margin: 30,
-        loop:true,
-        dots: true,
-        autoplayHoverPause: true,
-        smartSpeed:650,         
-        autoplay:true,      
-            responsive: {
-            0: {
-                items: 1
-            },
-            480: {
-                items: 1,
-            },
-            768: {
-                items: 2,
-            },
-            992: {
-                items:4
-            }
-        }
-    });
-
-    $('.active-upcoming-event-carusel').owlCarousel({
-        items:2,
-        margin: 30,
-        loop:true,
-        dots: true,
-        autoplayHoverPause: true,
-        smartSpeed:650,         
-        autoplay:true,      
-            responsive: {
-            0: {
-                items: 1
-            },
-            480: {
-                items: 1,
-            },
-            992: {
-                items: 2,
-            }
-        }
-    });
-
-
-    $('.active-review-carusel').owlCarousel({
-        items:2,
-        margin: 30,
-        loop:true,
-        dots: true,
-        autoplayHoverPause: true,
-        smartSpeed:650,         
-        autoplay:true,      
-            responsive: {
-            0: {
-                items: 1
-            },
-            480: {
-                items: 1,
-            },
-            768: {
-                items: 2,
-            }
-        }
-    });
-
-    //------- Mobile Nav  js --------//  
-
-    if ($('#nav-menu-container').length) {
-        var $mobile_nav = $('#nav-menu-container').clone().prop({
-            id: 'mobile-nav'
+      on('click', '#portfolio-flters li', function(e) {
+        e.preventDefault();
+        portfolioFilters.forEach(function(el) {
+          el.classList.remove('filter-active');
         });
-        $mobile_nav.find('> ul').attr({
-            'class': '',
-            'id': ''
-        });
-        $('body').append($mobile_nav);
-        $('body').prepend('<button type="button" id="mobile-nav-toggle"><i class="lnr lnr-menu"></i></button>');
-        $('body').append('<div id="mobile-body-overly"></div>');
-        $('#mobile-nav').find('.menu-has-children').prepend('<i class="lnr lnr-chevron-down"></i>');
+        this.classList.add('filter-active');
 
-        $(document).on('click', '.menu-has-children i', function(e) {
-            $(this).next().toggleClass('menu-item-active');
-            $(this).nextAll('ul').eq(0).slideToggle();
-            $(this).toggleClass("lnr-chevron-up lnr-chevron-down");
+        portfolioIsotope.arrange({
+          filter: this.getAttribute('data-filter')
         });
-
-        $(document).on('click', '#mobile-nav-toggle', function(e) {
-            $('body').toggleClass('mobile-nav-active');
-            $('#mobile-nav-toggle i').toggleClass('lnr-cross lnr-menu');
-            $('#mobile-body-overly').toggle();
+        portfolioIsotope.on('arrangeComplete', function() {
+          AOS.refresh()
         });
-
-            $(document).on('click', function(e) {
-            var container = $("#mobile-nav, #mobile-nav-toggle");
-            if (!container.is(e.target) && container.has(e.target).length === 0) {
-                if ($('body').hasClass('mobile-nav-active')) {
-                    $('body').removeClass('mobile-nav-active');
-                    $('#mobile-nav-toggle i').toggleClass('lnr-cross lnr-menu');
-                    $('#mobile-body-overly').fadeOut();
-                }
-            }
-        });
-    } else if ($("#mobile-nav, #mobile-nav-toggle").length) {
-        $("#mobile-nav, #mobile-nav-toggle").hide();
+      }, true);
     }
 
-    //------- Smooth Scroll  js --------//  
+  });
 
-    $('.nav-menu a, #mobile-nav a, .scrollto').on('click', function() {
-        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-            var target = $(this.hash);
-            if (target.length) {
-                var top_space = 0;
+  /**
+   * Initiate portfolio lightbox 
+   */
+  const portfolioLightbox = GLightbox({
+    selector: '.portfolio-lightbox'
+  });
 
-                if ($('#header').length) {
-                    top_space = $('#header').outerHeight();
+  /**
+   * Initiate portfolio details lightbox 
+   */
+  const portfolioDetailsLightbox = GLightbox({
+    selector: '.portfolio-details-lightbox',
+    width: '90%',
+    height: '90vh'
+  });
 
-                    if (!$('#header').hasClass('header-fixed')) {
-                        top_space = top_space;
-                    }
-                }
-
-                $('html, body').animate({
-                    scrollTop: target.offset().top - top_space
-                }, 1500, 'easeInOutExpo');
-
-                if ($(this).parents('.nav-menu').length) {
-                    $('.nav-menu .menu-active').removeClass('menu-active');
-                    $(this).closest('li').addClass('menu-active');
-                }
-
-                if ($('body').hasClass('mobile-nav-active')) {
-                    $('body').removeClass('mobile-nav-active');
-                    $('#mobile-nav-toggle i').toggleClass('lnr-times lnr-bars');
-                    $('#mobile-body-overly').fadeOut();
-                }
-                return false;
-            }
-        }
-    });
-
-    $(document).ready(function() {
-
-        $('html, body').hide();
-
-        if (window.location.hash) {
-
-            setTimeout(function() {
-
-                $('html, body').scrollTop(0).show();
-
-                $('html, body').animate({
-
-                    scrollTop: $(window.location.hash).offset().top - 108
-
-                }, 1000)
-
-            }, 0);
-
-        } else {
-
-            $('html, body').show();
-
-        }
-
-    });
-
-
-
-    //------- Header Scroll Class  js --------//  
-
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 100) {
-            $('#header').addClass('header-scrolled');
-        } else {
-            $('#header').removeClass('header-scrolled');
-        }
-    });
-
-    //------- Google Map  js --------//  
-
-    if (document.getElementById("map")) {
-        google.maps.event.addDomListener(window, 'load', init);
-
-        function init() {
-            var mapOptions = {
-                zoom: 11,
-                center: new google.maps.LatLng(40.6700, -73.9400), // New York
-                styles: [{
-                    "featureType": "water",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#e9e9e9"
-                    }, {
-                        "lightness": 17
-                    }]
-                }, {
-                    "featureType": "landscape",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#f5f5f5"
-                    }, {
-                        "lightness": 20
-                    }]
-                }, {
-                    "featureType": "road.highway",
-                    "elementType": "geometry.fill",
-                    "stylers": [{
-                        "color": "#ffffff"
-                    }, {
-                        "lightness": 17
-                    }]
-                }, {
-                    "featureType": "road.highway",
-                    "elementType": "geometry.stroke",
-                    "stylers": [{
-                        "color": "#ffffff"
-                    }, {
-                        "lightness": 29
-                    }, {
-                        "weight": 0.2
-                    }]
-                }, {
-                    "featureType": "road.arterial",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#ffffff"
-                    }, {
-                        "lightness": 18
-                    }]
-                }, {
-                    "featureType": "road.local",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#ffffff"
-                    }, {
-                        "lightness": 16
-                    }]
-                }, {
-                    "featureType": "poi",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#f5f5f5"
-                    }, {
-                        "lightness": 21
-                    }]
-                }, {
-                    "featureType": "poi.park",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#dedede"
-                    }, {
-                        "lightness": 21
-                    }]
-                }, {
-                    "elementType": "labels.text.stroke",
-                    "stylers": [{
-                        "visibility": "on"
-                    }, {
-                        "color": "#ffffff"
-                    }, {
-                        "lightness": 16
-                    }]
-                }, {
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "saturation": 36
-                    }, {
-                        "color": "#333333"
-                    }, {
-                        "lightness": 40
-                    }]
-                }, {
-                    "elementType": "labels.icon",
-                    "stylers": [{
-                        "visibility": "off"
-                    }]
-                }, {
-                    "featureType": "transit",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#f2f2f2"
-                    }, {
-                        "lightness": 19
-                    }]
-                }, {
-                    "featureType": "administrative",
-                    "elementType": "geometry.fill",
-                    "stylers": [{
-                        "color": "#fefefe"
-                    }, {
-                        "lightness": 20
-                    }]
-                }, {
-                    "featureType": "administrative",
-                    "elementType": "geometry.stroke",
-                    "stylers": [{
-                        "color": "#fefefe"
-                    }, {
-                        "lightness": 17
-                    }, {
-                        "weight": 1.2
-                    }]
-                }]
-            };
-            var mapElement = document.getElementById('map');
-            var map = new google.maps.Map(mapElement, mapOptions);
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(40.6700, -73.9400),
-                map: map,
-                title: 'Snazzy!'
-            });
-        }
+  /**
+   * Portfolio details slider
+   */
+  new Swiper('.portfolio-details-slider', {
+    speed: 400,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true
     }
+  });
 
-    //------- Mailchimp js --------//  
+  /**
+   * Testimonials slider
+   */
+  new Swiper('.testimonials-slider', {
+    speed: 600,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
+    slidesPerView: 'auto',
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true
+    }
+  });
 
-    $(document).ready(function() {
-        $('#mc_embed_signup').find('form').ajaxChimp();
-    });
+  /**
+   * Animation on scroll
+   */
+  window.addEventListener('load', () => {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false
+    })
+  });
 
-});
+})()
