@@ -11,3 +11,8 @@ $route['admin'] = 'admin/dashboard';
 
 // route users
 $route['users'] = 'users/dashboard';
+
+// route home
+$route['get_penduduk']  = 'home/get_penduduk';
+$route['get_pekerjaan'] = 'home/get_pekerjaan';
+$route['get_umur']      = 'home/get_umur';

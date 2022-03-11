@@ -11,6 +11,12 @@
                     <a href="#<?= strtolower($row->nama) ?>" class="nav-link scrollto"><i class="bx bx-circle"></i> <span><?= ucfirst($row->nama) ?></span></a>
                 </li>
             <?php } ?>
+            <li>
+                <a href="#statistik" class="nav-link scrollto"><i class="bx bx-circle"></i> <span>Statistik</span></a>
+            </li>
+            <li>
+                <a href="#tentang" class="nav-link scrollto"><i class="bx bx-circle"></i> <span>Home</span></a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -43,7 +49,31 @@
             </div>
         </section>
     <?php } ?>
-    <section>
+    <section id="statistik" class="about">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Statistik</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <figure class="highcharts-figure">
+                        <div id="grafik-penduduk"></div>
+                    </figure>
+                </div>
+                <div class="col-lg-12">
+                    <figure class="highcharts-figure">
+                        <div id="grafik-pekerjaan"></div>
+                    </figure>
+                </div>
+                <div class="col-lg-12">
+                    <figure class="highcharts-figure">
+                        <div id="grafik-umur"></div>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="tentang" class="about">
         <div class="container" data-aos="fade-up">
             <div class="section-title">
                 <h2>Tentang</h2>

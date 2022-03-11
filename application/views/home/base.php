@@ -33,7 +33,7 @@
 	</style>
 
 	<!-- jquery -->
-
+	<script type="text/javascript" src="<?= assets_url() ?>admin/jquery/js/jquery.min.js"></script>
 </head>
 
 <body>
