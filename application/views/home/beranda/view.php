@@ -17,8 +17,9 @@
 
 <section id="hero" class="d-flex flex-column justify-content-center">
     <div class="container" data-aos="zoom-in" data-aos-delay="100">
+        <h1>Selamat Datang di Sistem Informasi Persuratan Desa</h1>
         <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum voluptatibus, similique quod esse, labore illum consequatur perspiciatis blanditiis commodi officiis nobis incidunt ratione, dolore maiores! Labore odio cumque animi nemo!
+            Sistem informasi persuratan adalah suatu bentuk perwujudan dari kemajuan teknologi yang semakin canggih dan berkembang. Kecanggihan teknologi yang terus berkembang dan bergerak maju menjadikan manusia harus mampu beradaptasi dengan teknologi. Bentuk adaptasi yang dapat diwujudkan oleh manusia adalah menciptakan penciptaan yang dapat membantu urusan manusia. Sehingga teknologi yang ada mampu dimanfaatkan dan digunakan dengan maksimal dan pekerjaan manusia dapat diselesaikan.
         </p>
     </div>
 </section>
@@ -42,5 +43,20 @@
             </div>
         </section>
     <?php } ?>
+    <section>
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Tentang</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15887.286552468307!2d120.3551952368343!3d-5.444032075864519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbc0f404c79f7ff%3A0xa81d3feba23fba04!2sBonto%20Tangnga%2C%20Bontotiro%2C%20Kabupaten%20Bulukumba%2C%20Sulawesi%20Selatan!5e0!3m2!1sid!2sid!4v1647012685675!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                <div class="col-lg-6">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos perferendis modi pariatur itaque blanditiis consectetur sint quidem nam perspiciatis, minus obcaecati doloribus aliquid ipsum labore eos minima expedita, nemo tempore.
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 <!-- end:: main -->

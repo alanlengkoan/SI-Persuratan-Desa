@@ -44,8 +44,7 @@
 	<!-- begin:: footer -->
 	<footer id="footer">
 		<div class="container">
-			<h3>Brandon Johnson</h3>
-			<p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
+			<h3>Desa Bontotangnga</h3>
 			<div class="social-links">
 				<?= (empty(get_sistem_detail()->facebook) ? '-' : '<a href="' . get_sistem_detail()->facebook . '"><i class="bx bxl-facebook"></i></a>') ?>
 				<?= (empty(get_sistem_detail()->instagram) ? '-' : '<a href="' . get_sistem_detail()->instagram . '"><i class="bx bxl-instagram"></i></a>') ?>
