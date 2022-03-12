@@ -265,7 +265,7 @@
                 if (del) {
                     $.ajax({
                         type: "post",
-                        url: "<?= admin_url() ?>keluarga/process_del",
+                        url: "<?= admin_url() ?>keluarga_anggota/process_del",
                         dataType: 'json',
                         data: {
                             id: ini.data('id'),
