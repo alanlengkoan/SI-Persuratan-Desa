@@ -36,4 +36,10 @@ class M_surat_keluar extends CI_Model
         $this->datatables->from('tb_surat_keluar AS sk');
         return print_r($this->datatables->generate());
     }
+
+    public function getApprovalSuratKeluarUsers($id_users, $approve)
+    {
+        $result = $this->db->query("SELECT sk.id_surat_keluar, sk.id_users, sk.no_surat, sk.tgl_surat, sk.tgl_keluar, sk.perihal, sk.approve, sk.isi, sj.nama AS jenis_surat, st.nama AS tujuan_surat, ss.nama AS sifat_surat FROM tb_surat_keluar AS sk LEFT JOIN tb_surat_jenis AS sj ON sk.id_surat_jenis = sj.id_surat_jenis LEFT JOIN tb_surat_tujuan AS st ON sk.id_surat_tujuan = st.id_surat_tujuan LEFT JOIN tb_surat_sifat AS ss ON sk.id_surat_sifat = ss.id_surat_sifat WHERE sk.id_users = '$id_users' AND sk.approve = '$approve' ORDER BY sk.ins");
+        return $result;
+    }
 }

@@ -94,31 +94,48 @@
             success: function(response) {
                 Highcharts.chart('grafik-penduduk', {
                     chart: {
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false,
-                        type: 'pie'
+                        type: 'column'
                     },
                     title: {
                         text: 'Jumlah Penduduk'
                     },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.y:f} orang</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
-                                enabled: false
-                            },
-                            showInLegend: true
+                    xAxis: {
+                        type: 'category',
+                        labels: {
+                            rotation: -45,
+                            style: {
+                                fontSize: '13px',
+                                fontFamily: 'Verdana, sans-serif'
+                            }
                         }
                     },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Jenis Kelamin'
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        pointFormat: 'Jumlah {series.name}: <b>{point.y:f} orang</b>'
+                    },
                     series: [{
-                        name: 'Total',
+                        name: 'Jenis Kelamin',
                         colorByPoint: true,
-                        data: response.data
+                        data: response.data,
+                        dataLabels: {
+                            enabled: true,
+                            rotation: -50,
+                            color: '#FFFFFF',
+                            align: 'right',
+                            format: '{point.y:.1f}',
+                            style: {
+                                fontSize: '13px',
+                                fontFamily: 'Verdana, sans-serif'
+                            }
+                        }
                     }]
                 });
             }
@@ -197,6 +214,62 @@
                         name: 'Total',
                         colorByPoint: true,
                         data: response.data
+                    }]
+                });
+            }
+        })
+    }();
+
+    // untuk grafik katgori umur
+    var untukGrafikKategoriUmur = function() {
+        $.ajax({
+            url: '<?= admin_url() ?>dashboard/get_umur_kategori',
+            dataType: 'json',
+            success: function(response) {
+                Highcharts.chart('grafik-kategori-umur', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Jenis Kategori Umur'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        labels: {
+                            rotation: -45,
+                            style: {
+                                fontSize: '13px',
+                                fontFamily: 'Verdana, sans-serif'
+                            }
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Jenis Kelamin'
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        pointFormat: 'Jumlah {series.name}: <b>{point.y:f} orang</b>'
+                    },
+                    series: [{
+                        name: 'Jenis Kelamin',
+                        colorByPoint: true,
+                        data: response.data,
+                        dataLabels: {
+                            enabled: true,
+                            rotation: -50,
+                            color: '#FFFFFF',
+                            align: 'right',
+                            format: '{point.y:.1f}',
+                            style: {
+                                fontSize: '13px',
+                                fontFamily: 'Verdana, sans-serif'
+                            }
+                        }
                     }]
                 });
             }

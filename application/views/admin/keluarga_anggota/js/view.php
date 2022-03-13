@@ -147,6 +147,7 @@
         $(document).on('click', '#btn-add', function() {
             $('#judul-add-upd').html('Tambah');
             $('#validasi').css('color', 'black').html('Masukkan Nomor NIK yang berbeda!');
+            $('#inpidkeluargaanggota').val('');
             $('#inpnokk').val('');
             $('#inpnoktp').val('');
             $('#inpnama').val('');

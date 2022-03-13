@@ -109,4 +109,44 @@ class Dashboard extends MY_Controller
         // untuk response json
         $this->_response($response);
     }
+
+    // untuk umur
+    public function get_umur_kategori()
+    {
+        $get = $this->m_dashboard->getUmur();
+        $num = $get->num_rows();
+        $res = [];
+        $get_age = [];
+        $age = [
+            "0 - 15 (Anak-anak)",
+            "16 - 24 (Muda)",
+            "25 - 34 (Pekerja Awal)",
+            "35 - 44 (Paruh Baya)",
+            "45 - 54 (Pra-Pensiun)",
+            "55 - 64 (Pensiun)",
+            "65 (Lanjut Usia)",
+        ];
+        if ($num > 0) {
+            for ($i = 0; $i < count($age); $i++) {
+                $parsing = explode("-", $age[$i]);
+                foreach ($get->result() as $row) {
+                    $umur = count_age($row->tgl_lahir);
+                    if ($umur >= $parsing[0] && $umur <= $parsing[1]) {
+                        $get_age[$age[$i]][] = $umur;
+                    }
+                }
+            }
+        }
+
+        foreach ($age as $value) {
+            $res[] = [
+                'name' => $value,
+                'y'    => (int) (empty($get_age[$value]) ? 0 : count($get_age[$value])),
+            ];
+        }
+
+        $response = ['data' => $res];
+        // untuk response json
+        $this->_response($response);
+    }
 }

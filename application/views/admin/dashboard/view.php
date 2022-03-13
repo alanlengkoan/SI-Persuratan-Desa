@@ -109,6 +109,16 @@
                                         </figure>
                                     </div>
                                 </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-header-text">Kategori Umur</h5>
+                                    </div>
+                                    <div class="card-block">
+                                        <figure class="highcharts-figure">
+                                            <div id="grafik-kategori-umur"></div>
+                                        </figure>
+                                    </div>
+                                </div>
                             </div>
                             <!-- end:: grafik -->
                         </div>
