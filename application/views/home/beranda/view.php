@@ -40,7 +40,9 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-4">
-                        <img src="<?= upload_url() ?>gambar/<?= $row->gambar ?>" class="img-fluid" alt="">
+                        <a href="<?= upload_url() ?>gambar/<?= $row->gambar ?>">
+                            <img src="<?= upload_url() ?>gambar/<?= $row->gambar ?>" class="img-fluid" alt="<?= $row->nama ?>">
+                        </a>
                     </div>
                     <div class="col-lg-8 pt-4 pt-lg-0 content">
                         <?= $row->isi ?>
@@ -68,6 +70,11 @@
                 <div class="col-lg-12">
                     <figure class="highcharts-figure">
                         <div id="grafik-umur"></div>
+                    </figure>
+                </div>
+                <div class="col-lg-12">
+                    <figure class="highcharts-figure">
+                        <div id="grafik-kategori-umur"></div>
                     </figure>
                 </div>
             </div>

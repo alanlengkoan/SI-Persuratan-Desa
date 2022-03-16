@@ -110,7 +110,7 @@ class Dashboard extends MY_Controller
         $this->_response($response);
     }
 
-    // untuk umur
+    // untuk kategori umur
     public function get_umur_kategori()
     {
         $get = $this->m_dashboard->getUmur();
