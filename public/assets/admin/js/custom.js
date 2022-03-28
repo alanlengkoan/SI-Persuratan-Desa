@@ -67,3 +67,6 @@ function autoSeparator(Num) {
 $(".inputNumber").inputFilter(function (value) {
     return /^-?\d*$/.test(value);
 });
+
+// untuk debugin console log
+const log = (arg) => console.log(arg);
