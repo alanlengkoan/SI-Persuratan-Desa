@@ -487,13 +487,14 @@ class Datatables
     private function get_filtering()
     {
 
-        $mColArray    = $this->ci->input->post('columns');
+        $mColArray = $this->ci->input->post('columns');
 
-        $sWhere        = '';
-        $search        = $this->ci->input->post('search');
-        $sSearch    = $this->ci->db->escape_like_str(trim($search['value']));
+        $sWhere    = '';
+        $search    = $this->ci->input->post('search');
+        $newSearch = isset($search['value']) ? $search['value'] : '';
+        $sSearch   = $this->ci->db->escape_like_str(trim($newSearch));
 
-        $columns    = array_values(array_diff($this->columns, $this->unset_columns));
+        $columns = array_values(array_diff($this->columns, $this->unset_columns));
 
         if ($sSearch != '') {
 
@@ -771,7 +772,9 @@ class Datatables
             $column    = $this->ci->input->post('columns');
         }
 
-        if (is_numeric($column[0]['data'])) {
+        $newColumn = isset($column[0]['data']) ? $column[0]['data'] : '';
+
+        if (is_numeric($newColumn)) {
 
             return false;
         } else {
