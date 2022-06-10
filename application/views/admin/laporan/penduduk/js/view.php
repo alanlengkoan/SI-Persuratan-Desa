@@ -28,27 +28,42 @@
             buttons: [{
                     extend: 'copy',
                     className: 'btn btn-info',
-                    text: '<i class="fa fa-copy"></i>&nbsp;Copy'
+                    text: '<i class="fa fa-copy"></i>&nbsp;Copy',
+                    title: function() {
+                        return ' Sistem Informasi Desa Bonto Tangnga - Laporan Penduduk';
+                    }
                 },
                 {
                     extend: 'excel',
                     className: 'btn btn-success',
-                    text: '<i class="fa fa-file-excel-o"></i>&nbsp;Excel'
+                    text: '<i class="fa fa-file-excel-o"></i>&nbsp;Excel',
+                    title: function() {
+                        return ' Sistem Informasi Desa Bonto Tangnga - Laporan Penduduk';
+                    }
                 },
                 {
                     extend: 'pdf',
                     className: 'btn btn-danger',
-                    text: '<i class="fa fa-file-pdf-o"></i>&nbsp;Pdf'
+                    text: '<i class="fa fa-file-pdf-o"></i>&nbsp;Pdf',
+                    title: function() {
+                        return ' Sistem Informasi Desa Bonto Tangnga - Laporan Penduduk';
+                    }
                 },
                 {
                     extend: 'csv',
                     className: 'btn btn-warning',
-                    text: '<i class="fa fa-file-o"></i>&nbsp;CSV'
+                    text: '<i class="fa fa-file-o"></i>&nbsp;CSV',
+                    title: function() {
+                        return ' Sistem Informasi Desa Bonto Tangnga - Laporan Penduduk';
+                    }
                 },
                 {
                     extend: 'print',
                     className: 'btn btn-primary',
-                    text: '<i class="fa fa-print"></i>&nbsp;Print'
+                    text: '<i class="fa fa-print"></i>&nbsp;Print',
+                    title: function() {
+                        return ' Sistem Informasi Desa Bonto Tangnga - Laporan Penduduk';
+                    }
                 }
             ],
             columns: [{

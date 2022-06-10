@@ -23,9 +23,9 @@
 
 <section id="hero" class="d-flex flex-column justify-content-center">
     <div class="container" data-aos="zoom-in" data-aos-delay="100">
-        <h1>Selamat Datang di Sistem Informasi Persuratan Desa</h1>
+        <h1>Selamat Datang di Sistem Informasi Desa Bonto Tangnga</h1>
         <p>
-            Sistem informasi persuratan adalah suatu bentuk perwujudan dari kemajuan teknologi yang semakin canggih dan berkembang. Kecanggihan teknologi yang terus berkembang dan bergerak maju menjadikan manusia harus mampu beradaptasi dengan teknologi. Bentuk adaptasi yang dapat diwujudkan oleh manusia adalah menciptakan penciptaan yang dapat membantu urusan manusia. Sehingga teknologi yang ada mampu dimanfaatkan dan digunakan dengan maksimal dan pekerjaan manusia dapat diselesaikan.
+            Sistem Informasi Desa Bonto Tangnga adalah suatu bentuk perwujudan dari kemajuan teknologi yang semakin canggih dan berkembang. Kecanggihan teknologi yang terus berkembang dan bergerak maju menjadikan manusia harus mampu beradaptasi dengan teknologi. Bentuk adaptasi yang dapat diwujudkan oleh manusia adalah menciptakan penciptaan yang dapat membantu urusan manusia. Sehingga teknologi yang ada mampu dimanfaatkan dan digunakan dengan maksimal dan pekerjaan manusia dapat diselesaikan.
         </p>
     </div>
 </section>

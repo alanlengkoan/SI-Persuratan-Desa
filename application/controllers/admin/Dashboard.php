@@ -91,7 +91,9 @@ class Dashboard extends MY_Controller
                 $parsing = explode("-", $age[$i]);
                 foreach ($get->result() as $row) {
                     $umur = count_age($row->tgl_lahir);
-                    if ($umur >= $parsing[0] && $umur <= $parsing[1]) {
+                    $prev = preg_replace("/[^0-9]/", "", $parsing[0]);
+                    $next = preg_replace("/[^0-9]/", "", $parsing[1] ?? 0);
+                    if ($umur >= $prev && $umur <= $next) {
                         $get_age[$age[$i]][] = $umur;
                     }
                 }
@@ -131,7 +133,9 @@ class Dashboard extends MY_Controller
                 $parsing = explode("-", $age[$i]);
                 foreach ($get->result() as $row) {
                     $umur = count_age($row->tgl_lahir);
-                    if ($umur >= $parsing[0] && $umur <= $parsing[1]) {
+                    $prev = preg_replace("/[^0-9]/", "", $parsing[0]);
+                    $next = preg_replace("/[^0-9]/", "", $parsing[1] ?? 0);
+                    if ($umur >= $prev && $umur <= $next) {
                         $get_age[$age[$i]][] = $umur;
                     }
                 }
