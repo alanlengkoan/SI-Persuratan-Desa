@@ -43,8 +43,8 @@
 
 <div class="kop_surat">
     <table align="center">
-        <td>
-            <img src="<?= assets_path() ?>admin/images/logo.png" alt="logo" title="logo" width="70px" />
+        <td width="100">
+            <img src="<?= assets_path() ?>admin/images/logo.png" alt="logo" title="logo" width="100px" />
         </td>
         <td align="center">
             <h3>PEMERINTAH KABUPATEN BULUKUMBA</h3>
@@ -52,7 +52,7 @@
             <h3>DESA BONTO TANGNGA</h3>
             <p><i><?= (empty($data->alamat) ? null : $data->alamat) ?></i></p>
         </td>
-        <td>
+        <td width="100">
         </td>
     </table>
     <hr>
