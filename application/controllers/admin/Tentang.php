@@ -19,7 +19,7 @@ class Tentang extends MY_Controller
     public function index()
     {
         // untuk load view
-        $this->template->load('admin', 'Tentang', 'tentang', 'view');
+        $this->template->load('admin', 'Profil', 'tentang', 'view');
     }
 
     // untuk get datatable
