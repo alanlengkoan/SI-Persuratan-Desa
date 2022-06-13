@@ -36,27 +36,18 @@
                     }
                 },
                 {
-                    title: 'Nomor Surat',
-                    data: 'no_surat',
+                    title: 'KK',
+                    data: 'no_kk',
                     className: 'text-center',
                 },
                 {
-                    title: 'Tanggal Surat',
+                    title: 'NIK',
+                    data: 'no_ktp',
                     className: 'text-center',
-                    render: function(data, type, full, meta) {
-                        return tglIndo(full.tgl_surat);
-                    },
                 },
                 {
-                    title: 'Tanggal Keluar',
-                    className: 'text-center',
-                    render: function(data, type, full, meta) {
-                        return tglIndo(full.tgl_keluar);
-                    },
-                },
-                {
-                    title: 'Jenis Surat',
-                    data: 'jenis_surat',
+                    title: 'Nama',
+                    data: 'nama',
                     className: 'text-center',
                 },
                 {
@@ -93,16 +84,105 @@
                     orderable: false,
                     searchable: false,
                     render: function(data, type, full, meta) {
-                        return `
-                        <div class="button-icon-btn button-icon-btn-cl">
-                            <a href="<?= admin_url() ?>surat_keluar/detail/` + btoa(full.id_surat_keluar) + `" target="_blank" class="btn btn-success btn-sm waves-effect"><i class="fa fa-info"></i>&nbsp;Detail</a>&nbsp;
-                            <a href="<?= admin_url() ?>surat_keluar/print/` + btoa(full.id_surat_keluar) + `" target="_blank" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-print"></i>&nbsp;Cetak</a>&nbsp;
-                            <button type="button" id="btn-del" data-id="` + full.id_surat_keluar + `" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
-                        </div>
-                    `;
+                        if (full.approve == 0) {
+                            return `
+                                <div class="button-icon-btn button-icon-btn-cl">
+                                    <button type="button" id="btn-del" data-id="` + full.id_surat_keluar + `" class="btn btn-danger btn-sm waves-effect"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
+                                </div>
+                            `;
+                        } else {
+                            if (full.arsip !== null) {
+                                var location = (full.arsip_tipe === 'pdf' ? '<?= upload_url('pdf') ?>' : '<?= upload_url('doc') ?>');
+                                return `
+                                    <div class="button-icon-btn button-icon-btn-cl">
+                                        <a href="<?= admin_url() ?>surat_keluar/detail/` + btoa(full.id_surat_keluar) + `" target="_blank" class="btn btn-success btn-sm waves-effect"><i class="fa fa-info"></i>&nbsp;Detail</a>&nbsp;
+                                        <a href="` + location + `` + full.arsip + `" target="_blank" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-print"></i>&nbsp;Cetak</a>&nbsp;
+                                    </div>
+                                `;
+                            } else {
+                                return `
+                                    <div class="button-icon-btn button-icon-btn-cl">
+                                        <button type="button" id="btn-upd" data-id="` + full.id_surat_keluar + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-upload"></i>&nbsp;Upload</button>
+                                    </div>
+                                `;
+                            }
+                        }
                     },
                 },
             ],
+        });
+    }();
+
+    // untuk tambah & ubah data
+    var untukTambahDanUbahData = function() {
+        $(document).on('submit', '#form-add-upd', function(e) {
+            e.preventDefault();
+            $('#inpnosurat').attr('required', 'required');
+            $('#inptglsurat').attr('required', 'required');
+            $('#inptglkeluar').attr('required', 'required');
+            $('#inparsiptipe').attr('required', 'required');
+            $('#inparsip').attr('required', 'required');
+
+            if ($('#form-add-upd').parsley().isValid() == true) {
+                $.ajax({
+                    method: $(this).attr('method'),
+                    url: $(this).attr('action'),
+                    data: new FormData(this),
+                    contentType: false,
+                    processData: false,
+                    cache: false,
+                    dataType: 'json',
+                    beforeSend: function() {
+                        $('#save').attr('disabled', 'disabled');
+                        $('#save').html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
+                    },
+                    success: function(response) {
+                        swal({
+                            title: response.title,
+                            text: response.text,
+                            icon: response.type,
+                            button: response.button,
+                        }).then((value) => {
+                            $('#modal-add-upd').modal('hide');
+                            csrf.val(response.csrf);
+                            tabelSuratKeluarDt.ajax.reload();
+                        });
+
+                        $('#save').removeAttr('disabled');
+                        $('#save').html('<i class="fa fa-save"></i>&nbsp;Simpan');
+                    }
+                })
+            }
+        });
+    }();
+
+    // untuk get id
+    var untukGetIdData = function() {
+        $(document).on('click', '#btn-upd', function() {
+            var ini = $(this);
+
+            $.ajax({
+                type: "POST",
+                url: "<?= admin_url() ?>surat_keluar/get",
+                dataType: 'json',
+                data: {
+                    id: ini.data('id'),
+                    my_csrf_token: csrf.val(),
+                },
+                beforeSend: function() {
+                    $('#judul-add-upd').html('Upload');
+
+                    ini.attr('disabled', 'disabled');
+                    ini.html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
+                },
+                success: function(response) {
+                    csrf.val(response.csrf);
+                    $('#inpidsuratkeluar').val(response.id_surat_keluar);
+
+                    ini.removeAttr('disabled');
+                    ini.html('<i class="fa fa-pencil"></i>&nbsp;Ubah');
+                }
+            });
         });
     }();
 

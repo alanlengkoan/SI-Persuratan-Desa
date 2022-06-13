@@ -84,9 +84,20 @@
                             </div>
                             <hr>
                             <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Foto KTP</label>
+                                <div class="col-sm-9">
+                                    <img src="<?= upload_url('gambar') ?><?= $data->foto_ktp ?>" alt="foto ktp" class="img-fluid" width="500" height="500" />
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Arsip</label>
                                 <div class="col-sm-9">
-                                    <embed style="height: 500px;" src="<?= users_url() ?>surat_keluar/print/<?= base64url_encode($data->id_surat_keluar) ?>" type="application/pdf" frameBorder="0" scrolling="auto" height="100%" width="100%"></embed>
+                                    <?php if ($data->arsip_tipe === 'pdf') { ?>
+                                        <embed style="height: 500px;" src="<?= upload_url('pdf') ?><?= $data->arsip ?>" type="application/pdf" frameBorder="0" scrolling="auto" height="100%" width="100%"></embed>
+                                    <?php } else { ?>
+                                        <iframe style=" width: 100%; height: 500px;" src="https://docs.google.com/gview?url=<?= upload_url('doc') ?><?= $data->arsip ?>&embedded=true" frameborder="0"></iframe>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </form>

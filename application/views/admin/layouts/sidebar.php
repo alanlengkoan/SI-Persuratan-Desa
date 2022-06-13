@@ -21,7 +21,7 @@
                 </a>
             </li>
         </ul>
-        <div class="pcoded-navigation-label">Master</div>
+        <div class="pcoded-navigation-label">Data</div>
         <ul class="pcoded-item pcoded-left-item">
             <li class="<?= ($this->uri->segment(2) === 'tentang' ? 'active' : '') ?>">
                 <a href="<?= admin_url() ?>tentang">
@@ -111,7 +111,7 @@
                     <span class="pcoded-micon">
                         <i class="fa fa-circle"></i>
                     </span>
-                    <span class="pcoded-mtext">Surat Keluar</span>
+                    <span class="pcoded-mtext">Permohonan Surat</span>
                 </a>
             </li>
         </ul>

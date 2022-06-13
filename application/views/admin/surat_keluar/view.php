@@ -36,8 +36,6 @@
                         </div>
                     </div>
                     <div class="card-block table-border-style">
-                        <input type="hidden" id="<?= $this->security->get_csrf_token_name() ?>" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>" />
-                        
                         <table class="table table-striped table-bordered nowrap" id="tabel-surat-keluar" style="width: 100%;">
                         </table>
                     </div>
@@ -47,3 +45,66 @@
     </div>
 </div>
 <!-- end:: content -->
+
+
+<!-- begin:: modal tambah & ubah -->
+<div class="modal fade" id="modal-add-upd" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><span id="judul-add-upd"></span> <?= $title ?></h4>
+            </div>
+            <form id="form-add-upd" action="<?= admin_url() ?>surat_keluar/process_save" method="POST">
+                <!-- begin:: id -->
+                <input type="hidden" name="inpidsuratkeluar" id="inpidsuratkeluar" />
+                <input type="hidden" id="<?= $this->security->get_csrf_token_name() ?>" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>" />
+                <!-- end:: id -->
+
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Nomor Surat *</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="inpnosurat" id="inpnosurat" placeholder="Masukkan nomor surat" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tanggal Surat *</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" name="inptglsurat" id="inptglsurat" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tanggal Keluar *</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" name="inptglkeluar" id="inptglkeluar" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tipe Arsip *</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="inparsiptipe" id="inparsiptipe">
+                                <option value="">- Pilih -</option>
+                                <option value="pdf">Pdf</option>
+                                <option value="doc">Doc</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Arsip *</label>
+                        <div class="col-sm-9">
+                            <div id="lihat_gambar"></div>
+                            <input type="file" name="inparsip" id="inparsip" />
+                            <div id="centang_gambar"></div>
+                            <p>File dengan tipe (*.pdf,*.doc/docx) Max. 20MB</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm waves-effect" data-dismiss="modal"><i class="fa fa-close"></i>&nbsp;Batal</button>
+                    <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light" id="save"><i class="fa fa-save"></i>&nbsp;Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end:: modal tambah & ubah -->

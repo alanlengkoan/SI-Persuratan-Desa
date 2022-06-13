@@ -157,6 +157,7 @@
             $('#inpidagama').val('');
             $('#inpidpekerjaan').val('');
             $('#inpkewarganegaraan').val('');
+            $('#inpalamat').val('');
             $('#inppendidikan').val('');
             $('#inpstatusnikah').val('');
         });
@@ -175,6 +176,7 @@
             $('#inpidagama').attr('required', 'required');
             $('#inpidpekerjaan').attr('required', 'required');
             $('#inpkewarganegaraan').attr('required', 'required');
+            $('#inpalamat').attr('required', 'required');
             $('#inppendidikan').attr('required', 'required');
             $('#inpstatusnikah').attr('required', 'required');
 
@@ -242,6 +244,7 @@
                     $('#inpidagama').val(response.id_agama);
                     $('#inpidpekerjaan').val(response.id_pekerjaan);
                     $('#inpkewarganegaraan').val(response.kewarganegaraan);
+                    $('#inpalamat').val(response.alamat);
                     $('#inppendidikan').val(response.pendidikan);
                     $('#inpstatusnikah').val(response.status_nikah);
 

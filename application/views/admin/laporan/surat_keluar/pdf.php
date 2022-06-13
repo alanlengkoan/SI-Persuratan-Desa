@@ -1,5 +1,3 @@
-<title><?= $title ?></title>
-
 <!-- CSS -->
 <style media="screen">
     .kop_surat {
@@ -58,28 +56,52 @@
     <hr>
 </div>
 
-<!-- begin:: body -->
 <div class="jenis_surat_head">
-    <h3 class="jenis_surat"><?= $detail->jenis_surat ?></h3>
-    <p>Nomor : <?= $detail->no_surat ?></p>
+    <h3>Laporan Surat Keluar</h3>
 </div>
-<br />
-<br />
-<?= $detail->isi ?>
-<br />
-<br />
-<!-- end:: body -->
 
-<table align="right">
+<table align="center" border="1" cellpadding="4" cellspacing="0" style="width: 100%;">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>No. Surat</th>
+            <th>Tanggal Surat</th>
+            <th>Tanggal Keluar</th>
+            <th>Perihal</th>
+            <th>Jenis Surat</th>
+            <th>Tujuan Surat</th>
+            <th>Sifat Surat</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $no = 1;
+        foreach ($surat_keluar as $key => $value) {
+        ?>
+            <tr>
+                <td align="center"><?= $no++ ?></td>
+                <td align="center"><?= $value->no_surat ?></td>
+                <td align="center"><?= $value->tgl_surat ?></td>
+                <td align="center"><?= $value->tgl_keluar ?></td>
+                <td align="center"><?= $value->perihal ?></td>
+                <td align="center"><?= $value->jenis_surat ?></td>
+                <td align="center"><?= $value->tujuan_surat ?></td>
+                <td align="center"><?= $value->sifat_surat ?></td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
+
+<br /><br />
+<table>
     <tr>
         <td align="center">
-            <p>Bulukumba, <?= tgl_indo($detail->tgl_surat) ?></p>
-            <p>Kepala Desa</p>
+            <p>MAKASSAR, <?= tgl_indo(date('Y-m-d')) ?></p>
             <br />
             <br />
             <br />
             <br />
-            <p class="nama"><?= (empty($data->nama) ? null : $data->nama) ?></p>
+            <p>Penanggung Jawab</p>
         </td>
     </tr>
 </table>

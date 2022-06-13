@@ -42,11 +42,10 @@
                     }
                 },
                 {
-                    extend: 'pdf',
                     className: 'btn btn-danger',
                     text: '<i class="fa fa-file-pdf-o"></i>&nbsp;Pdf',
-                    title: function() {
-                        return ' Sistem Informasi Desa Bonto Tangnga - Laporan Penduduk';
+                    action: function(e, dt, node, config) {
+                        window.open('<?= admin_url() ?>laporan/penduduk_pdf');
                     }
                 },
                 {

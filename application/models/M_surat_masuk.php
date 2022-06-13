@@ -4,7 +4,7 @@ class M_surat_masuk extends CI_Model
 {
     public function getAll()
     {
-        $result = $this->db->query("SELECT sm.id_surat_masuk, sm.no_surat, sm.tgl_surat, sm.tgl_masuk, sj.nama AS jenis_surat, sa.nama AS asal_surat, ss.nama AS sifat_surat FROM tb_surat_masuk AS sm LEFT JOIN tb_surat_jenis AS sj ON sm.id_surat_jenis = sj.id_surat_jenis LEFT JOIN tb_surat_asal AS sa ON sm.id_surat_asal = sa.id_surat_asal LEFT JOIN tb_surat_sifat AS ss ON sm.id_surat_sifat = ss.id_surat_sifat")->result();
+        $result = $this->db->query("SELECT sm.id_surat_masuk, sm.no_surat, sm.tgl_surat, sm.tgl_masuk, sm.perihal, sj.nama AS jenis_surat, sa.nama AS asal_surat, ss.nama AS sifat_surat FROM tb_surat_masuk AS sm LEFT JOIN tb_surat_jenis AS sj ON sm.id_surat_jenis = sj.id_surat_jenis LEFT JOIN tb_surat_asal AS sa ON sm.id_surat_asal = sa.id_surat_asal LEFT JOIN tb_surat_sifat AS ss ON sm.id_surat_sifat = ss.id_surat_sifat")->result();
         return $result;
     }
 

@@ -64,21 +64,27 @@
 
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Nomor Surat *</label>
+                        <label class="col-sm-3 col-form-label">KK</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inpnosurat" id="inpnosurat" placeholder="Masukkan nomor surat" />
+                            <input type="text" class="form-control" value="<?= $penduduk['no_kk'] ?>" readonly="readonly" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tanggal Surat *</label>
+                        <label class="col-sm-3 col-form-label">NIK</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" name="inptglsurat" id="inptglsurat" />
+                            <input type="text" class="form-control" value="<?= $penduduk['no_ktp'] ?>" readonly="readonly" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tanggal Keluar *</label>
+                        <label class="col-sm-3 col-form-label">Nama</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" name="inptglkeluar" id="inptglkeluar" />
+                            <input type="text" class="form-control" value="<?= $penduduk['nama'] ?>" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Alamat</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" value="<?= $penduduk['alamat'] ?>" readonly="readonly" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -121,9 +127,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Isi&nbsp;*</label>
+                        <label class="col-sm-3 col-form-label">Foto KTP*</label>
                         <div class="col-sm-9">
-                            <textarea name="inpisi" id="inpisi" cols="30" rows="10"></textarea>
+                            <input type="file" name="inpfotoktp" id="inpfotoktp" />
                         </div>
                     </div>
                 </div>

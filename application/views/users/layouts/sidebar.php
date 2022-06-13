@@ -28,7 +28,7 @@
                     <span class="pcoded-micon">
                         <i class="fa fa-circle"></i>
                     </span>
-                    <span class="pcoded-mtext">Surat Keluar</span>
+                    <span class="pcoded-mtext">Permohonan Surat</span>
                 </a>
             </li>
         </ul>

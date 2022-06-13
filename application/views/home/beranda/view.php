@@ -15,7 +15,10 @@
                 <a href="#statistik" class="nav-link scrollto"><i class="bx bx-circle"></i> <span>Statistik</span></a>
             </li>
             <li>
-                <a href="#tentang" class="nav-link scrollto"><i class="bx bx-circle"></i> <span>Home</span></a>
+                <a href="#tentang" class="nav-link scrollto"><i class="bx bx-circle"></i> <span>Tentang</span></a>
+            </li>
+            <li>
+                <a href="<?= login_url() ?>" class="nav-link scrollto"><i class="bx bx-log-in"></i> <span>Login</span></a>
             </li>
         </ul>
     </nav>

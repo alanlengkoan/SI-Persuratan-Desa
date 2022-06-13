@@ -83,6 +83,7 @@ class Keluarga_anggota extends MY_Controller
             'kelamin'         => strip_tags($post['inpkelamin']),
             'tmp_lahir'       => strip_tags($post['inptmplahir']),
             'tgl_lahir'       => strip_tags($post['inptgllahir']),
+            'alamat'          => strip_tags($post['inpalamat']),
             'kewarganegaraan' => strip_tags($post['inpkewarganegaraan']),
             'pendidikan'      => strip_tags($post['inppendidikan']),
             'status_nikah'    => strip_tags($post['inpstatusnikah']),

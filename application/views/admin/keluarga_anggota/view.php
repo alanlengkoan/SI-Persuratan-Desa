@@ -132,6 +132,12 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Alamat *</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="inpalamat" id="inpalamat" placeholder="Masukkan alamat"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Kewarganegaraan *</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="inpkewarganegaraan" id="inpkewarganegaraan">

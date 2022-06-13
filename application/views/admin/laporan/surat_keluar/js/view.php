@@ -29,7 +29,7 @@
                     extend: 'copy',
                     className: 'btn btn-info',
                     text: '<i class="fa fa-copy"></i>&nbsp;Copy',
-                     title: function() {
+                    title: function() {
                         return 'Sistem Informasi Desa Bonto Tangnga - Laporan Surat Keluar';
                     }
                 },
@@ -37,23 +37,22 @@
                     extend: 'excel',
                     className: 'btn btn-success',
                     text: '<i class="fa fa-file-excel-o"></i>&nbsp;Excel',
-                     title: function() {
+                    title: function() {
                         return 'Sistem Informasi Desa Bonto Tangnga - Laporan Surat Keluar';
                     }
                 },
                 {
-                    extend: 'pdf',
                     className: 'btn btn-danger',
                     text: '<i class="fa fa-file-pdf-o"></i>&nbsp;Pdf',
-                     title: function() {
-                        return 'Sistem Informasi Desa Bonto Tangnga - Laporan Surat Keluar';
+                    action: function(e, dt, node, config) {
+                        window.open('<?= admin_url() ?>laporan/surat_keluar_pdf');
                     }
                 },
                 {
                     extend: 'csv',
                     className: 'btn btn-warning',
                     text: '<i class="fa fa-file-o"></i>&nbsp;CSV',
-                     title: function() {
+                    title: function() {
                         return 'Sistem Informasi Desa Bonto Tangnga - Laporan Surat Keluar';
                     }
                 },
@@ -61,7 +60,7 @@
                     extend: 'print',
                     className: 'btn btn-primary',
                     text: '<i class="fa fa-print"></i>&nbsp;Print',
-                     title: function() {
+                    title: function() {
                         return 'Sistem Informasi Desa Bonto Tangnga - Laporan Surat Keluar';
                     }
                 }

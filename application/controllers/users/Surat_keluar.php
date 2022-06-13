@@ -23,12 +23,13 @@ class Surat_keluar extends MY_Controller
     public function index()
     {
         $data = [
+            'penduduk'     => $this->crud->gda('tb_keluarga_anggota', ['id_users' => $this->id_users]),
             'jenis_surat'  => $this->m_surat_jenis->getAll(),
             'tujuan_surat' => $this->m_surat_tujuan->getAll(),
             'sifat_surat'  => $this->m_surat_sifat->getAll(),
         ];
         // untuk load view
-        $this->template->load('users', 'Surat Keluar', 'surat_keluar', 'view', $data);
+        $this->template->load('users', 'Permohonan Surat', 'surat_keluar', 'view', $data);
     }
 
     // untuk halaman detail
@@ -74,41 +75,54 @@ class Surat_keluar extends MY_Controller
         $this->_response_message($message);
     }
 
-
     // untuk proses tambah data
     public function process_save()
     {
         $post = $this->input->post(NULL, TRUE);
 
-        $data = [
-            'id_users'        => $this->id_users,
-            'id_surat_tujuan' => strip_tags($post['inpidsurattujuan']),
-            'id_surat_sifat'  => strip_tags($post['inpidsuratsifat']),
-            'id_surat_jenis'  => strip_tags($post['inpidsuratjenis']),
-            'no_surat'        => strip_tags($post['inpnosurat']),
-            'tgl_surat'       => strip_tags($post['inptglsurat']),
-            'tgl_keluar'      => strip_tags($post['inptglkeluar']),
-            'perihal'         => strip_tags($post['inpperihal']),
-            'isi'             => $post['inpisi'],
-        ];
+        $config['upload_path']   = './' . upload_path('gambar');
+        $config['allowed_types'] = 'jpg|jpeg|png';
+        $config['encrypt_name']  = TRUE;
+        $config['overwrite']     = TRUE;
 
-        $this->db->trans_start();
-        if (empty($post['inpidsuratkeluar'])) {
-            $data2 = [
-                'approve' => '0',
+        $this->load->library('upload', $config);
+
+        // untuk proses simpan
+        if (!$this->upload->do_upload('inpfotoktp')) {
+            // apa bila gagal
+            $error = array('error' => $this->upload->display_errors());
+
+            $message = ['title' => 'Gagal!', 'text' => strip_tags($error['error']), 'type' => 'error', 'button' => 'Ok!'];
+        } else {
+            // apa bila berhasil
+            $detailFile = $this->upload->data();
+
+            $data = [
+                'id_users'        => $this->id_users,
+                'id_surat_tujuan' => strip_tags($post['inpidsurattujuan']),
+                'id_surat_jenis'  => strip_tags($post['inpidsuratjenis']),
+                'id_surat_sifat'  => strip_tags($post['inpidsuratsifat']),
+                'perihal'         => strip_tags($post['inpperihal']),
+                'foto_ktp'        => $detailFile['file_name'],
             ];
 
-            $insert = array_merge($data, $data2);
+            $this->db->trans_start();
+            if (empty($post['inpidsuratkeluar'])) {
+                $data2 = [
+                    'approve' => '0'
+                ];
+                $insert = array_merge($data, $data2);
 
-            $this->crud->i('tb_surat_keluar', $insert);
-        } else {
-            $this->crud->u('tb_surat_keluar', $data, ['id_surat_keluar' => $post['inpidsuratkeluar']]);
-        }
-        $this->db->trans_complete();
-        if ($this->db->trans_status() === FALSE) {
-            $message = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
-        } else {
-            $message = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
+                $this->crud->i('tb_surat_keluar', $insert);
+            } else {
+                $this->crud->u('tb_surat_keluar', $data, ['id_surat_keluar' => $post['inpidsuratkeluar']]);
+            }
+            $this->db->trans_complete();
+            if ($this->db->trans_status() === FALSE) {
+                $message = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
+            } else {
+                $message = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
+            }
         }
         // untuk message
         $this->_response_message($message);

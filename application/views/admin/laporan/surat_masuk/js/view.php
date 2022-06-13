@@ -42,11 +42,10 @@
                     }
                 },
                 {
-                    extend: 'pdf',
                     className: 'btn btn-danger',
                     text: '<i class="fa fa-file-pdf-o"></i>&nbsp;Pdf',
-                    title: function() {
-                        return ' Sistem Informasi Desa Bonto Tangnga - Laporan Surat Masuk';
+                    action: function(e, dt, node, config) {
+                        window.open('<?= admin_url() ?>laporan/surat_masuk_pdf');
                     }
                 },
                 {

@@ -16,11 +16,6 @@
     let csrf = $('#<?= $this->security->get_csrf_token_name() ?>');
     let tabelSuratKeluarDt = null;
 
-    // untuk textarea editor
-    CKEDITOR.replace('inpisi', {
-        language: 'en',
-    });
-
     // untuk datatable
     var untukTabelSuratKeluar = function() {
         tabelSuratKeluarDt = $('#tabel-surat-keluar').DataTable({
@@ -41,25 +36,6 @@
                     }
                 },
                 {
-                    title: 'Nomor Surat',
-                    data: 'no_surat',
-                    className: 'text-center',
-                },
-                {
-                    title: 'Tanggal Surat',
-                    className: 'text-center',
-                    render: function(data, type, full, meta) {
-                        return tglIndo(full.tgl_surat);
-                    },
-                },
-                {
-                    title: 'Tanggal Keluar',
-                    className: 'text-center',
-                    render: function(data, type, full, meta) {
-                        return tglIndo(full.tgl_keluar);
-                    },
-                },
-                {
                     title: 'Jenis Surat',
                     data: 'jenis_surat',
                     className: 'text-center',
@@ -72,6 +48,11 @@
                 {
                     title: 'Sifat Surat',
                     data: 'sifat_surat',
+                    className: 'text-center',
+                },
+                {
+                    title: 'Perihal',
+                    data: 'perihal',
                     className: 'text-center',
                 },
                 {
@@ -105,11 +86,11 @@
                                 </div>
                             `;
                         } else {
+                            var location = (full.arsip_tipe === 'pdf' ? '<?= upload_url('pdf') ?>' : '<?= upload_url('doc') ?>');
                             return `
                                 <div class="button-icon-btn button-icon-btn-cl">
                                     <a href="<?= users_url() ?>surat_keluar/detail/` + btoa(full.id_surat_keluar) + `" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-info"></i>&nbsp;Detail</a>&nbsp;
-                                    <a href="<?= users_url() ?>surat_keluar/print/` + btoa(full.id_surat_keluar) + `" target="_blank" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-print"></i>&nbsp;Cetak</a>&nbsp;
-                                    <button type="button" id="btn-upd" data-id="` + full.id_surat_keluar + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-pencil"></i>&nbsp;Ubah</button>&nbsp;
+                                    <a href="` + location + `` + full.arsip + `" target="_blank" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-print"></i>&nbsp;Cetak</a>&nbsp;
                                 </div>
                             `;
                         }
@@ -124,14 +105,11 @@
         $(document).on('click', '#btn-add', function() {
             $('#judul-add-upd').html('Tambah');
             $('#inpidsuratkeluar').val('');
-            $('#inpnosurat').val('');
-            $('#inptglsurat').val('');
-            $('#inptglkeluar').val('');
             $('#inpidsuratjenis').val('');
             $('#inpidsurattujuan').val('');
             $('#inpidsuratsifat').val('');
             $('#inpperihal').val('');
-            CKEDITOR.instances.inpisi.setData('');
+            $('#inpfotoktp').val('');
         });
     }();
 
@@ -140,13 +118,11 @@
         $(document).on('submit', '#form-add-upd', function(e) {
             e.preventDefault();
             $('#inpnosurat').attr('required', 'required');
-            $('#inptglsurat').attr('required', 'required');
-            $('#inptglkeluar').attr('required', 'required');
             $('#inpidsuratjenis').attr('required', 'required');
             $('#inpidsurattujuan').attr('required', 'required');
             $('#inpidsuratsifat').attr('required', 'required');
             $('#inpperihal').attr('required', 'required');
-            $('#inparsip').attr('required', 'required');
+            $('#inpfotoktp').attr('required', 'required');
 
             if ($('#form-add-upd').parsley().isValid() == true) {
                 $.ajax({
@@ -204,14 +180,10 @@
                     csrf.val(response.csrf);
 
                     $('#inpidsuratkeluar').val(response.id_surat_keluar);
-                    $('#inpnosurat').val(response.no_surat);
-                    $('#inptglsurat').val(response.tgl_surat);
-                    $('#inptglkeluar').val(response.tgl_keluar);
                     $('#inpidsuratjenis').val(response.id_surat_jenis);
                     $('#inpidsurattujuan').val(response.id_surat_tujuan);
                     $('#inpidsuratsifat').val(response.id_surat_sifat);
                     $('#inpperihal').val(response.perihal);
-                    CKEDITOR.instances.inpisi.setData(response.isi);
 
                     ini.removeAttr('disabled');
                     ini.html('<i class="fa fa-pencil"></i>&nbsp;Ubah');
