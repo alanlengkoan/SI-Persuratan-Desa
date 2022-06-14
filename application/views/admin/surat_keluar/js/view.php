@@ -87,6 +87,7 @@
                         if (full.approve == 0) {
                             return `
                                 <div class="button-icon-btn button-icon-btn-cl">
+                                    <a href="<?= admin_url() ?>surat_keluar/detail/` + btoa(full.id_surat_keluar) + `" target="_blank" class="btn btn-success btn-sm waves-effect"><i class="fa fa-info"></i>&nbsp;Detail</a>&nbsp;
                                     <button type="button" id="btn-del" data-id="` + full.id_surat_keluar + `" class="btn btn-danger btn-sm waves-effect"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
                                 </div>
                             `;
