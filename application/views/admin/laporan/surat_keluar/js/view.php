@@ -82,14 +82,14 @@
                     title: 'Tanggal Surat',
                     className: 'text-center',
                     render: function(data, type, full, meta) {
-                        return tglIndo(full.tgl_surat);
+                        return (full.tgl_surat === null ? '-' : tglIndo(full.tgl_surat));
                     },
                 },
                 {
                     title: 'Tanggal Keluar',
                     className: 'text-center',
                     render: function(data, type, full, meta) {
-                        return tglIndo(full.tgl_keluar);
+                        return t(full.tgl_keluar === null ? '-' : glIndo(full.tgl_keluar));
                     },
                 },
                 {
