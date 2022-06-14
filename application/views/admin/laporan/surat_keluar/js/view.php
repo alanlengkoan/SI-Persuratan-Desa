@@ -75,8 +75,10 @@
                 },
                 {
                     title: 'Nomor Surat',
-                    data: 'no_surat',
                     className: 'text-center',
+                    render: function(data, type, full, meta) {
+                        return (full.no_surat === null ? '-' : full.no_surat);
+                    },
                 },
                 {
                     title: 'Tanggal Surat',
@@ -89,7 +91,7 @@
                     title: 'Tanggal Keluar',
                     className: 'text-center',
                     render: function(data, type, full, meta) {
-                        return t(full.tgl_keluar === null ? '-' : glIndo(full.tgl_keluar));
+                        return (full.tgl_keluar === null ? '-' : glIndo(full.tgl_keluar));
                     },
                 },
                 {
