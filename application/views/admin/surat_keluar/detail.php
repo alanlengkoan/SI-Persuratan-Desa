@@ -78,7 +78,7 @@
                             </div>
                             <hr>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Foto KTP</label>
+                                <label class="col-sm-3 col-form-label">Dokumen Lampiran</label>
                                 <div class="col-sm-9">
                                     <embed style="height: 500px;" src="<?= upload_url('pdf') ?><?= $data->dok_lampiran ?>" type="application/pdf" frameBorder="0" scrolling="auto" height="100%" width="100%"></embed>
                                 </div>
