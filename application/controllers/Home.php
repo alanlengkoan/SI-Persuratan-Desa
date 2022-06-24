@@ -31,11 +31,11 @@ class Home extends MY_Controller
         $res = [
             [
                 'name' => 'Laki - laki',
-                'y'    => (int) $this->m_dashboard->getPenduduk($post['year'], 'L')->sum_gender,
+                'y'    => (int) $this->m_dashboard->getPenduduk('L', $post['year'])->sum_gender,
             ],
             [
                 'name' => 'Perempuan',
-                'y'    => (int) $this->m_dashboard->getPenduduk($post['year'], 'P')->sum_gender,
+                'y'    => (int) $this->m_dashboard->getPenduduk('P', $post['year'])->sum_gender,
             ]
         ];
 
