@@ -17,6 +17,7 @@ class Home extends MY_Controller
     {
         $data = [
             'profil' => $this->m_profil->getAll(),
+            'tahun'  => $this->m_dashboard->getYear(),
         ];
         // untuk load view
         $this->template->load('home', 'Beranda', 'beranda', 'view', $data);
@@ -25,14 +26,16 @@ class Home extends MY_Controller
     // untuk penduduk
     public function get_penduduk()
     {
+        $post = $this->input->get();
+
         $res = [
             [
                 'name' => 'Laki - laki',
-                'y'    => (int) $this->m_dashboard->getPenduduk('L')->sum_gender,
+                'y'    => (int) $this->m_dashboard->getPenduduk($post['year'], 'L')->sum_gender,
             ],
             [
                 'name' => 'Perempuan',
-                'y'    => (int) $this->m_dashboard->getPenduduk('P')->sum_gender,
+                'y'    => (int) $this->m_dashboard->getPenduduk($post['year'], 'P')->sum_gender,
             ]
         ];
 
@@ -44,7 +47,9 @@ class Home extends MY_Controller
     // untuk pekerjaan
     public function get_pekerjaan()
     {
-        $get = $this->m_dashboard->getPekerjaan();
+        $post = $this->input->get();
+
+        $get = $this->m_dashboard->getPekerjaan($post['year']);
         $num = $get->num_rows();
         $res = [];
         if ($num > 0) {
@@ -64,7 +69,9 @@ class Home extends MY_Controller
     // untuk umur
     public function get_umur()
     {
-        $get = $this->m_dashboard->getUmur();
+        $post = $this->input->get();
+
+        $get = $this->m_dashboard->getUmur($post['year']);
         $num = $get->num_rows();
         $res = [];
         $get_age = [];
@@ -113,7 +120,9 @@ class Home extends MY_Controller
     // untuk kategori umur
     public function get_umur_kategori()
     {
-        $get = $this->m_dashboard->getUmur();
+        $post = $this->input->get();
+
+        $get = $this->m_dashboard->getUmur($post['year']);
         $num = $get->num_rows();
         $res = [];
         $get_age = [];

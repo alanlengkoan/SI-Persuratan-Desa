@@ -3,11 +3,30 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
 <script>
+    var tahun = $('#tahun').find(":selected").val();
+    _grafikPenduduk(tahun);
+    _grafikPekerjaan(tahun);
+    _grafikUmur(tahun);
+    _grafikKategoriUmur(tahun);
+    
+    // untuk filter tahun
+    var untukFilterTahun = function() {
+        $("#tahun").change(function() {
+            _grafikPenduduk(this.value);
+            _grafikPekerjaan(this.value);
+            _grafikUmur(this.value);
+            _grafikKategoriUmur(this.value);
+        });
+    }();
+
     // untuk grafik penduduk
-    var untukGrafikPenduduk = function() {
+    function _grafikPenduduk(year) {
         $.ajax({
             url: '<?= base_url() ?>get_penduduk',
             dataType: 'json',
+            data: {
+                year: year
+            },
             success: function(response) {
                 Highcharts.chart('grafik-penduduk', {
                     chart: {
@@ -56,14 +75,17 @@
                     }]
                 });
             }
-        })
-    }();
+        });
+    }
 
     // untuk grafik pekerjaan
-    var untukGrafikPekerjaan = function() {
+    function _grafikPekerjaan(year) {
         $.ajax({
             url: '<?= base_url() ?>get_pekerjaan',
             dataType: 'json',
+            data: {
+                year: year
+            },
             success: function(response) {
                 Highcharts.chart('grafik-pekerjaan', {
                     chart: {
@@ -95,14 +117,17 @@
                     }]
                 });
             }
-        })
-    }();
+        });
+    }
 
     // untuk grafik umur
-    var untukGrafikUmur = function() {
+    function _grafikUmur(year) {
         $.ajax({
             url: '<?= base_url() ?>get_umur',
             dataType: 'json',
+            data: {
+                year: year
+            },
             success: function(response) {
                 Highcharts.chart('grafik-umur', {
                     chart: {
@@ -135,13 +160,16 @@
                 });
             }
         })
-    }();
+    }
 
     // untuk grafik katgori umur
-    var untukGrafikKategoriUmur = function() {
+    function _grafikKategoriUmur(year) {
         $.ajax({
             url: '<?= base_url() ?>get_umur_kategori',
             dataType: 'json',
+            data: {
+                year: year
+            },
             success: function(response) {
                 Highcharts.chart('grafik-kategori-umur', {
                     chart: {
@@ -190,6 +218,6 @@
                     }]
                 });
             }
-        })
-    }();
+        });
+    }
 </script>

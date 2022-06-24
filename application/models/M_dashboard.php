@@ -2,21 +2,27 @@
 
 class M_dashboard extends CI_Model
 {
-    public function getPenduduk($kelamin)
+    public function getYear()
     {
-        $result = $this->db->query("SELECT COUNT(*) AS sum_gender FROM tb_keluarga_anggota AS ka WHERE ka.kelamin = '$kelamin'")->row();
+        $result = $this->db->query("SELECT YEAR( tgl_lahir) AS tahun FROM tb_keluarga_anggota GROUP BY YEAR( tgl_lahir)");
         return $result;
     }
 
-    public function getPekerjaan()
+    public function getPenduduk($year, $kelamin)
     {
-        $result = $this->db->query("SELECT pe.nama,( SELECT COUNT(*) FROM tb_keluarga_anggota AS ka WHERE ka.id_pekerjaan = pe.id_pekerjaan) AS count FROM tb_pekerjaan AS pe");
+        $result = $this->db->query("SELECT COUNT(*) AS sum_gender FROM tb_keluarga_anggota AS ka WHERE ka.kelamin = '$kelamin' AND YEAR(ka.tgl_lahir) = '$year'")->row();
         return $result;
     }
 
-    public function getUmur()
+    public function getPekerjaan($year)
     {
-        $result = $this->db->query("SELECT ka.tgl_lahir FROM tb_keluarga_anggota AS ka");
+        $result = $this->db->query("SELECT pe.nama,( SELECT COUNT(*) FROM tb_keluarga_anggota AS ka WHERE ka.id_pekerjaan = pe.id_pekerjaan AND YEAR(ka.tgl_lahir) = '$year') AS count FROM tb_pekerjaan AS pe");
+        return $result;
+    }
+
+    public function getUmur($year)
+    {
+        $result = $this->db->query("SELECT ka.tgl_lahir FROM tb_keluarga_anggota AS ka WHERE YEAR(ka.tgl_lahir) = '$year'");
         return $result;
     }
 }

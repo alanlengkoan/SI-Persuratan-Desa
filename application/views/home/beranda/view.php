@@ -61,6 +61,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
+                    <select name="tahun" id="tahun" class="form-control">
+                        <option value="<?= date('Y') ?>" selected><?= date('Y') ?></option>
+                        <?php foreach ($tahun->result() as $row) { ?>
+                            <option value="<?= $row->tahun ?>"><?= $row->tahun ?></option>
+                        <?php } ?>
+                    </select>
+
                     <figure class="highcharts-figure">
                         <div id="grafik-penduduk"></div>
                     </figure>
