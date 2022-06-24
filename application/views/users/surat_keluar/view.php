@@ -66,25 +66,37 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">KK</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" value="<?= $penduduk['no_kk'] ?>" readonly="readonly" />
+                            <input type="text" class="form-control" value="<?= $penduduk->no_kk ?>" readonly="readonly" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">NIK</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" value="<?= $penduduk['no_ktp'] ?>" readonly="readonly" />
+                            <input type="text" class="form-control" value="<?= $penduduk->no_ktp ?>" readonly="readonly" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Nama</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" value="<?= $penduduk['nama'] ?>" readonly="readonly" />
+                            <input type="text" class="form-control" value="<?= $penduduk->nama ?>" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">E-mail</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" value="<?= $penduduk->email ?>" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">No HP</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" value="<?= $penduduk->telepon ?>" readonly="readonly" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Alamat</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" value="<?= $penduduk['alamat'] ?>" readonly="readonly" />
+                            <input type="text" class="form-control" value="<?= $penduduk->alamat ?>" readonly="readonly" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -110,26 +122,16 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Sifat Surat *</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" name="inpidsuratsifat" id="inpidsuratsifat">
-                                <option value="">- Pilih -</option>
-                                <?php foreach ($sifat_surat as $key => $row) { ?>
-                                    <option value="<?= $row->id_surat_sifat ?>"><?= $row->nama ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Perihal *</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="inpperihal" id="inpperihal" placeholder="Masukkan perihal" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Foto KTP*</label>
+                        <label class="col-sm-3 col-form-label">Dokumen Lampiran*</label>
                         <div class="col-sm-9">
-                            <input type="file" name="inpfotoktp" id="inpfotoktp" />
+                            <input type="file" class="form-control" name="inpdoklampiran" id="inpdoklampiran" />
+                            <span style=" font-style: italic; font-size: 10px;">Silahkan upload Foto Copy KTP, KK, dan Akta dalam bentuk PDF!</span>
                         </div>
                     </div>
                 </div>

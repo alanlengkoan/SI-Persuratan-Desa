@@ -139,6 +139,7 @@ class Auth extends MY_Controller
                 'id_users' => acak_id('tb_users', 'id_users'),
                 'nama'     => $row->nama,
                 'email'    => $post['email'],
+                'telepon'  => $post['telepon'],
                 'username' => $post['username'],
                 'password' => password_hash($post['password'], PASSWORD_DEFAULT),
                 'roles'    => 'users',

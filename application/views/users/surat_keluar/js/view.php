@@ -46,11 +46,6 @@
                     className: 'text-center',
                 },
                 {
-                    title: 'Sifat Surat',
-                    data: 'sifat_surat',
-                    className: 'text-center',
-                },
-                {
                     title: 'Perihal',
                     data: 'perihal',
                     className: 'text-center',
@@ -86,11 +81,10 @@
                                 </div>
                             `;
                         } else {
-                            var location = (full.arsip_tipe === 'pdf' ? '<?= upload_url('pdf') ?>' : '<?= upload_url('doc') ?>');
                             return `
                                 <div class="button-icon-btn button-icon-btn-cl">
                                     <a href="<?= users_url() ?>surat_keluar/detail/` + btoa(full.id_surat_keluar) + `" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-info"></i>&nbsp;Detail</a>&nbsp;
-                                    <a href="` + location + `` + full.arsip + `" target="_blank" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-print"></i>&nbsp;Cetak</a>&nbsp;
+                                    <a href="<?= users_url() ?>surat_keluar/print/` + btoa(full.id_surat_keluar) + `" target="_blank" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-info"></i>&nbsp;Cetak</a>&nbsp;
                                 </div>
                             `;
                         }

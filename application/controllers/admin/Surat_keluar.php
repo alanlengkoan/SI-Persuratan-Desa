@@ -17,6 +17,7 @@ class Surat_keluar extends MY_Controller
         $this->load->model('m_surat_jenis');
         $this->load->model('m_surat_keluar');
         $this->load->model('m_surat_tujuan');
+        $this->load->model('m_keluarga_anggota');
     }
 
     // untuk default
@@ -47,10 +48,14 @@ class Surat_keluar extends MY_Controller
     {
         $id_surat_keluar = base64url_decode($this->uri->segment(4));
 
+        $surat_keluar = $this->m_surat_keluar->getDetail($id_surat_keluar);
+        $penduduk     = $this->m_keluarga_anggota->getWhere($surat_keluar->id_users);
+
         $data = [
-            'title'  => 'Surat Keluar',
-            'detail' => $this->m_surat_keluar->getDetail($id_surat_keluar),
-            'data'   => $this->m_pengaturan->getFirstRecord(),
+            'title'    => 'Surat Keluar',
+            'detail'   => $surat_keluar,
+            'penduduk' => $penduduk,
+            'data'     => $this->m_pengaturan->getFirstRecord(),
         ];
         // untuk load view
         $this->pdf->setPaper('legal', 'potrait');
@@ -74,71 +79,19 @@ class Surat_keluar extends MY_Controller
         $this->m_surat_keluar->getAllDataDt();
     }
 
-    // untuk proses tambah data
-    public function process_save()
-    {
-        $post = $this->input->post(NULL, TRUE);
-
-        switch ($post['inparsiptipe']) {
-            case 'pdf':
-                $config['upload_path']   = './' . upload_path('pdf');
-                $config['allowed_types'] = 'pdf';
-                $config['encrypt_name']  = TRUE;
-                $config['overwrite']     = TRUE;
-                break;
-            case 'doc':
-                $config['upload_path']   = './' . upload_path('doc');
-                $config['allowed_types'] = 'doc|docx';
-                $config['encrypt_name']  = TRUE;
-                $config['overwrite']     = TRUE;
-                break;
-            default:
-                echo "Gagal";
-                break;
-        }
-
-        $this->load->library('upload', $config);
-
-        // $result = $this->crud->gda('tb_surat_keluar', ['id_surat_keluar' => $post['inpidsuratkeluar']]);
-
-        // untuk proses simpan
-        if (!$this->upload->do_upload('inparsip')) {
-            // apa bila gagal
-            $error = array('error' => $this->upload->display_errors());
-
-            $message = ['title' => 'Gagal!', 'text' => strip_tags($error['error']), 'type' => 'error', 'button' => 'Ok!'];
-        } else {
-            // apa bila berhasil
-            $detailFile = $this->upload->data();
-
-            $data = [
-                'no_surat'   => strip_tags($post['inpnosurat']),
-                'tgl_surat'  => strip_tags($post['inptglsurat']),
-                'tgl_keluar' => strip_tags($post['inptglsurat']),
-                'arsip_tipe' => strip_tags($post['inparsiptipe']),
-                'arsip'      => $detailFile['file_name'],
-            ];
-
-            $this->db->trans_start();
-            $this->crud->u('tb_surat_keluar', $data, ['id_surat_keluar' => $post['inpidsuratkeluar']]);
-            $this->db->trans_complete();
-            if ($this->db->trans_status() === FALSE) {
-                $message = ['title' => 'Gagal!', 'text' => 'Gagal Simpan!', 'type' => 'error', 'button' => 'Ok!'];
-            } else {
-                $message = ['title' => 'Berhasil!', 'text' => 'Berhasil Simpan!', 'type' => 'success', 'button' => 'Ok!'];
-            }
-        }
-        // untuk message
-        $this->_response_message($message);
-    }
-
     // untuk ubah approve
     public function upd_approve()
     {
         $post = $this->input->post(NULL, TRUE);
 
+        $kode = get_kode_urut('tb_surat_keluar', 'no_surat', '214/');
+        $no_surat = $kode . '/BT/I/' . date('Y');
+
         $data = [
-            'approve' => ($post['value'] === '1' ? '0' : '1')
+            'no_surat'   => $no_surat,
+            'tgl_surat'  => date('Y-m-d'),
+            'tgl_keluar' => date('Y-m-d'),
+            'approve'    => ($post['value'] === '1' ? '0' : '1')
         ];
 
         $this->db->trans_start();

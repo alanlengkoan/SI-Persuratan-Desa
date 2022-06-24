@@ -56,11 +56,6 @@
                     className: 'text-center',
                 },
                 {
-                    title: 'Sifat Surat',
-                    data: 'sifat_surat',
-                    className: 'text-center',
-                },
-                {
                     title: 'Approve',
                     className: 'text-center',
                     render: function(data, type, full, meta) {
@@ -92,21 +87,12 @@
                                 </div>
                             `;
                         } else {
-                            if (full.arsip !== null) {
-                                var location = (full.arsip_tipe === 'pdf' ? '<?= upload_url('pdf') ?>' : '<?= upload_url('doc') ?>');
-                                return `
-                                    <div class="button-icon-btn button-icon-btn-cl">
-                                        <a href="<?= admin_url() ?>surat_keluar/detail/` + btoa(full.id_surat_keluar) + `" target="_blank" class="btn btn-success btn-sm waves-effect"><i class="fa fa-info"></i>&nbsp;Detail</a>&nbsp;
-                                        <a href="` + location + `` + full.arsip + `" target="_blank" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-print"></i>&nbsp;Cetak</a>&nbsp;
-                                    </div>
-                                `;
-                            } else {
-                                return `
-                                    <div class="button-icon-btn button-icon-btn-cl">
-                                        <button type="button" id="btn-upd" data-id="` + full.id_surat_keluar + `" class="btn btn-info btn-sm waves-effect" data-toggle="modal" data-target="#modal-add-upd"><i class="fa fa-upload"></i>&nbsp;Upload</button>
-                                    </div>
-                                `;
-                            }
+                            return `
+                                <div class="button-icon-btn button-icon-btn-cl">
+                                    <a href="<?= admin_url() ?>surat_keluar/detail/` + btoa(full.id_surat_keluar) + `" target="_blank" class="btn btn-success btn-sm waves-effect"><i class="fa fa-info"></i>&nbsp;Detail</a>&nbsp;
+                                    <a href="<?= admin_url() ?>surat_keluar/print/` + btoa(full.id_surat_keluar) + `" target="_blank" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-info"></i>&nbsp;Cetak</a>&nbsp;
+                                </div>
+                            `;
                         }
                     },
                 },

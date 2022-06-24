@@ -71,12 +71,6 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Sifat Surat</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control-plaintext" value="<?= $data->sifat_surat ?>" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Perihal</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control-plaintext" value="<?= $data->perihal ?>" />
@@ -86,20 +80,18 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Foto KTP</label>
                                 <div class="col-sm-9">
-                                    <img src="<?= upload_url('gambar') ?><?= $data->foto_ktp ?>" alt="foto ktp" class="img-fluid" width="500" height="500" />
+                                    <embed style="height: 500px;" src="<?= upload_url('pdf') ?><?= $data->dok_lampiran ?>" type="application/pdf" frameBorder="0" scrolling="auto" height="100%" width="100%"></embed>
                                 </div>
                             </div>
-                            <hr>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Arsip</label>
-                                <div class="col-sm-9">
-                                    <?php if ($data->arsip_tipe === 'pdf') { ?>
-                                        <embed style="height: 500px;" src="<?= upload_url('pdf') ?><?= $data->arsip ?>" type="application/pdf" frameBorder="0" scrolling="auto" height="100%" width="100%"></embed>
-                                    <?php } else { ?>
-                                        <iframe style=" width: 100%; height: 500px;" src="https://docs.google.com/gview?url=<?= upload_url('doc') ?><?= $data->arsip ?>&embedded=true" frameborder="0"></iframe>
-                                    <?php } ?>
+                            <?php if ($data->approve === '1') { ?>
+                                <hr>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Arsip</label>
+                                    <div class="col-sm-9">
+                                        <embed style="height: 500px;" src="<?= admin_url() ?>surat_keluar/print/<?= base64url_encode($data->id_surat_keluar) ?>" type="application/pdf" frameBorder="0" scrolling="auto" height="100%" width="100%"></embed>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php } ?>
                         </form>
                     </div>
                 </div>

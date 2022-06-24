@@ -55,6 +55,7 @@
             e.preventDefault();
             $('#inpnama').attr('required', 'required');
             $('#inpemail').attr('required', 'required');
+            $('#inptelepon').attr('required', 'required');
             $('#inpusername').attr('required', 'required');
 
             if ($('#form-akun').parsley().isValid() == true) {

@@ -79,6 +79,7 @@ class Profil extends MY_Controller
         $data = [
             'nama'     => strip_tags($post['inpnama']),
             'email'    => strip_tags($post['inpemail']),
+            'telepon'  => strip_tags($post['inptelepon']),
             'username' => strip_tags($post['inpusername']),
             'roles'    => 'users'
         ];

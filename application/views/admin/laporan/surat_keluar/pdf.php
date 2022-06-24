@@ -70,7 +70,6 @@
             <th>Perihal</th>
             <th>Jenis Surat</th>
             <th>Tujuan Surat</th>
-            <th>Sifat Surat</th>
         </tr>
     </thead>
     <tbody>
@@ -86,7 +85,6 @@
                 <td align="center"><?= $value->perihal ?></td>
                 <td align="center"><?= $value->jenis_surat ?></td>
                 <td align="center"><?= $value->tujuan_surat ?></td>
-                <td align="center"><?= $value->sifat_surat ?></td>
             </tr>
         <?php } ?>
     </tbody>

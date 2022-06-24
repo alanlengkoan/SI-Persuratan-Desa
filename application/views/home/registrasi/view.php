@@ -110,6 +110,11 @@
                                 <label class="float-label">E-mail</label>
                             </div>
                             <div class="form-group form-primary">
+                                <?= form_input(array('type' => 'telepon', 'name' => 'telepon', 'id' => 'telepon', 'class' => 'form-control')) ?>
+                                <span class="form-bar"></span>
+                                <label class="float-label">No HP</label>
+                            </div>
+                            <div class="form-group form-primary">
                                 <?= form_input(array('name' => 'username', 'id' => 'username', 'class' => 'form-control')) ?>
                                 <span class="form-bar"></span>
                                 <label class="float-label">Username</label>
@@ -164,6 +169,7 @@
                 e.preventDefault();
                 $('#nik').attr('required', 'required');
                 $('#email').attr('required', 'required');
+                $('#telepon').attr('required', 'required');
                 $('#username').attr('required', 'required');
                 $('#password').attr('required', 'required');
 

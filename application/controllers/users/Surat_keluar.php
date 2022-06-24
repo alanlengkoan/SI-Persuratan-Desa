@@ -13,20 +13,19 @@ class Surat_keluar extends MY_Controller
         // untuk load model
         $this->load->model('crud');
         $this->load->model('m_pengaturan');
-        $this->load->model('m_surat_sifat');
         $this->load->model('m_surat_jenis');
         $this->load->model('m_surat_keluar');
         $this->load->model('m_surat_tujuan');
+        $this->load->model('m_keluarga_anggota');
     }
 
     // untuk default
     public function index()
     {
         $data = [
-            'penduduk'     => $this->crud->gda('tb_keluarga_anggota', ['id_users' => $this->id_users]),
+            'penduduk'     => $this->m_keluarga_anggota->getWhere($this->id_users),
             'jenis_surat'  => $this->m_surat_jenis->getAll(),
             'tujuan_surat' => $this->m_surat_tujuan->getAll(),
-            'sifat_surat'  => $this->m_surat_sifat->getAll(),
         ];
         // untuk load view
         $this->template->load('users', 'Permohonan Surat', 'surat_keluar', 'view', $data);
@@ -48,10 +47,14 @@ class Surat_keluar extends MY_Controller
     {
         $id_surat_keluar = base64url_decode($this->uri->segment(4));
 
+        $surat_keluar = $this->m_surat_keluar->getDetail($id_surat_keluar);
+        $penduduk     = $this->m_keluarga_anggota->getWhere($this->id_users);
+
         $data = [
-            'title'  => 'Surat Keluar',
-            'detail' => $this->m_surat_keluar->getDetail($id_surat_keluar),
-            'data'   => $this->m_pengaturan->getFirstRecord(),
+            'title'    => 'Surat Keluar',
+            'detail'   => $surat_keluar,
+            'penduduk' => $penduduk,
+            'data'     => $this->m_pengaturan->getFirstRecord(),
         ];
         // untuk load view
         $this->pdf->setPaper('legal', 'potrait');
@@ -80,15 +83,15 @@ class Surat_keluar extends MY_Controller
     {
         $post = $this->input->post(NULL, TRUE);
 
-        $config['upload_path']   = './' . upload_path('gambar');
-        $config['allowed_types'] = 'jpg|jpeg|png';
+        $config['upload_path']   = './' . upload_path('pdf');
+        $config['allowed_types'] = 'pdf';
         $config['encrypt_name']  = TRUE;
         $config['overwrite']     = TRUE;
 
         $this->load->library('upload', $config);
 
         // untuk proses simpan
-        if (!$this->upload->do_upload('inpfotoktp')) {
+        if (!$this->upload->do_upload('inpdoklampiran')) {
             // apa bila gagal
             $error = array('error' => $this->upload->display_errors());
 
@@ -101,9 +104,8 @@ class Surat_keluar extends MY_Controller
                 'id_users'        => $this->id_users,
                 'id_surat_tujuan' => strip_tags($post['inpidsurattujuan']),
                 'id_surat_jenis'  => strip_tags($post['inpidsuratjenis']),
-                'id_surat_sifat'  => strip_tags($post['inpidsuratsifat']),
                 'perihal'         => strip_tags($post['inpperihal']),
-                'foto_ktp'        => $detailFile['file_name'],
+                'dok_lampiran'    => $detailFile['file_name'],
             ];
 
             $this->db->trans_start();

@@ -99,6 +99,12 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">No HP *</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="inptelepon" id="inptelepon" value="<?= $data->telepon ?>" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">Username *</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" class="form-control" name="inpusername" id="inpusername" value="<?= $data->username ?>" />

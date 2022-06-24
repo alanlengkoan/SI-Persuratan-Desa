@@ -91,7 +91,7 @@
                     title: 'Tanggal Keluar',
                     className: 'text-center',
                     render: function(data, type, full, meta) {
-                        return (full.tgl_keluar === null ? '-' : glIndo(full.tgl_keluar));
+                        return (full.tgl_keluar === null ? '-' : tglIndo(full.tgl_keluar));
                     },
                 },
                 {
@@ -102,11 +102,6 @@
                 {
                     title: 'Tujuan Surat',
                     data: 'tujuan_surat',
-                    className: 'text-center',
-                },
-                {
-                    title: 'Sifat Surat',
-                    data: 'sifat_surat',
                     className: 'text-center',
                 },
             ],
